@@ -1,0 +1,8 @@
+{
+  "code": 200,
+  "msg": "成功",
+  "data": {
+    "use-pro-table": ["add", "batchAdd", "export", "batchDelete", "status"],
+    "auth-button": ["add", "edit", "delete", "import", "export"]
+  }
+}

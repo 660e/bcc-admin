@@ -1,0 +1,428 @@
+{
+  "code": 200,
+  "msg": "成功",
+  "data": [
+    {
+      "path": "/home/index",
+      "name": "home",
+      "component": "/home/index",
+      "meta": {
+        "icon": "HomeFilled",
+        "title": "首页",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": true,
+        "isKeepAlive": false
+      }
+    },
+    {
+      "path": "/system",
+      "name": "system",
+      "redirect": "/system/role",
+      "meta": {
+        "icon": "Tools",
+        "title": "系统管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": false
+      },
+      "children": [
+        {
+          "path": "/system/role",
+          "name": "role-manage",
+          "component": "/system/role/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "角色管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system/menu",
+          "name": "menu-manage",
+          "component": "/system/menu/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "菜单管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system/dict",
+          "name": "dict-manage",
+          "component": "/system/dict/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "字典管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/examples",
+      "name": "examples",
+      "redirect": "/examples/assembly",
+      "meta": {
+        "icon": "List",
+        "title": "示例",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/examples/assembly",
+          "name": "assembly",
+          "redirect": "/examples/assembly/guide",
+          "meta": {
+            "icon": "Briefcase",
+            "title": "自定义组件",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children": [
+            {
+              "path": "/examples/assembly/guide",
+              "name": "guide",
+              "component": "/examples/assembly/guide/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "引导页",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/assembly/tabs",
+              "name": "tabs",
+              "component": "/examples/assembly/tabs/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "标签页操作",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              },
+              "children": [
+                {
+                  "path": "/examples/assembly/tabs/detail/:id",
+                  "name": "tabs-detail",
+                  "component": "/examples/assembly/tabs/detail",
+                  "meta": {
+                    "icon": "Menu",
+                    "title": "Tab 详情",
+                    "activeMenu": "/examples/assembly/tabs",
+                    "isLink": "",
+                    "isHide": true,
+                    "isFull": false,
+                    "isAffix": false,
+                    "isKeepAlive": true
+                  }
+                }
+              ]
+            },
+            {
+              "path": "/examples/assembly/use-pro-table",
+              "name": "use-pro-table",
+              "component": "/examples/assembly/use-pro-table/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "表格",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              },
+              "children": [
+                {
+                  "path": "/examples/assembly/use-pro-table/detail/:id",
+                  "name": "use-pro-table-detail",
+                  "component": "/examples/assembly/use-pro-table/detail",
+                  "meta": {
+                    "icon": "Menu",
+                    "title": "表格详情",
+                    "activeMenu": "/examples/assembly/use-pro-table",
+                    "isLink": "",
+                    "isHide": true,
+                    "isFull": false,
+                    "isAffix": false,
+                    "isKeepAlive": true
+                  }
+                }
+              ]
+            },
+            {
+              "path": "/examples/assembly/use-icon-select",
+              "name": "use-icon-select",
+              "component": "/examples/assembly/use-icon-select/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "图标选择器",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/assembly/use-tree-filter",
+              "name": "use-tree-filter",
+              "component": "/examples/assembly/use-tree-filter/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "树形筛选器",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/assembly/use-svg-icon",
+              "name": "use-svg-icon",
+              "component": "/examples/assembly/use-svg-icon/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "SVG 图标",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/assembly/upload-file",
+              "name": "upload-file",
+              "component": "/examples/assembly/upload-file/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "文件上传",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/assembly/use-wang-editor",
+              "name": "use-wang-editor",
+              "component": "/examples/assembly/use-wang-editor/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "富文本编辑器",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/assembly/draggable",
+              "name": "draggable",
+              "component": "/examples/assembly/draggable/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "拖拽",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/examples/directives",
+          "name": "directives",
+          "redirect": "/examples/directives/copy-direct",
+          "meta": {
+            "icon": "Stamp",
+            "title": "自定义指令",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children": [
+            {
+              "path": "/examples/directives/copy-direct",
+              "name": "copy-direct",
+              "component": "/examples/directives/copy-direct/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "复制",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/directives/drag-direct",
+              "name": "drag-direct",
+              "component": "/examples/directives/drag-direct/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "拖拽",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/directives/debounce-direct",
+              "name": "debounce-direct",
+              "component": "/examples/directives/debounce-direct/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "防抖",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/directives/throttle-direct",
+              "name": "throttle-direct",
+              "component": "/examples/directives/throttle-direct/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "节流",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/directives/longpress-direct",
+              "name": "longpress-direct",
+              "component": "/examples/directives/longpress-direct/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "长按",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/examples/auth",
+          "name": "auth",
+          "redirect": "/examples/auth/menu",
+          "meta": {
+            "icon": "Lock",
+            "title": "权限控制",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          },
+          "children": [
+            {
+              "path": "/examples/auth/menu",
+              "name": "auth-menu",
+              "component": "/examples/auth/menu/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "菜单",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            },
+            {
+              "path": "/examples/auth/button",
+              "name": "auth-button",
+              "component": "/examples/auth/button/index",
+              "meta": {
+                "icon": "Menu",
+                "title": "按钮",
+                "isLink": "",
+                "isHide": false,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": true
+              }
+            }
+          ]
+        },
+        {
+          "path": "/examples/data-screen",
+          "name": "data-screen",
+          "component": "/examples/data-screen/index",
+          "meta": {
+            "icon": "Histogram",
+            "title": "数据大屏",
+            "isLink": "",
+            "isHide": false,
+            "isFull": true,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/examples/tianditu",
+          "name": "tianditu",
+          "component": "/examples/tianditu/index",
+          "meta": {
+            "icon": "MapLocation",
+            "title": "天地图",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
+        }
+      ]
+    }
+  ]
+}
