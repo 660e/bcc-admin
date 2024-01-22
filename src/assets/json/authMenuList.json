@@ -105,7 +105,7 @@
         {
           "path": "/examples/assembly",
           "name": "assembly",
-          "redirect": "/examples/assembly/guide",
+          "redirect": "/examples/assembly/tabs",
           "meta": {
             "icon": "Menu",
             "title": "自定义组件",
@@ -116,20 +116,6 @@
             "isKeepAlive": false
           },
           "children": [
-            {
-              "path": "/examples/assembly/guide",
-              "name": "guide",
-              "component": "/examples/assembly/guide/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "引导页",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            },
             {
               "path": "/examples/assembly/tabs",
               "name": "tabs",
