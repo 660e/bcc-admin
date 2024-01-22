@@ -5,14 +5,6 @@ import { ColumnProps } from '@/components/pro-table/interface';
 import ProTable from '@/components/pro-table/index.vue';
 import ImportDialog from './dialogs/import.vue';
 
-const importDialogRef = ref();
-const importData = () => {
-  importDialogRef.value.open();
-};
-const batchDelete = (ids: string[]) => {
-  console.log(ids);
-};
-
 const data = ref([
   { id: '001', name: 'TEST-G-001' },
   { id: '002', name: 'TEST-G-002' }
@@ -26,6 +18,17 @@ const columns: ColumnProps[] = [
   { prop: 'updateTime', label: '更新时间' },
   { prop: 'operation', label: '操作', fixed: 'right', width: 0 }
 ];
+
+const importDialogRef = ref();
+const importData = () => {
+  importDialogRef.value.open();
+};
+const importDataConfirm = (ids: string[]) => {
+  console.log(ids);
+};
+const batchDelete = (ids: string[]) => {
+  console.log(ids);
+};
 </script>
 
 <template>
@@ -45,6 +48,6 @@ const columns: ColumnProps[] = [
     </pro-table>
 
     <!-- 导入 -->
-    <import-dialog ref="importDialogRef" />
+    <import-dialog @confirm="importDataConfirm" ref="importDialogRef" />
   </div>
 </template>
