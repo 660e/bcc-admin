@@ -1,20 +1,17 @@
 <template>
   <div class="flex flex-col h-full">
-    <pro-table ref="proTableRef" title="菜单列表" row-key="path" :indent="20" :columns="columns" :data="menuData">
-      <!-- 表格 header 按钮 -->
+    <pro-table :columns="columns" :data="data" row-key="path">
       <template #tableHeader>
-        <el-button type="primary" :icon="CirclePlus">新增菜单</el-button>
+        <el-button type="primary">新增</el-button>
       </template>
-      <!-- 菜单图标 -->
       <template #icon="scope">
-        <el-icon :size="18">
-          <component :is="scope.row.meta.icon"></component>
+        <el-icon :size="16">
+          <component :is="scope.row.meta.icon" />
         </el-icon>
       </template>
-      <!-- 菜单操作 -->
       <template #operation>
-        <el-button type="primary" link :icon="EditPen">编辑</el-button>
-        <el-button type="primary" link :icon="Delete">删除</el-button>
+        <el-button type="primary" link>编辑</el-button>
+        <el-button type="primary" link>删除</el-button>
       </template>
     </pro-table>
   </div>
@@ -23,20 +20,18 @@
 <script lang="ts" name="menu-manage" setup>
 import { ref } from 'vue';
 import { ColumnProps } from '@/components/pro-table/interface';
-import { Delete, EditPen, CirclePlus } from '@element-plus/icons-vue';
+
 import authMenuList from '@/assets/json/authMenuList.json';
 import ProTable from '@/components/pro-table/index.vue';
 
-const proTableRef = ref();
-const menuData = ref(authMenuList.data);
+const data = ref(authMenuList.data);
 
-// 表格配置项
 const columns: ColumnProps[] = [
-  { prop: 'meta.title', label: '菜单名称', align: 'left', search: { el: 'input' } },
+  { prop: 'meta.title', label: '菜单名称', search: { el: 'input' } },
   { prop: 'meta.icon', label: '菜单图标' },
-  { prop: 'name', label: '菜单 name', search: { el: 'input' } },
-  { prop: 'path', label: '菜单路径', width: 300, search: { el: 'input' } },
-  { prop: 'component', label: '组件路径', width: 300 },
-  { prop: 'operation', label: '操作', width: 250, fixed: 'right' }
+  { prop: 'name', label: '路由名称', search: { el: 'input' } },
+  { prop: 'path', label: '菜单路径', search: { el: 'input' } },
+  { prop: 'component', label: '组件路径' },
+  { prop: 'operation', label: '操作', fixed: 'right' }
 ];
 </script>
