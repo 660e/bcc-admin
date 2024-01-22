@@ -1,8 +1,38 @@
+<script lang="ts" name="gen-manage" setup>
+import { ref } from 'vue';
+import { ColumnProps } from '@/components/pro-table/interface';
+
+import ProTable from '@/components/pro-table/index.vue';
+import ImportDialog from './dialogs/import.vue';
+
+const importDialogRef = ref();
+const importData = () => {
+  importDialogRef.value.open();
+};
+const batchDelete = (ids: string[]) => {
+  console.log(ids);
+};
+
+const data = ref([
+  { id: '001', name: 'TEST-G-001' },
+  { id: '002', name: 'TEST-G-002' }
+]);
+const columns: ColumnProps[] = [
+  { type: 'selection', fixed: 'left', width: 0 },
+  { prop: 'name', label: '表名称', search: { el: 'input' } },
+  { prop: 'description', label: '表描述', search: { el: 'input' } },
+  { prop: 'substance', label: '实体' },
+  { prop: 'creationTime', label: '创建时间' },
+  { prop: 'updateTime', label: '更新时间' },
+  { prop: 'operation', label: '操作', fixed: 'right', width: 0 }
+];
+</script>
+
 <template>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col h-full no-card">
     <pro-table :columns="columns" :data="data">
       <template #tableHeader="scope">
-        <el-button>导入</el-button>
+        <el-button @click="importData">导入</el-button>
         <el-button @click="batchDelete(scope.selectedListIds)">删除</el-button>
       </template>
       <template #operation>
@@ -13,31 +43,8 @@
         <el-button type="primary" link>生成代码</el-button>
       </template>
     </pro-table>
+
+    <!-- 导入 -->
+    <import-dialog ref="importDialogRef" />
   </div>
 </template>
-
-<script lang="ts" name="gen-manage" setup>
-import { ref } from 'vue';
-import { ColumnProps } from '@/components/pro-table/interface';
-
-import ProTable from '@/components/pro-table/index.vue';
-
-const data = ref([
-  { id: '001', name: 'TEST-G-001' },
-  { id: '002', name: 'TEST-G-002' }
-]);
-
-const columns: ColumnProps[] = [
-  { type: 'selection', fixed: 'left', width: 0 },
-  { prop: 'name', label: '表名称', search: { el: 'input' } },
-  { prop: 'description', label: '表描述', search: { el: 'input' } },
-  { prop: 'substance', label: '实体' },
-  { prop: 'creationTime', label: '创建时间' },
-  { prop: 'updateTime', label: '更新时间' },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 0 }
-];
-
-const batchDelete = (ids: string[]) => {
-  console.log(ids);
-};
-</script>

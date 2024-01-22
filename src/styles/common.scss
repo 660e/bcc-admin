@@ -100,12 +100,16 @@
 .no-card {
   .card {
     background-color: transparent;
-    border: none;
-    border-radius: 0;
+    border: 0;
     box-shadow: none;
-  }
-  .table-search {
-    padding: 18px 0 0 !important;
-    margin-bottom: 0 !important;
+    &.table-search {
+      margin-bottom: 0;
+    }
+    &.table-main {
+      padding-top: 0;
+      .table-header {
+        display: none;
+      }
+    }
   }
 }
