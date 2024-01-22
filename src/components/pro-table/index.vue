@@ -62,7 +62,7 @@
             </el-radio>
             <!-- sort -->
             <el-tag v-if="item.type == 'sort'" class="move">
-              <el-icon> <DCaret /></el-icon>
+              <el-icon><DCaret /></el-icon>
             </el-tag>
           </template>
         </el-table-column>
