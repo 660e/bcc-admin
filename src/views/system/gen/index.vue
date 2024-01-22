@@ -29,7 +29,7 @@ const columns: ColumnProps[] = [
 </script>
 
 <template>
-  <div class="flex flex-col h-full no-card">
+  <div class="flex flex-col h-full">
     <pro-table :columns="columns" :data="data">
       <template #tableHeader="scope">
         <el-button @click="importData">导入</el-button>

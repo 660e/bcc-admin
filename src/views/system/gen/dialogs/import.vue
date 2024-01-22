@@ -4,8 +4,6 @@ import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
 
-const dialogVisible = ref(false);
-
 const data = ref([
   { id: '001', name: 'TEST-G-001' },
   { id: '002', name: 'TEST-G-002' }
@@ -18,15 +16,32 @@ const columns: ColumnProps[] = [
   { prop: 'updateTime', label: '更新时间' }
 ];
 
+const visible = ref(false);
+const closed = () => {
+  console.log('closed');
+};
 const open = () => {
-  dialogVisible.value = true;
+  visible.value = true;
+};
+const cancel = () => {
+  visible.value = false;
+};
+const confirm = () => {
+  cancel();
 };
 
 defineExpose({ open });
 </script>
 
 <template>
-  <el-dialog v-model="dialogVisible" title="导入">
+  <el-dialog v-model="visible" @closed="closed" title="导入" class="no-card">
     <pro-table :columns="columns" :data="data" />
+
+    <template #footer>
+      <div class="flex justify-end">
+        <el-button @click="cancel">取消</el-button>
+        <el-button @click="confirm" type="primary">确定</el-button>
+      </div>
+    </template>
   </el-dialog>
 </template>
