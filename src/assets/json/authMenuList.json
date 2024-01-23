@@ -134,6 +134,20 @@
           ]
         },
         {
+          "path": "/examples/icon-select",
+          "name": "use-icon-select",
+          "component": "/examples/icon-select/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "icon-select组件",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
+        },
+        {
           "path": "/examples/tabs",
           "name": "tabs",
           "component": "/examples/tabs/index",
@@ -206,20 +220,6 @@
             "isKeepAlive": false
           },
           "children": [
-            {
-              "path": "/examples/assembly/use-icon-select",
-              "name": "use-icon-select",
-              "component": "/examples/assembly/use-icon-select/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "图标选择器",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            },
             {
               "path": "/examples/assembly/use-tree-filter",
               "name": "use-tree-filter",
