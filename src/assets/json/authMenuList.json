@@ -176,6 +176,20 @@
           }
         },
         {
+          "path": "/examples/upload-file",
+          "name": "upload-file",
+          "component": "/examples/upload-file/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "upload组件",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
+        },
+        {
           "path": "/examples/tabs",
           "name": "tabs",
           "component": "/examples/tabs/index",
@@ -248,20 +262,6 @@
             "isKeepAlive": false
           },
           "children": [
-            {
-              "path": "/examples/assembly/upload-file",
-              "name": "upload-file",
-              "component": "/examples/assembly/upload-file/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "文件上传",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            },
             {
               "path": "/examples/assembly/use-wang-editor",
               "name": "use-wang-editor",
