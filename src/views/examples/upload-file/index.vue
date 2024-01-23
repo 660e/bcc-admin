@@ -162,7 +162,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="upload-file">
+<script lang="ts" name="upload-file" setup>
 import { ref, reactive } from 'vue';
 import { FormInstance } from 'element-plus';
 import UploadImg from '@/components/upload/img.vue';

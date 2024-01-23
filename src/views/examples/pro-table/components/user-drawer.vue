@@ -52,7 +52,7 @@
   </el-drawer>
 </template>
 
-<script setup lang="ts" name="UserDrawer">
+<script lang="ts" name="UserDrawer" setup>
 import { ref, reactive } from 'vue';
 import { genderType } from '@/utils/dict';
 import { ElMessage, FormInstance } from 'element-plus';

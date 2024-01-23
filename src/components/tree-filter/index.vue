@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="tree-filter">
+<script lang="ts" name="tree-filter" setup>
 import { ref, watch, onBeforeMount, nextTick } from 'vue';
 import { ElTree } from 'element-plus';
 

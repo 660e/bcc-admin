@@ -22,7 +22,7 @@
   </component>
 </template>
 
-<script setup lang="ts" name="search-form-item">
+<script lang="ts" name="search-form-item" setup>
 import { computed, inject, ref } from 'vue';
 import { handleProp } from '@/utils';
 import { ColumnProps } from '@/components/pro-table/interface';

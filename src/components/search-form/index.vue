@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="search-form">
+<script lang="ts" name="search-form" setup>
 import { computed, ref } from 'vue';
 import { ColumnProps } from '@/components/pro-table/interface';
 import { BreakPoint } from '@/components/grid-layout/interface';

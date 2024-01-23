@@ -27,7 +27,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="tabs">
+<script lang="ts" name="tabs" setup>
 import { inject, nextTick, ref } from 'vue';
 import { HOME_URL } from '@/config';
 import { useRoute, useRouter } from 'vue-router';

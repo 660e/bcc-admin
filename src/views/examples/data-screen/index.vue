@@ -95,7 +95,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="data-screen">
+<script lang="ts" name="data-screen" setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { HOME_URL } from '@/config';
 import { useRouter } from 'vue-router';

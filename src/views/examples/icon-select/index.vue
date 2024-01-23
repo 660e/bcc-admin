@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="icon-select">
+<script lang="ts" name="icon-select" setup>
 import { ref } from 'vue';
 import IconSelect from '@/components/icon-select/index.vue';
 const iconValue = ref('');

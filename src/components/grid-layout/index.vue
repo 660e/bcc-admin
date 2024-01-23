@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="grid-layout">
+<script lang="ts" name="grid-layout" setup>
 import {
   ref,
   watch,
