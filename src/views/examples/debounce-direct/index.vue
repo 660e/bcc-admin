@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="debounce-direct">
+<script lang="ts" name="debounce-direct" setup>
 import { ElMessage } from 'element-plus';
 const debounceClick = () => {
   ElMessage.success('我是防抖按钮触发的事件 🍍🍓🍌');

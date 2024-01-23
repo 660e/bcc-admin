@@ -20,8 +20,8 @@
     </el-row>
     <el-divider content-position="left"> 使用 v-auth 指令绑定多个权限 </el-divider>
     <el-row>
-      <el-button v-auth="['add', 'edit', 'delete', 'import', 'export']" type="primary" :icon="CirclePlus"> 新增 </el-button>
-      <el-button v-auth="['add', 'edit', 'delete', 'import', 'export']" type="warning" :icon="EditPen"> 编辑 </el-button>
+      <el-button v-auth="['add', 'edit', 'delete']" type="primary" :icon="CirclePlus"> 新增 </el-button>
+      <el-button v-auth="['add', 'edit', 'delete', 'import']" type="warning" :icon="EditPen"> 编辑 </el-button>
       <el-button v-auth="['add', 'edit', 'delete', 'import', 'export']" type="danger" plain :icon="Delete"> 删除 </el-button>
       <el-button v-auth="['add', 'edit', 'delete', 'import', 'export']" type="info" plain :icon="Upload"> 导入数据 </el-button>
       <el-button v-auth="['add', 'edit', 'delete', 'import', 'export']" type="info" plain :icon="Download"> 导出数据 </el-button>
@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="auth-button">
+<script lang="ts" name="auth-direct" setup>
 import { useAuthButtons } from '@/hooks/useAuthButtons';
 import { CirclePlus, Delete, EditPen, Download, Upload } from '@element-plus/icons-vue';
 

@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="throttle-direct">
+<script lang="ts" name="throttle-direct" setup>
 import { ElMessage } from 'element-plus';
 const throttleClick = () => {
   ElMessage.success('我是节流按钮触发的事件 🍍🍓🍌');

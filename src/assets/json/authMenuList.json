@@ -277,134 +277,88 @@
           }
         },
         {
-          "path": "/examples/directives",
-          "name": "directives",
-          "redirect": "/examples/directives/copy-direct",
+          "path": "/examples/auth-direct",
+          "name": "auth-direct",
+          "component": "/examples/auth-direct/index",
           "meta": {
             "icon": "Menu",
-            "title": "自定义指令",
+            "title": "v-auth指令",
             "isLink": "",
             "isHide": false,
             "isFull": false,
             "isAffix": false,
             "isKeepAlive": false
-          },
-          "children": [
-            {
-              "path": "/examples/directives/copy-direct",
-              "name": "copy-direct",
-              "component": "/examples/directives/copy-direct/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "复制",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            },
-            {
-              "path": "/examples/directives/drag-direct",
-              "name": "drag-direct",
-              "component": "/examples/directives/drag-direct/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "拖拽",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            },
-            {
-              "path": "/examples/directives/debounce-direct",
-              "name": "debounce-direct",
-              "component": "/examples/directives/debounce-direct/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "防抖",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            },
-            {
-              "path": "/examples/directives/throttle-direct",
-              "name": "throttle-direct",
-              "component": "/examples/directives/throttle-direct/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "节流",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            },
-            {
-              "path": "/examples/directives/longpress-direct",
-              "name": "longpress-direct",
-              "component": "/examples/directives/longpress-direct/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "长按",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            }
-          ]
+          }
         },
         {
-          "path": "/examples/auth",
-          "name": "auth",
-          "redirect": "/examples/auth/menu",
+          "path": "/examples/copy-direct",
+          "name": "copy-direct",
+          "component": "/examples/copy-direct/index",
           "meta": {
             "icon": "Menu",
-            "title": "权限控制",
+            "title": "v-copy指令",
             "isLink": "",
             "isHide": false,
             "isFull": false,
             "isAffix": false,
             "isKeepAlive": false
-          },
-          "children": [
-            {
-              "path": "/examples/auth/menu",
-              "name": "auth-menu",
-              "component": "/examples/auth/menu/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "菜单",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            },
-            {
-              "path": "/examples/auth/button",
-              "name": "auth-button",
-              "component": "/examples/auth/button/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "按钮",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            }
-          ]
+          }
+        },
+        {
+          "path": "/examples/debounce-direct",
+          "name": "debounce-direct",
+          "component": "/examples/debounce-direct/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "v-debounce指令",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
+        },
+        {
+          "path": "/examples/drag-direct",
+          "name": "drag-direct",
+          "component": "/examples/drag-direct/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "v-draggable指令",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
+        },
+        {
+          "path": "/examples/longpress-direct",
+          "name": "longpress-direct",
+          "component": "/examples/longpress-direct/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "v-longpress指令",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
+        },
+        {
+          "path": "/examples/throttle-direct",
+          "name": "throttle-direct",
+          "component": "/examples/throttle-direct/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "v-throttle指令",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
         }
       ]
     }

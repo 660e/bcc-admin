@@ -5,4 +5,4 @@
   </div>
 </template>
 
-<script setup lang="ts" name="drag-direct"></script>
+<script lang="ts" name="drag-direct" setup></script>

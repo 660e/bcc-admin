@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="longpress-direct">
+<script lang="ts" name="longpress-direct" setup>
 import { ElMessage } from 'element-plus';
 const longpress = () => {
   ElMessage.success('长按事件触发成功 🎉🎉🎉');
