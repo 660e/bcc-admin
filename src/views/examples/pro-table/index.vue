@@ -45,7 +45,7 @@
   </div>
 </template>
 
-<script setup lang="tsx" name="use-pro-table">
+<script setup lang="tsx" name="pro-table">
 import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { User } from '@/api/interface';

@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="use-tree-filter">
+<script setup lang="ts" name="tree-filter">
 import { reactive } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getUserDepartment } from '@/api/modules/user';

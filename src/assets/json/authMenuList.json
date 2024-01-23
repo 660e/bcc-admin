@@ -135,11 +135,25 @@
         },
         {
           "path": "/examples/icon-select",
-          "name": "use-icon-select",
+          "name": "icon-select",
           "component": "/examples/icon-select/index",
           "meta": {
             "icon": "Menu",
             "title": "icon-select组件",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
+        },
+        {
+          "path": "/examples/tree-filter",
+          "name": "tree-filter",
+          "component": "/examples/tree-filter/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "tree-filter组件",
             "isLink": "",
             "isHide": false,
             "isFull": false,
@@ -220,20 +234,6 @@
             "isKeepAlive": false
           },
           "children": [
-            {
-              "path": "/examples/assembly/use-tree-filter",
-              "name": "use-tree-filter",
-              "component": "/examples/assembly/use-tree-filter/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "树形筛选器",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            },
             {
               "path": "/examples/assembly/use-svg-icon",
               "name": "use-svg-icon",
