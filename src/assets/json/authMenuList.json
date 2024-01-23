@@ -103,6 +103,20 @@
       },
       "children": [
         {
+          "path": "/examples/icon-select",
+          "name": "icon-select",
+          "component": "/examples/icon-select/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "icon-select组件",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
+        },
+        {
           "path": "/examples/pro-table",
           "name": "pro-table",
           "component": "/examples/pro-table/index",
@@ -134,12 +148,12 @@
           ]
         },
         {
-          "path": "/examples/icon-select",
-          "name": "icon-select",
-          "component": "/examples/icon-select/index",
+          "path": "/examples/svg-icon",
+          "name": "svg-icon",
+          "component": "/examples/svg-icon/index",
           "meta": {
             "icon": "Menu",
-            "title": "icon-select组件",
+            "title": "svg-icon组件",
             "isLink": "",
             "isHide": false,
             "isFull": false,
@@ -154,20 +168,6 @@
           "meta": {
             "icon": "Menu",
             "title": "tree-filter组件",
-            "isLink": "",
-            "isHide": false,
-            "isFull": false,
-            "isAffix": false,
-            "isKeepAlive": false
-          }
-        },
-        {
-          "path": "/examples/svg-icon",
-          "name": "svg-icon",
-          "component": "/examples/svg-icon/index",
-          "meta": {
-            "icon": "Menu",
-            "title": "svg-icon组件",
             "isLink": "",
             "isHide": false,
             "isFull": false,
@@ -263,34 +263,18 @@
           }
         },
         {
-          "path": "/examples/assembly",
-          "name": "assembly",
-          "redirect": "/examples/assembly/tabs",
+          "path": "/examples/draggable",
+          "name": "draggable",
+          "component": "/examples/draggable/index",
           "meta": {
             "icon": "Menu",
-            "title": "自定义组件",
+            "title": "拖拽",
             "isLink": "",
             "isHide": false,
             "isFull": false,
             "isAffix": false,
             "isKeepAlive": false
-          },
-          "children": [
-            {
-              "path": "/examples/assembly/draggable",
-              "name": "draggable",
-              "component": "/examples/assembly/draggable/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "拖拽",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              }
-            }
-          ]
+          }
         },
         {
           "path": "/examples/directives",
