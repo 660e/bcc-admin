@@ -5,7 +5,7 @@ import InfoPane from './panes/info.vue';
 import RowsPane from './panes/rows.vue';
 import GeneratePane from './panes/generate.vue';
 
-const active = ref('rows');
+const active = ref('info');
 </script>
 
 <template>
