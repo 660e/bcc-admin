@@ -122,8 +122,39 @@
               "component": "/examples/pro-table/detail",
               "meta": {
                 "icon": "Menu",
-                "title": "表格详情",
+                "title": "详情页",
                 "activeMenu": "/examples/pro-table",
+                "isLink": "",
+                "isHide": true,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": false
+              }
+            }
+          ]
+        },
+        {
+          "path": "/examples/tabs",
+          "name": "tabs",
+          "component": "/examples/tabs/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "标签操作",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          },
+          "children": [
+            {
+              "path": "/examples/tabs/detail/:id",
+              "name": "tabs-detail",
+              "component": "/examples/tabs/detail",
+              "meta": {
+                "icon": "Menu",
+                "title": "详情页",
+                "activeMenu": "/examples/tabs",
                 "isLink": "",
                 "isHide": true,
                 "isFull": false,
@@ -175,38 +206,6 @@
             "isKeepAlive": false
           },
           "children": [
-            {
-              "path": "/examples/assembly/tabs",
-              "name": "tabs",
-              "component": "/examples/assembly/tabs/index",
-              "meta": {
-                "icon": "Menu",
-                "title": "标签页操作",
-                "isLink": "",
-                "isHide": false,
-                "isFull": false,
-                "isAffix": false,
-                "isKeepAlive": false
-              },
-              "children": [
-                {
-                  "path": "/examples/assembly/tabs/detail/:id",
-                  "name": "tabs-detail",
-                  "component": "/examples/assembly/tabs/detail",
-                  "meta": {
-                    "icon": "Menu",
-                    "title": "Tab 详情",
-                    "activeMenu": "/examples/assembly/tabs",
-                    "isLink": "",
-                    "isHide": true,
-                    "isFull": false,
-                    "isAffix": false,
-                    "isKeepAlive": false
-                  }
-                }
-              ]
-            },
-
             {
               "path": "/examples/assembly/use-icon-select",
               "name": "use-icon-select",
