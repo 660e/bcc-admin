@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="use-wang-editor">
+<script setup lang="ts" name="wang-editor">
 import { ref } from 'vue';
 import WangEditor from '@/components/wang-editor/index.vue';
 
