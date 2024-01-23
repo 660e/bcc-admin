@@ -54,7 +54,7 @@ import { useDownload } from '@/hooks/useDownload';
 import { useAuthButtons } from '@/hooks/useAuthButtons';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import ProTable from '@/components/pro-table/index.vue';
-import UserDrawer from '@/views/examples/assembly/use-pro-table/components/user-drawer.vue';
+import UserDrawer from './components/user-drawer.vue';
 import { ProTableInstance, ColumnProps, HeaderRenderScope } from '@/components/pro-table/interface';
 import { CirclePlus, Delete, EditPen, Download, View, Refresh } from '@element-plus/icons-vue';
 import {
@@ -73,7 +73,7 @@ const router = useRouter();
 
 // 跳转详情页
 const toDetail = () => {
-  router.push(`/examples/assembly/use-pro-table/detail/${Math.random().toFixed(3)}?params=detail-page`);
+  router.push(`/examples/pro-table/detail/${Math.random().toFixed(3)}?params=detail-page`);
 };
 
 // ProTable 实例
