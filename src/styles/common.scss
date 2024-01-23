@@ -96,6 +96,12 @@
   border: 1px solid var(--el-border-color-light);
   border-radius: 4px;
   box-shadow: 0 0 12px rgb(0 0 0 / 5%);
+  .el-tabs__header.is-top {
+    margin-bottom: 0;
+  }
+  .el-tabs__content {
+    flex: 1;
+  }
 }
 .no-card {
   .card {
