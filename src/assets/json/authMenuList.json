@@ -84,7 +84,24 @@
             "isFull": false,
             "isAffix": false,
             "isKeepAlive": false
-          }
+          },
+          "children": [
+            {
+              "path": "/system/gen/:id",
+              "name": "gen-edit",
+              "component": "/system/gen/pages/edit",
+              "meta": {
+                "icon": "Menu",
+                "title": "详情页",
+                "activeMenu": "/system/gen",
+                "isLink": "",
+                "isHide": true,
+                "isFull": false,
+                "isAffix": false,
+                "isKeepAlive": false
+              }
+            }
+          ]
         }
       ]
     },
