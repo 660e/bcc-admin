@@ -35,7 +35,7 @@ defineExpose({ open });
 </script>
 
 <template>
-  <el-dialog v-model="visible" @closed="closed" title="导入" class="no-card">
+  <el-dialog v-model="visible" @closed="closed" title="导入" class="no-card" draggable>
     <pro-table :columns="columns" :data="data" ref="proTableRef" />
 
     <template #footer>
