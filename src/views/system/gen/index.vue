@@ -39,7 +39,7 @@ const edit = (id: string) => {
 
 <template>
   <div class="flex flex-col h-full">
-    <pro-table :columns="columns" :data="data">
+    <pro-table :data="data" :columns="columns">
       <template #tableHeader="scope">
         <el-button @click="importData">导入</el-button>
         <el-button @click="batchDelete(scope.selectedListIds)">删除</el-button>

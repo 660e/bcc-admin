@@ -98,14 +98,9 @@ const rules = reactive<FormRules<Forms>>({
           <el-input v-model="forms.feature" />
         </el-form-item>
       </div>
-
       <el-form-item label="备注">
         <el-input v-model="forms.remark" :rows="5" type="textarea" />
       </el-form-item>
-      <div class="flex justify-center">
-        <el-button>返回</el-button>
-        <el-button type="primary">提交</el-button>
-      </div>
     </el-form>
   </el-tab-pane>
 </template>
