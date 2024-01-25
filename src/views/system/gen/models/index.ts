@@ -24,5 +24,5 @@ export interface InfoType {
 
 export interface DataType {
   info: InfoType;
-  rows: any;
+  rows: InfoType[];
 }

@@ -5,7 +5,7 @@ import { DataType } from '../models';
 import InfoPane from './panes/info.vue';
 import RowsPane from './panes/rows.vue';
 
-const active = ref('info');
+const active = ref('rows');
 
 const data = reactive<DataType>({
   info: {
@@ -31,7 +31,7 @@ const data = reactive<DataType>({
     tplWebType: 'element-plus',
     genType: '0'
   },
-  rows: []
+  rows: new Array(20).fill(null).map((e, i) => ({ id: i, name: `TEST-G-${i}` })) as any
 });
 
 const confirm = () => {

@@ -1,10 +1,12 @@
 <script lang="ts" name="rows-pane" setup>
-import { ref } from 'vue';
 import { ColumnProps } from '@/components/pro-table/interface';
+import { InfoType } from '../../models';
 
 import ProTable from '@/components/pro-table/index.vue';
 
-const data = ref(new Array(20).fill(null).map((e, i) => ({ id: i, name: `TEST-G-${i}` })));
+const $props = defineProps<{ rows: InfoType[] }>();
+
+const data = $props.rows;
 const columns: ColumnProps[] = [
   { prop: 'name', label: '字段列名' },
   { prop: 'description', label: '字段描述' },
