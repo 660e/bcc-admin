@@ -1,32 +1,12 @@
 <script lang="ts" name="info-pane" setup>
 import { reactive } from 'vue';
-import type { FormRules } from 'element-plus';
+import { FormRules } from 'element-plus';
+import { InfoType } from '../../models';
 
-interface Forms {
-  [key: string]: string;
-}
+const $props = defineProps<{ info: InfoType }>();
 
-const forms = reactive<Forms>({
-  tableName: '',
-  tableComment: '',
-  tplCategory: 'crud',
-  className: '',
-  packageName: '',
-  moduleName: '',
-  businessName: '',
-  functionName: '',
-  remark: '',
-
-  treeCode: '',
-  treeParentCode: '',
-  treeName: '',
-
-  functionAuthor: 'admin',
-  tplWebType: 'element-plus',
-  genType: '0'
-});
-
-const rules = reactive<FormRules<Forms>>({
+const forms = $props.info;
+const rules = reactive<FormRules<InfoType>>({
   tableName: [{ required: true, message: '请填写表名称', trigger: 'blur' }],
   tableComment: [{ required: true, message: '请填写表描述', trigger: 'blur' }],
   className: [{ required: true, message: '请填写实体类名称', trigger: 'blur' }],
