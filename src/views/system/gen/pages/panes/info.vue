@@ -3,37 +3,37 @@ import { reactive } from 'vue';
 import type { FormRules } from 'element-plus';
 
 interface Forms {
-  name: string;
-  description: string;
-  substance: string;
-  template: string;
-  path: string;
-  module: string;
-  business: string;
-  feature: string;
+  tableName: string;
+  tableComment: string;
+  className: string;
+  tplCategory: string;
+  packageName: string;
+  moduleName: string;
+  businessName: string;
+  functionName: string;
   remark: string;
 }
 
 const forms = reactive<Forms>({
-  name: '',
-  description: '',
-  substance: '',
-  template: '',
-  path: '',
-  module: '',
-  business: '',
-  feature: '',
+  tableName: '',
+  tableComment: '',
+  className: '',
+  tplCategory: '',
+  packageName: '',
+  moduleName: '',
+  businessName: '',
+  functionName: '',
   remark: ''
 });
 
 const rules = reactive<FormRules<Forms>>({
-  name: [{ required: true, message: '请填写表名称', trigger: 'blur' }],
-  description: [{ required: true, message: '请填写表描述', trigger: 'blur' }],
-  substance: [{ required: true, message: '请填写实体类名称', trigger: 'blur' }],
-  path: [{ required: true, message: '请填写生成包路径', trigger: 'blur' }],
-  module: [{ required: true, message: '请填写生成模块名', trigger: 'blur' }],
-  business: [{ required: true, message: '请填写生成业务名', trigger: 'blur' }],
-  feature: [{ required: true, message: '请填写生成功能名', trigger: 'blur' }]
+  tableName: [{ required: true, message: '请填写表名称', trigger: 'blur' }],
+  tableComment: [{ required: true, message: '请填写表描述', trigger: 'blur' }],
+  className: [{ required: true, message: '请填写实体类名称', trigger: 'blur' }],
+  packageName: [{ required: true, message: '请填写生成包路径', trigger: 'blur' }],
+  moduleName: [{ required: true, message: '请填写生成模块名', trigger: 'blur' }],
+  businessName: [{ required: true, message: '请填写生成业务名', trigger: 'blur' }],
+  functionName: [{ required: true, message: '请填写生成功能名', trigger: 'blur' }]
 });
 </script>
 
@@ -41,19 +41,19 @@ const rules = reactive<FormRules<Forms>>({
   <el-tab-pane v-bind="$attrs">
     <el-form :model="forms" :rules="rules" label-width="130px">
       <div class="grid grid-cols-2 grid-rows-4 grid-flow-col pt-5">
-        <el-form-item label="表名称" prop="name">
-          <el-input v-model="forms.name" />
+        <el-form-item label="表名称" prop="tableName">
+          <el-input v-model="forms.tableName" />
         </el-form-item>
-        <el-form-item label="表描述" prop="description">
-          <el-input v-model="forms.description" />
+        <el-form-item label="表描述" prop="tableComment">
+          <el-input v-model="forms.tableComment" />
         </el-form-item>
-        <el-form-item label="实体类名称" prop="substance">
-          <el-input v-model="forms.substance" />
+        <el-form-item label="实体类名称" prop="className">
+          <el-input v-model="forms.className" />
         </el-form-item>
         <el-form-item label="生成模板">
-          <el-select v-model="forms.template"></el-select>
+          <el-select v-model="forms.tplCategory"></el-select>
         </el-form-item>
-        <el-form-item prop="path">
+        <el-form-item prop="packageName">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>生成包路径</span>
@@ -62,9 +62,9 @@ const rules = reactive<FormRules<Forms>>({
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="forms.path" />
+          <el-input v-model="forms.packageName" />
         </el-form-item>
-        <el-form-item prop="module">
+        <el-form-item prop="moduleName">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>生成模块名</span>
@@ -73,9 +73,9 @@ const rules = reactive<FormRules<Forms>>({
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="forms.module" />
+          <el-input v-model="forms.moduleName" />
         </el-form-item>
-        <el-form-item prop="business">
+        <el-form-item prop="businessName">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>生成业务名</span>
@@ -84,9 +84,9 @@ const rules = reactive<FormRules<Forms>>({
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="forms.business" />
+          <el-input v-model="forms.businessName" />
         </el-form-item>
-        <el-form-item prop="feature">
+        <el-form-item prop="functionName">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>生成功能名</span>
@@ -95,7 +95,7 @@ const rules = reactive<FormRules<Forms>>({
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="forms.feature" />
+          <el-input v-model="forms.functionName" />
         </el-form-item>
       </div>
       <el-form-item label="备注">
