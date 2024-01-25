@@ -23,7 +23,7 @@ const columns: ColumnProps[] = [
 </script>
 
 <template>
-  <el-tab-pane v-bind="$attrs" class="h-full flex no-card">
+  <el-tab-pane v-bind="$attrs" class="h-full no-card">
     <pro-table :data="data" :columns="columns" :pagination="false">
       <template #description="scope">
         <el-input v-model="scope.row.description" />

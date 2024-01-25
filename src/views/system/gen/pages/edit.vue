@@ -9,7 +9,7 @@ const active = ref('rows');
 
 <template>
   <div class="card h-full flex flex-col px-5">
-    <el-tabs v-model="active" class="flex-1 flex flex-col">
+    <el-tabs v-model="active" class="flex-1 flex flex-col h-0">
       <info-pane label="基本信息" name="info" />
       <rows-pane label="字段信息" name="rows" />
     </el-tabs>
