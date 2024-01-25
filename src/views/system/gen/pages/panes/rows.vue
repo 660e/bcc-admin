@@ -4,7 +4,7 @@ import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
 
-const data = ref(new Array(10).fill(null).map((e, i) => ({ id: i, name: `TEST-G-${i}` })));
+const data = ref(new Array(20).fill(null).map((e, i) => ({ id: i, name: `TEST-G-${i}` })));
 const columns: ColumnProps[] = [
   { prop: 'name', label: '字段列名' },
   { prop: 'description', label: '字段描述' },
@@ -23,7 +23,7 @@ const columns: ColumnProps[] = [
 </script>
 
 <template>
-  <el-tab-pane v-bind="$attrs" class="h-full no-card">
+  <el-tab-pane v-bind="$attrs" class="h-full flex no-card">
     <pro-table :data="data" :columns="columns" :pagination="false">
       <template #description="scope">
         <el-input v-model="scope.row.description" />

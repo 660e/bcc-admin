@@ -6,10 +6,7 @@ import { ColumnProps } from '@/components/pro-table/interface';
 import ProTable from '@/components/pro-table/index.vue';
 import ImportDialog from './dialogs/import.vue';
 
-const data = ref([
-  { id: '001', name: 'TEST-G-001' },
-  { id: '002', name: 'TEST-G-002' }
-]);
+const data = ref(new Array(20).fill(null).map((e, i) => ({ id: i, name: `TEST-G-${i}` })));
 const columns: ColumnProps[] = [
   { type: 'selection', fixed: 'left', width: 0 },
   { prop: 'name', label: '表名称', search: { el: 'input' } },

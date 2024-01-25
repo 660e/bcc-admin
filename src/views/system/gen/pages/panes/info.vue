@@ -12,18 +12,26 @@ interface Forms {
   businessName: string;
   functionName: string;
   remark: string;
+
+  functionAuthor: string;
+  tplWebType: string;
+  genType: string;
 }
 
 const forms = reactive<Forms>({
   tableName: '',
   tableComment: '',
   className: '',
-  tplCategory: '',
+  tplCategory: 'crud',
   packageName: '',
   moduleName: '',
   businessName: '',
   functionName: '',
-  remark: ''
+  remark: '',
+
+  functionAuthor: 'admin',
+  tplWebType: 'element-plus',
+  genType: '0'
 });
 
 const rules = reactive<FormRules<Forms>>({
@@ -51,7 +59,11 @@ const rules = reactive<FormRules<Forms>>({
           <el-input v-model="forms.className" />
         </el-form-item>
         <el-form-item label="生成模板">
-          <el-select v-model="forms.tplCategory"></el-select>
+          <el-select v-model="forms.tplCategory">
+            <el-option label="单表（增删改查）" value="crud" />
+            <el-option label="树表（增删改查）" value="tree" />
+            <el-option label="主子表（增删改查）" value="sub" />
+          </el-select>
         </el-form-item>
         <el-form-item prop="packageName">
           <template #label>
