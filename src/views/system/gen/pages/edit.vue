@@ -31,7 +31,7 @@ const data = reactive<DataType>({
     tplWebType: 'element-plus',
     genType: '0'
   },
-  rows: new Array(20).fill(null).map((e, i) => ({ id: i, name: `TEST-G-${i}` })) as any
+  rows: new Array(20).fill(null).map((e, i) => ({ id: i, columnName: `TEST-G-${i}` })) as any
 });
 
 const confirm = () => {

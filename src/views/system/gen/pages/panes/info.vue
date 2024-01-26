@@ -1,7 +1,7 @@
 <script lang="ts" name="info-pane" setup>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { FormRules } from 'element-plus';
-import { InfoType } from '../../models';
+import { InfoType, SelectOption } from '../../models';
 
 const $props = defineProps<{ info: InfoType }>();
 
@@ -22,6 +22,17 @@ const rules = reactive<FormRules<InfoType>>({
   subTableName: [{ required: true, message: '请填写关联子表的表名', trigger: 'change' }],
   subTableFkName: [{ required: true, message: '请填写子表关联的外键名', trigger: 'change' }]
 });
+
+const tplCategoryOptions = ref<SelectOption[]>([
+  { label: '单表（增删改查）', value: 'crud' },
+  { label: '树表（增删改查）', value: 'tree' },
+  { label: '主子表（增删改查）', value: 'sub' }
+]);
+const treeCodeOptions = ref<SelectOption[]>([]);
+const treeParentCodeOptions = ref<SelectOption[]>([]);
+const treeNameOptions = ref<SelectOption[]>([]);
+const subTableNameOptions = ref<SelectOption[]>([]);
+const subTableFkNameOptions = ref<SelectOption[]>([]);
 </script>
 
 <template>
@@ -36,9 +47,7 @@ const rules = reactive<FormRules<InfoType>>({
         </el-form-item>
         <el-form-item label="生成模板">
           <el-select v-model="forms.tplCategory">
-            <el-option label="单表（增删改查）" value="crud" />
-            <el-option label="树表（增删改查）" value="tree" />
-            <el-option label="主子表（增删改查）" value="sub" />
+            <el-option v-for="option in tplCategoryOptions" :key="option.value" :label="option.label" :value="option.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="实体类名称" prop="className">
@@ -100,7 +109,9 @@ const rules = reactive<FormRules<InfoType>>({
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.treeCode"></el-select>
+            <el-select v-model="forms.treeCode">
+              <el-option v-for="option in treeCodeOptions" :key="option.value" :label="option.label" :value="option.value" />
+            </el-select>
           </el-form-item>
           <el-form-item prop="treeParentCode">
             <template #label>
@@ -111,7 +122,14 @@ const rules = reactive<FormRules<InfoType>>({
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.treeParentCode"></el-select>
+            <el-select v-model="forms.treeParentCode">
+              <el-option
+                v-for="option in treeParentCodeOptions"
+                :key="option.value"
+                :label="option.label"
+                :value="option.value"
+              />
+            </el-select>
           </el-form-item>
           <el-form-item prop="treeName">
             <template #label>
@@ -122,7 +140,9 @@ const rules = reactive<FormRules<InfoType>>({
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.treeName"></el-select>
+            <el-select v-model="forms.treeName">
+              <el-option v-for="option in treeNameOptions" :key="option.value" :label="option.label" :value="option.value" />
+            </el-select>
           </el-form-item>
         </template>
 
@@ -137,7 +157,9 @@ const rules = reactive<FormRules<InfoType>>({
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.subTableName"></el-select>
+            <el-select v-model="forms.subTableName">
+              <el-option v-for="option in subTableNameOptions" :key="option.value" :label="option.label" :value="option.value" />
+            </el-select>
           </el-form-item>
           <el-form-item prop="subTableFkName">
             <template #label>
@@ -148,7 +170,14 @@ const rules = reactive<FormRules<InfoType>>({
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.subTableFkName"></el-select>
+            <el-select v-model="forms.subTableFkName">
+              <el-option
+                v-for="option in subTableFkNameOptions"
+                :key="option.value"
+                :label="option.label"
+                :value="option.value"
+              />
+            </el-select>
           </el-form-item>
         </template>
       </div>
