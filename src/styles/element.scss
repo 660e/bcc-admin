@@ -21,7 +21,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    span {
+    .el-dialog__title {
       font-size: 16px;
       line-height: 1;
     }
@@ -80,6 +80,34 @@
 .el-message,
 .el-notification {
   z-index: 2070 !important;
+}
+
+/* el-message-box */
+.el-message-box {
+  padding: 0;
+  .el-message-box__header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .el-message-box__title span {
+      font-size: 16px;
+      line-height: 1;
+    }
+    .el-message-box__headerbtn {
+      position: static;
+      width: 20px;
+      height: 20px;
+      font-size: 20px;
+      display: flex;
+    }
+  }
+  .el-message-box__content {
+    padding: 20px;
+  }
+  .el-message-box__btns {
+    padding: 10px;
+  }
 }
 
 /* el-table */

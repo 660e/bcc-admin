@@ -39,20 +39,24 @@ const edit = (id: string) => {
   $router.push({ name: 'gen-edit', params: { id } });
 };
 const remove = (row: any) => {
-  ElMessageBox.confirm(`是否确认删除表名称为“${row.tableName}”的数据项？`, '系统提示', { type: 'warning' }).then(() => {
-    ElMessage({
-      type: 'success',
-      message: '删除成功'
-    });
-  });
+  ElMessageBox.confirm(`是否确认删除表名称为“${row.tableName}”的数据项？`, '系统提示', { type: 'warning' })
+    .then(() => {
+      ElMessage({
+        type: 'success',
+        message: '删除成功'
+      });
+    })
+    .catch(() => false);
 };
 const sync = (row: any) => {
-  ElMessageBox.confirm(`确认要强制同步“${row.tableName}”表结构吗？`, '系统提示', { type: 'warning' }).then(() => {
-    ElMessage({
-      type: 'success',
-      message: '同步成功'
-    });
-  });
+  ElMessageBox.confirm(`确认要强制同步“${row.tableName}”表结构吗？`, '系统提示', { type: 'warning' })
+    .then(() => {
+      ElMessage({
+        type: 'success',
+        message: '同步成功'
+      });
+    })
+    .catch(() => false);
 };
 </script>
 
