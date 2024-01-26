@@ -6,6 +6,7 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 
 import ProTable from '@/components/pro-table/index.vue';
 import ImportDialog from './dialogs/import.vue';
+import PreviewDialog from './dialogs/preview.vue';
 
 const data = ref(new Array(20).fill(null).map((e, i) => ({ id: i, tableName: `TEST-G-${i}` })));
 const columns: ColumnProps[] = [
@@ -30,6 +31,10 @@ const batchDelete = (ids: string[]) => {
 };
 
 const $router = useRouter();
+const previewDialogRef = ref();
+const preview = () => {
+  previewDialogRef.value.open();
+};
 const edit = (id: string) => {
   $router.push({ name: 'gen-edit', params: { id } });
 };
@@ -59,7 +64,7 @@ const sync = (row: any) => {
         <el-button @click="batchDelete(scope.selectedListIds)">删除</el-button>
       </template>
       <template #operation="scope">
-        <el-button type="primary" link>预览</el-button>
+        <el-button @click="preview" type="primary" link>预览</el-button>
         <el-button @click="edit(scope.row.id)" type="primary" link>编辑</el-button>
         <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
         <el-button @click="sync(scope.row)" type="primary" link>同步</el-button>
@@ -69,5 +74,7 @@ const sync = (row: any) => {
 
     <!-- 导入 -->
     <import-dialog @confirm="importDataConfirm" ref="importDialogRef" />
+    <!-- 预览 -->
+    <preview-dialog ref="previewDialogRef" />
   </div>
 </template>
