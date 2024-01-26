@@ -41,6 +41,14 @@ const remove = (row: any) => {
     });
   });
 };
+const sync = (row: any) => {
+  ElMessageBox.confirm(`确认要强制同步“${row.tableName}”表结构吗？`, '系统提示', { type: 'warning' }).then(() => {
+    ElMessage({
+      type: 'success',
+      message: '同步成功'
+    });
+  });
+};
 </script>
 
 <template>
@@ -54,7 +62,7 @@ const remove = (row: any) => {
         <el-button type="primary" link>预览</el-button>
         <el-button @click="edit(scope.row.id)" type="primary" link>编辑</el-button>
         <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
-        <el-button type="primary" link>同步</el-button>
+        <el-button @click="sync(scope.row)" type="primary" link>同步</el-button>
         <el-button type="primary" link>生成代码</el-button>
       </template>
     </pro-table>
