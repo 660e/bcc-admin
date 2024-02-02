@@ -11,7 +11,7 @@
       height: 100%;
       transition: width 0.3s ease;
       .el-scrollbar {
-        height: calc(100% - 55px);
+        height: calc(100% - 55px - 40px);
         .el-menu {
           width: 100%;
           overflow-x: hidden;

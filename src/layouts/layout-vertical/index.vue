@@ -7,6 +7,7 @@
           <img class="logo-img" src="@/assets/images/logo.svg" alt="logo" />
           <span v-show="!isCollapse" class="logo-text">{{ title }}</span>
         </div>
+        <collapse-icon />
         <el-scrollbar>
           <el-menu
             :router="false"
@@ -40,6 +41,7 @@ import AppMain from '@/layouts/components/app-main/index.vue';
 import ToolbarLeft from '@/layouts/components/app-header/toolbar-left.vue';
 import ToolbarRight from '@/layouts/components/app-header/toolbar-right.vue';
 import SubMenu from '@/layouts/components/app-menu/sub-menu.vue';
+import CollapseIcon from '../components/collapse-icon.vue';
 
 const title = import.meta.env.VITE_GLOB_APP_TITLE;
 

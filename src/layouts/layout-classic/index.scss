@@ -45,10 +45,13 @@
         flex-direction: column;
         height: 100%;
         transition: width 0.3s ease;
-        .el-menu {
-          width: 100%;
-          overflow-x: hidden;
-          border-right: none;
+        .el-scrollbar {
+          height: calc(100% - 40px);
+          .el-menu {
+            width: 100%;
+            overflow-x: hidden;
+            border-right: none;
+          }
         }
       }
     }

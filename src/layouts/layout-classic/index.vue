@@ -16,6 +16,7 @@
     <el-container class="classic-content">
       <el-aside>
         <div class="aside-box" :style="{ width: isCollapse ? '65px' : '210px' }">
+          <collapse-icon />
           <el-scrollbar>
             <el-menu
               :router="false"
@@ -46,6 +47,7 @@ import AppMain from '@/layouts/components/app-main/index.vue';
 import SubMenu from '@/layouts/components/app-menu/sub-menu.vue';
 import ToolbarLeft from '@/layouts/components/app-header/toolbar-left.vue';
 import ToolbarRight from '@/layouts/components/app-header/toolbar-right.vue';
+import CollapseIcon from '../components/collapse-icon.vue';
 
 const title = import.meta.env.VITE_GLOB_APP_TITLE;
 
