@@ -45,6 +45,20 @@
           }
         },
         {
+          "path": "/system/user",
+          "name": "user-manage",
+          "component": "/system/user/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "用户管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": false
+          }
+        },
+        {
           "path": "/system/menu",
           "name": "menu-manage",
           "component": "/system/menu/index",
