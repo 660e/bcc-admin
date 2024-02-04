@@ -1,14 +1,15 @@
 <template>
   <div class="h-full flex justify-center items-center relative">
-    <el-card class="w-80">
-      <div class="text-3xl text-center pb-5">BCC-Admin</div>
-      <login-form />
-    </el-card>
+    <div class="flex rounded overflow-hidden">
+      <el-image :src="loginImage" fit="cover" class="w-80" />
+      <login-form class="w-80" />
+    </div>
     <switch-dark class="absolute right-5 bottom-5" />
   </div>
 </template>
 
 <script lang="ts" name="login" setup>
-import LoginForm from './components/login-form.vue';
+import loginImage from '@/assets/images/login.jpg';
 import SwitchDark from '@/components/switch-dark/index.vue';
+import LoginForm from './components/form.vue';
 </script>
