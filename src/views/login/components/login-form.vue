@@ -23,6 +23,8 @@
 </template>
 
 <script lang="ts" setup>
+import { getCaptcha } from '@/api/modules/login';
+
 import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { HOME_URL } from '@/config';
@@ -88,6 +90,14 @@ const login = (formEl: FormInstance | undefined) => {
 };
 
 onMounted(() => {
+  getCaptcha().then(response => {
+    console.log(response);
+  });
+
+  //
+  //
+  //
+
   // 监听 enter 事件（调用登录）
   document.onkeydown = (e: KeyboardEvent) => {
     e = (window.event as KeyboardEvent) || e;
