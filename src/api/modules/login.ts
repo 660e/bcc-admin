@@ -5,7 +5,7 @@ import authButtonList from '@/assets/json/authButtonList.json';
 import http from '@/api';
 
 // 获取验证码
-export function getCaptcha() {
+export function getCode() {
   return http.get('/code');
 }
 
