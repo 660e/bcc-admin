@@ -309,3 +309,33 @@ export function findItemNested(enumData: any, callValue: any, value: string, chi
     if (current[children]) return findItemNested(current[children], callValue, value, children);
   }, null);
 }
+
+/**
+ * 构建树
+ *
+ * @param  {Array}  data
+ * @param  {String} pid
+ * @return {Array}
+ *
+ */
+export function buildTree(data: any[], id: string = 'id', pid: string = 'pid', children: string = 'children'): any[] {
+  const tree: any[] = [];
+  const keys = {};
+  const temp = JSON.parse(JSON.stringify(data));
+  temp.forEach((e: any) => (keys[e[id]] = e));
+  temp.forEach((e: any) => {
+    if (!e[pid]) {
+      tree.push(e);
+    }
+    Object.keys(keys).forEach(k => {
+      if (e[id] === keys[k][pid]) {
+        if (e[children]) {
+          e[children].push(keys[k]);
+        } else {
+          e[children] = [keys[k]];
+        }
+      }
+    });
+  });
+  return tree;
+}
