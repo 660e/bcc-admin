@@ -22,16 +22,16 @@ export const logoutApi = () => {
   return http.delete('/auth/logout');
 };
 
-//
-//
-//
-
 // 获取菜单列表
 export const getAuthMenuListApi = () => {
-  console.log('获取菜单列表');
+  http.get('/system/menu/getRouters', {}, { loading: false });
   // return http.get<Menu.MenuOptions[]>('/menu/list', {}, { loading: false });
   return authMenuList;
 };
+
+//
+//
+//
 
 // 获取按钮权限
 export const getAuthButtonListApi = () => {
