@@ -1,14 +1,25 @@
 <script lang="ts" name="login-form" setup>
 import { onMounted, reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { FormInstance, FormRules } from 'element-plus';
 import { FullScreen, Lock, User } from '@element-plus/icons-vue';
 import { getCode, login } from '@/api/modules/login';
+import { useUserStore } from '@/stores/modules/user';
+import { useTabsStore } from '@/stores/modules/tabs';
+import { useKeepAliveStore } from '@/stores/modules/keep-alive';
+import { initDynamicRouter } from '@/routers/modules/dynamicRouter';
+import { HOME_URL } from '@/config';
+
+const $router = useRouter();
+const $userStore = useUserStore();
+const $tabsStore = useTabsStore();
+const $keepAliveStore = useKeepAliveStore();
 
 const formsRef = ref<FormInstance>();
 const forms = reactive({
   username: 'admin',
   password: 'admin123',
-  code: '',
+  code: '9999',
   uuid: ''
 });
 const rules = reactive<FormRules>({
@@ -17,27 +28,32 @@ const rules = reactive<FormRules>({
   code: [{ required: true, message: '请填写验证码' }]
 });
 const codeImage = ref('');
-const refreshCode = () => {
-  getCode().then((response: any) => {
-    if (response.code === 200) {
-      codeImage.value = `data:image/gif;base64,${response.img}`;
-      forms.uuid = response.uuid;
-    }
-  });
+const refreshCode = async () => {
+  const response: any = await getCode();
+  codeImage.value = `data:image/gif;base64,${response.img}`;
+  forms.uuid = response.uuid;
 };
 const submit = () => {
-  formsRef.value?.validate(valid => {
+  formsRef.value?.validate(async valid => {
     if (valid) {
-      login(forms).then(response => {
-        console.log(response);
-      });
+      // 执行登录接口
+      const { data } = await login(forms);
+      $userStore.setToken(data.access_token);
+
+      // 添加动态路由
+      await initDynamicRouter();
+
+      // 清空 tabs、keep-alive 数据
+      $tabsStore.setTabs([]);
+      $keepAliveStore.setKeepAliveName([]);
+
+      // 跳转到首页
+      $router.push(HOME_URL);
     }
   });
 };
 
-onMounted(() => {
-  refreshCode();
-});
+onMounted(() => refreshCode());
 </script>
 
 <template>

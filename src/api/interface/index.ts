@@ -3,6 +3,9 @@ export namespace Login {
     username: string;
     password: string;
   }
+  export interface Response {
+    access_token: string;
+  }
 
   //
   //

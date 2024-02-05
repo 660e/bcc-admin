@@ -1,8 +1,9 @@
+import http from '@/api';
 import { Login } from '@/api/interface/index';
+
 import { PORT1 } from '@/api/config/servicePort';
 import authMenuList from '@/assets/json/authMenuList.json';
 import authButtonList from '@/assets/json/authButtonList.json';
-import http from '@/api';
 
 // 获取验证码
 export function getCode() {
@@ -11,7 +12,7 @@ export function getCode() {
 
 // 登录
 export function login(params: Login.Form) {
-  return http.post('/auth/login', params);
+  return http.post<Login.Response>('/auth/login', params);
 }
 
 //
