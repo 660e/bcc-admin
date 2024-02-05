@@ -6,8 +6,17 @@ import http from '@/api';
 
 // 获取验证码
 export function getCode() {
-  return http.get('/code');
+  return http.get('/code', {}, { loading: false });
 }
+
+// 登录
+export function login(params: Login.Form) {
+  return http.post('/auth/login', params);
+}
+
+//
+//
+//
 
 /**
  * @name 登录模块
