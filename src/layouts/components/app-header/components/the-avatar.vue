@@ -1,75 +1,51 @@
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { logoutApi } from '@/api/modules/login';
+import { useUserStore } from '@/stores/modules/user';
+import { LOGIN_URL } from '@/config';
+import { ElMessageBox } from 'element-plus';
+
+import InfoDialog from './dialogs/info.vue';
+import PasswordDialog from './dialogs/password.vue';
+
+import avatarImage from '@/assets/images/avatar.gif';
+
+const $router = useRouter();
+const $userStore = useUserStore();
+
+const logout = () => {
+  ElMessageBox.confirm('退出登录？', '提示', { type: 'warning' }).then(async () => {
+    // 退出
+    await logoutApi();
+
+    // 清空token
+    $userStore.setToken('');
+
+    // 跳转到登录页
+    $router.replace(LOGIN_URL);
+  });
+};
+
+const infoDialogRef = ref();
+const info = () => infoDialogRef.value?.open();
+
+const passwordDialogRef = ref();
+const password = () => passwordDialogRef.value?.open();
+</script>
+
 <template>
   <el-dropdown trigger="click">
-    <div class="avatar">
-      <img src="@/assets/images/avatar.gif" alt="avatar" />
-    </div>
+    <el-avatar :src="avatarImage" />
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item @click="openDialog('infoRef')">{{ $t('header.personalData') }}</el-dropdown-item>
-        <el-dropdown-item @click="openDialog('passwordRef')">{{ $t('header.changePassword') }}</el-dropdown-item>
-        <el-dropdown-item divided @click="logout">{{ $t('header.logout') }}</el-dropdown-item>
+        <el-dropdown-item @click="info">{{ $t('header.personalData') }}</el-dropdown-item>
+        <el-dropdown-item @click="password">{{ $t('header.changePassword') }}</el-dropdown-item>
+        <el-dropdown-item @click="logout" divided>{{ $t('header.logout') }}</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
 
-  <!-- infoDialog -->
-  <info-dialog ref="infoRef" />
-  <!-- passwordDialog -->
-  <password-dialog ref="passwordRef" />
+  <info-dialog ref="infoDialogRef" />
+  <password-dialog ref="passwordDialogRef" />
 </template>
-
-<script lang="ts" setup>
-import { ref } from 'vue';
-import { LOGIN_URL } from '@/config';
-import { useRouter } from 'vue-router';
-import { logoutApi } from '@/api/modules/login';
-import { useUserStore } from '@/stores/modules/user';
-import { ElMessageBox, ElMessage } from 'element-plus';
-
-import InfoDialog from './info-dialog.vue';
-import PasswordDialog from './password-dialog.vue';
-
-const router = useRouter();
-const userStore = useUserStore();
-
-// 退出登录
-const logout = () => {
-  ElMessageBox.confirm('您是否确认退出登录?', '温馨提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning'
-  }).then(async () => {
-    // 1.执行退出登录接口
-    await logoutApi();
-
-    // 2.清除 Token
-    userStore.setToken('');
-
-    // 3.重定向到登陆页
-    router.replace(LOGIN_URL);
-    ElMessage.success('退出登录成功！');
-  });
-};
-
-// 打开修改密码和个人信息弹窗
-const infoRef = ref<InstanceType<typeof InfoDialog> | null>(null);
-const passwordRef = ref<InstanceType<typeof PasswordDialog> | null>(null);
-const openDialog = (ref: string) => {
-  if (ref == 'infoRef') infoRef.value?.openDialog();
-  if (ref == 'passwordRef') passwordRef.value?.openDialog();
-};
-</script>
-
-<style lang="scss" scoped>
-.avatar {
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  cursor: pointer;
-  border-radius: 50%;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
-</style>

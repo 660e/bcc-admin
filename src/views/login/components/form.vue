@@ -3,7 +3,7 @@ import { onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { FormInstance, FormRules } from 'element-plus';
 import { FullScreen, Lock, User } from '@element-plus/icons-vue';
-import { getCode, login } from '@/api/modules/login';
+import { getCode, loginApi } from '@/api/modules/login';
 import { useUserStore } from '@/stores/modules/user';
 import { useTabsStore } from '@/stores/modules/tabs';
 import { useKeepAliveStore } from '@/stores/modules/keep-alive';
@@ -33,11 +33,11 @@ const refreshCode = async () => {
   codeImage.value = `data:image/gif;base64,${response.img}`;
   forms.uuid = response.uuid;
 };
-const submit = () => {
+const login = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {
       // 执行登录接口
-      const { data } = await login(forms);
+      const { data } = await loginApi(forms);
       $userStore.setToken(data.access_token);
 
       // 添加动态路由
@@ -59,7 +59,7 @@ onMounted(() => refreshCode());
 <template>
   <div class="p-5 space-y-5">
     <div class="text-xl text-center leading-none">BCC-Admin</div>
-    <el-form :model="forms" :rules="rules" @keyup.enter="submit" ref="formsRef">
+    <el-form :model="forms" :rules="rules" @keyup.enter="login" ref="formsRef">
       <el-form-item prop="username">
         <el-input v-model="forms.username" :prefix-icon="User" placeholder="账号" size="large" />
       </el-form-item>
@@ -72,7 +72,7 @@ onMounted(() => refreshCode());
         </el-form-item>
         <el-image :src="codeImage" @click="refreshCode" class="cursor-pointer h-10" />
       </div>
-      <el-button @click="submit" type="primary" class="w-full" size="large">登录</el-button>
+      <el-button @click="login" type="primary" class="w-full" size="large">登录</el-button>
     </el-form>
   </div>
 </template>
