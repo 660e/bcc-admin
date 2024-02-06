@@ -7,7 +7,7 @@
             <template #label>
               <div class="space-x-1 flex items-center">
                 <span>{{ `${item.search?.label ?? item.label}` }}</span>
-                <el-tooltip v-if="item.search?.tooltip" effect="dark" :content="item.search?.tooltip" placement="top">
+                <el-tooltip v-if="item.search?.tooltip" :content="item.search?.tooltip" placement="top">
                   <el-icon><QuestionFilled /></el-icon>
                 </el-tooltip>
               </div>

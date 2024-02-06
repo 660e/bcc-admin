@@ -58,7 +58,7 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
           <template #label>
             <div class="flex items-center space-x-1">
               <span>生成包路径</span>
-              <el-tooltip effect="dark" content="生成在哪个java包下，例如：com.bcc.system" placement="top">
+              <el-tooltip content="生成在哪个java包下，例如：com.bcc.system" placement="top">
                 <el-icon><QuestionFilled /></el-icon>
               </el-tooltip>
             </div>
@@ -69,7 +69,7 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
           <template #label>
             <div class="flex items-center space-x-1">
               <span>生成模块名</span>
-              <el-tooltip effect="dark" content="可理解为子系统名，例如：system" placement="top">
+              <el-tooltip content="可理解为子系统名，例如：system" placement="top">
                 <el-icon><QuestionFilled /></el-icon>
               </el-tooltip>
             </div>
@@ -80,7 +80,7 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
           <template #label>
             <div class="flex items-center space-x-1">
               <span>生成业务名</span>
-              <el-tooltip effect="dark" content="可理解为功能英文名，例如：user" placement="top">
+              <el-tooltip content="可理解为功能英文名，例如：user" placement="top">
                 <el-icon><QuestionFilled /></el-icon>
               </el-tooltip>
             </div>
@@ -91,7 +91,7 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
           <template #label>
             <div class="flex items-center space-x-1">
               <span>生成功能名</span>
-              <el-tooltip effect="dark" content="用作类描述，例如：用户" placement="top">
+              <el-tooltip content="用作类描述，例如：用户" placement="top">
                 <el-icon><QuestionFilled /></el-icon>
               </el-tooltip>
             </div>
@@ -105,7 +105,7 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
             <template #label>
               <div class="flex items-center space-x-1">
                 <span>树编码字段</span>
-                <el-tooltip effect="dark" content="树显示的编码字段名，如：dept_id" placement="top">
+                <el-tooltip content="树显示的编码字段名，如：dept_id" placement="top">
                   <el-icon><QuestionFilled /></el-icon>
                 </el-tooltip>
               </div>
@@ -118,7 +118,7 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
             <template #label>
               <div class="flex items-center space-x-1">
                 <span>树父编码字段</span>
-                <el-tooltip effect="dark" content="树显示的父编码字段名，如：parent_Id" placement="top">
+                <el-tooltip content="树显示的父编码字段名，如：parent_Id" placement="top">
                   <el-icon><QuestionFilled /></el-icon>
                 </el-tooltip>
               </div>
@@ -136,7 +136,7 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
             <template #label>
               <div class="flex items-center space-x-1">
                 <span>树名称字段</span>
-                <el-tooltip effect="dark" content="树节点的显示名称字段名，如：dept_name" placement="top">
+                <el-tooltip content="树节点的显示名称字段名，如：dept_name" placement="top">
                   <el-icon><QuestionFilled /></el-icon>
                 </el-tooltip>
               </div>
@@ -153,7 +153,7 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
             <template #label>
               <div class="flex items-center space-x-1">
                 <span>关联子表的表名</span>
-                <el-tooltip effect="dark" content="关联子表的表名，如：sys_user" placement="top">
+                <el-tooltip content="关联子表的表名，如：sys_user" placement="top">
                   <el-icon><QuestionFilled /></el-icon>
                 </el-tooltip>
               </div>
@@ -166,7 +166,7 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
             <template #label>
               <div class="flex items-center space-x-1">
                 <span>子表关联的外键名</span>
-                <el-tooltip effect="dark" content="子表关联的外键名，如：user_id" placement="top">
+                <el-tooltip content="子表关联的外键名，如：user_id" placement="top">
                   <el-icon><QuestionFilled /></el-icon>
                 </el-tooltip>
               </div>

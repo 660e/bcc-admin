@@ -77,12 +77,7 @@
     <!-- 表单使用 -->
     <div class="flex space-x-2">
       <div class="card flex-1 space-y-5">
-        <el-alert
-          title="图片上传组件在 form 表单中使用，上传之后成功会自动重新校验"
-          type="warning"
-          effect="dark"
-          :closable="false"
-        />
+        <el-alert title="图片上传组件在 form 表单中使用，上传之后成功会自动重新校验" type="warning" :closable="false" />
         <el-form ref="ruleFormRef" label-width="100px" label-suffix=" :" :rules="rules" :model="fromModel">
           <el-form-item label="用户头像" prop="avatar">
             <upload-img v-model:image-url="fromModel.avatar" width="135px" height="135px" :file-size="3">
@@ -118,12 +113,7 @@
         </el-form>
       </div>
       <div class="card flex-1 space-y-5">
-        <el-alert
-          title="图片上传组件在 form 表单中使用，如果该表单禁用，则上传组件会自动禁用"
-          type="warning"
-          effect="dark"
-          :closable="false"
-        />
+        <el-alert title="图片上传组件在 form 表单中使用，如果该表单禁用，则上传组件会自动禁用" type="warning" :closable="false" />
         <el-form label-width="100px" label-suffix=" :" disabled :model="fromModel1">
           <el-form-item label="用户头像" prop="avatar">
             <upload-img v-model:image-url="fromModel1.avatar" width="135px" height="135px" :file-size="3">

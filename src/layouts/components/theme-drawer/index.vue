@@ -4,7 +4,7 @@
       <!-- 布局样式 -->
       <el-divider content-position="center">布局样式</el-divider>
       <div class="layout-box">
-        <el-tooltip effect="dark" content="纵向" placement="top" :show-after="200">
+        <el-tooltip content="纵向" placement="top" :show-after="200">
           <div :class="['layout-item layout-vertical', { 'is-active': layout == 'vertical' }]" @click="setLayout('vertical')">
             <div class="layout-dark"></div>
             <div class="layout-container">
@@ -16,7 +16,7 @@
             </el-icon>
           </div>
         </el-tooltip>
-        <el-tooltip effect="dark" content="经典" placement="top" :show-after="200">
+        <el-tooltip content="经典" placement="top" :show-after="200">
           <div :class="['layout-item layout-classic', { 'is-active': layout == 'classic' }]" @click="setLayout('classic')">
             <div class="layout-dark"></div>
             <div class="layout-container">
@@ -28,7 +28,7 @@
             </el-icon>
           </div>
         </el-tooltip>
-        <el-tooltip effect="dark" content="横向" placement="top" :show-after="200">
+        <el-tooltip content="横向" placement="top" :show-after="200">
           <div
             :class="['layout-item layout-transverse', { 'is-active': layout == 'transverse' }]"
             @click="setLayout('transverse')"
@@ -40,7 +40,7 @@
             </el-icon>
           </div>
         </el-tooltip>
-        <el-tooltip effect="dark" content="分栏" placement="top" :show-after="200">
+        <el-tooltip content="分栏" placement="top" :show-after="200">
           <div :class="['layout-item layout-columns', { 'is-active': layout == 'columns' }]" @click="setLayout('columns')">
             <div class="layout-dark"></div>
             <div class="layout-light"></div>
@@ -53,7 +53,7 @@
       </div>
       <div class="flex items-center">
         <span class="pr-1">侧边栏反转色</span>
-        <el-tooltip effect="dark" content="侧边栏颜色变为深色模式" placement="top">
+        <el-tooltip content="侧边栏颜色变为深色模式" placement="top">
           <el-icon><QuestionFilled /></el-icon>
         </el-tooltip>
         <div class="flex-1"></div>
@@ -61,7 +61,7 @@
       </div>
       <div class="flex items-center">
         <span class="pr-1">头部反转色</span>
-        <el-tooltip effect="dark" content="头部颜色变为深色模式" placement="top">
+        <el-tooltip content="头部颜色变为深色模式" placement="top">
           <el-icon><QuestionFilled /></el-icon>
         </el-tooltip>
         <div class="flex-1"></div>
