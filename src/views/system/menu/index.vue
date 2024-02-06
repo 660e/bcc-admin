@@ -53,9 +53,9 @@ const create = () => {
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.menuName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
-      await deleteMenu(row.menuId);
+      const { msg } = await deleteMenu(row.menuId);
       tableRef.value.search();
-      ElMessage({ type: 'success', message: '删除成功' });
+      ElMessage.success(msg);
     })
     .catch(() => false);
 };

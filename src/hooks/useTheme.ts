@@ -29,7 +29,7 @@ export const useTheme = () => {
   const changePrimary = (val: string | null) => {
     if (!val) {
       val = DEFAULT_PRIMARY;
-      ElMessage({ type: 'success', message: `主题颜色已重置为 ${DEFAULT_PRIMARY}` });
+      ElMessage.success(`主题颜色已重置为 ${DEFAULT_PRIMARY}`);
     }
     // 计算主题颜色变化
     document.documentElement.style.setProperty('--el-color-primary', val);

@@ -28,10 +28,7 @@ async function handleClick(this: any) {
   } catch (err) {
     console.error('复制操作不被支持或失败: ', err);
   }
-  ElMessage({
-    type: 'success',
-    message: '复制成功'
-  });
+  ElMessage.success('复制成功');
 }
 
 export default copy;

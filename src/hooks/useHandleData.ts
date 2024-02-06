@@ -24,10 +24,7 @@ export const useHandleData = (
     }).then(async () => {
       const res = await api(params);
       if (!res) return reject(false);
-      ElMessage({
-        type: 'success',
-        message: `${message}成功!`
-      });
+      ElMessage.success(`${message}成功!`);
       resolve(true);
     });
   });
