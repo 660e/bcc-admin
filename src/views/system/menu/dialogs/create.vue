@@ -1,16 +1,19 @@
 <script lang="ts" name="create-dialog" setup>
-import { reactive, ref } from 'vue';
+import { nextTick, reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { SelectOption } from '@/modules/forms';
-import { getMenuList, createMenu } from '@/api/modules/system';
+import { getMenuList, createMenu, editMenu } from '@/api/modules/system';
 import { buildTree } from '@/utils';
 
 import IconSelect from '@/components/icon-select/index.vue';
+
+const $emit = defineEmits(['confirm']);
 
 const visible = ref(false);
 
 const formsRef = ref<FormInstance>();
 const forms = ref({
+  menuId: undefined,
   parentId: '',
   menuType: 'M',
   icon: '',
@@ -33,22 +36,25 @@ const rules = reactive<FormRules>({
 
 const parentIdOptions = ref<SelectOption[]>();
 
-const open = async () => {
+const open = async (row: any) => {
+  visible.value = true;
   const response: any = await getMenuList();
   parentIdOptions.value = buildTree(
     response.data.map((e: any) => {
       return { label: e.menuName, value: e.menuId, id: e.menuId, pid: e.parentId };
     })
   );
-  visible.value = true;
+  await nextTick();
+  if (row.menuId) forms.value = JSON.parse(JSON.stringify(row));
 };
 const closed = () => {
-  console.log('closed');
+  formsRef.value?.resetFields();
 };
 const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {
-      const { msg } = await createMenu(forms.value);
+      const { msg } = forms.value.menuId ? await editMenu(forms.value) : await createMenu(forms.value);
+      $emit('confirm');
       ElMessage.success(msg);
       visible.value = false;
     }
@@ -59,8 +65,8 @@ defineExpose({ open });
 </script>
 
 <template>
-  <el-dialog v-model="visible" title="" width="700">
-    <el-form :model="forms" :rules="rules" @closed="closed" label-width="100" ref="formsRef" class="px-5 pt-5">
+  <el-dialog v-model="visible" :title="forms.menuId ? '编辑' : '新增'" @closed="closed" width="700">
+    <el-form :model="forms" :rules="rules" label-width="100" ref="formsRef" class="px-5 pt-5">
       <el-form-item label="上级菜单" prop="parentId">
         <el-tree-select v-model="forms.parentId" :data="parentIdOptions" check-strictly clearable />
       </el-form-item>

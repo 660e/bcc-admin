@@ -5,14 +5,13 @@
         <el-button @click="create()" type="primary">新增</el-button>
       </template>
       <template #operation="scope">
-        <el-button type="primary" link>编辑</el-button>
-        <el-button type="primary" link>新增</el-button>
+        <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
         <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
       </template>
     </pro-table>
 
     <!-- 新增/编辑 -->
-    <create-dialog ref="createDialogRef" />
+    <create-dialog @confirm="tableRef.search()" ref="createDialogRef" />
   </div>
 </template>
 
@@ -47,8 +46,8 @@ const requestApi = (params: any) => {
 };
 
 const createDialogRef = ref();
-const create = () => {
-  createDialogRef.value?.open();
+const create = (row: any = {}) => {
+  createDialogRef.value?.open(row);
 };
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.menuName}”？`, '系统提示', { type: 'warning' })
