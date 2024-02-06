@@ -1,7 +1,7 @@
 <script lang="ts" name="create-dialog" setup>
 import { nextTick, reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
-import { SelectOption } from '@/modules/forms';
+import { TreeSelectOption } from '@/modules/forms';
 import { getMenuList, createMenu, editMenu } from '@/api/modules/system';
 import { buildTree } from '@/utils';
 
@@ -34,12 +34,12 @@ const rules = reactive<FormRules>({
   path: [{ required: true, message: '请输入路由地址', trigger: 'blur' }]
 });
 
-const parentIdOptions = ref<SelectOption[]>();
+const parentIdOptions = ref<TreeSelectOption[]>([{ label: '根目录', value: 0, children: [] }]);
 
 const open = async (row: any) => {
   visible.value = true;
   const response: any = await getMenuList();
-  parentIdOptions.value = buildTree(
+  parentIdOptions.value[0].children = buildTree(
     response.data.map((e: any) => {
       return { label: e.menuName, value: e.menuId, id: e.menuId, pid: e.parentId };
     })
