@@ -1,16 +1,16 @@
 <script lang="ts" name="create-dialog" setup>
-import { onMounted, reactive, ref } from 'vue';
-import { FormRules } from 'element-plus';
+import { reactive, ref } from 'vue';
+import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { SelectOption } from '@/modules/forms';
-import { getMenuList } from '@/api/modules/system';
+import { getMenuList, createMenu } from '@/api/modules/system';
 import { buildTree } from '@/utils';
 
 import IconSelect from '@/components/icon-select/index.vue';
 
 const visible = ref(false);
 
-const formRef = ref();
-const model = ref({
+const formsRef = ref<FormInstance>();
+const forms = ref({
   parentId: '',
   menuType: 'M',
   icon: '',
@@ -25,7 +25,11 @@ const model = ref({
   visible: '0',
   status: '0'
 });
-const rules = reactive<FormRules>({});
+const rules = reactive<FormRules>({
+  menuName: [{ required: true, message: '请输入菜单名称', trigger: 'blur' }],
+  orderNum: [{ required: true, message: '请输入菜单顺序', trigger: 'blur' }],
+  path: [{ required: true, message: '请输入路由地址', trigger: 'blur' }]
+});
 
 const parentIdOptions = ref<SelectOption[]>();
 
@@ -42,39 +46,42 @@ const closed = () => {
   console.log('closed');
 };
 const confirm = () => {
-  console.log(model.value);
-  visible.value = false;
+  formsRef.value?.validate(async valid => {
+    if (valid) {
+      const { msg } = await createMenu(forms.value);
+      ElMessage.success(msg);
+      visible.value = false;
+    }
+  });
 };
 
 defineExpose({ open });
-
-onMounted(() => open());
 </script>
 
 <template>
   <el-dialog v-model="visible" title="" width="700">
-    <el-form :model="model" :rules="rules" @closed="closed" label-width="100" ref="formRef" class="px-5 pt-5">
+    <el-form :model="forms" :rules="rules" @closed="closed" label-width="100" ref="formsRef" class="px-5 pt-5">
       <el-form-item label="上级菜单" prop="parentId">
-        <el-tree-select v-model="model.parentId" :data="parentIdOptions" check-strictly clearable />
+        <el-tree-select v-model="forms.parentId" :data="parentIdOptions" check-strictly clearable />
       </el-form-item>
       <el-form-item label="菜单类型" prop="menuType">
-        <el-radio-group v-model="model.menuType">
+        <el-radio-group v-model="forms.menuType">
           <el-radio label="M">目录</el-radio>
           <el-radio label="C">菜单</el-radio>
           <el-radio label="F">按钮</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item v-if="model.menuType === 'M' || model.menuType === 'C'" label="菜单图标" prop="icon">
-        <icon-select v-model:icon-value="model.icon" />
+      <el-form-item v-if="forms.menuType === 'M' || forms.menuType === 'C'" label="菜单图标" prop="icon">
+        <icon-select v-model:icon-value="forms.icon" />
       </el-form-item>
       <div class="grid grid-cols-2 gap-x-5">
         <el-form-item label="菜单名称" prop="menuName">
-          <el-input v-model="model.menuName" />
+          <el-input v-model="forms.menuName" />
         </el-form-item>
         <el-form-item label="显示排序" prop="orderNum">
-          <el-input-number v-model="model.orderNum" :min="0" controls-position="right" class="w-full" />
+          <el-input-number v-model="forms.orderNum" :min="0" controls-position="right" class="w-full" />
         </el-form-item>
-        <el-form-item v-if="model.menuType === 'M' || model.menuType === 'C'" prop="isFrame">
+        <el-form-item v-if="forms.menuType === 'M' || forms.menuType === 'C'" prop="isFrame">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>是否外链</span>
@@ -83,12 +90,12 @@ onMounted(() => open());
               </el-tooltip>
             </div>
           </template>
-          <el-radio-group v-model="model.isFrame">
+          <el-radio-group v-model="forms.isFrame">
             <el-radio label="0">是</el-radio>
             <el-radio label="1">否</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item v-if="model.menuType === 'M' || model.menuType === 'C'" prop="path">
+        <el-form-item v-if="forms.menuType === 'M' || forms.menuType === 'C'" prop="path">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>路由地址</span>
@@ -97,9 +104,9 @@ onMounted(() => open());
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="model.path" />
+          <el-input v-model="forms.path" />
         </el-form-item>
-        <el-form-item v-if="model.menuType === 'C'" prop="component">
+        <el-form-item v-if="forms.menuType === 'C'" prop="component">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>组件路径</span>
@@ -108,9 +115,9 @@ onMounted(() => open());
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="model.component" />
+          <el-input v-model="forms.component" />
         </el-form-item>
-        <el-form-item v-if="model.menuType === 'F' || model.menuType === 'C'" prop="perms">
+        <el-form-item v-if="forms.menuType === 'F' || forms.menuType === 'C'" prop="perms">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>权限字符</span>
@@ -119,9 +126,9 @@ onMounted(() => open());
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="model.perms" />
+          <el-input v-model="forms.perms" />
         </el-form-item>
-        <el-form-item v-if="model.menuType === 'C'" prop="query">
+        <el-form-item v-if="forms.menuType === 'C'" prop="query">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>路由参数</span>
@@ -130,9 +137,9 @@ onMounted(() => open());
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="model.query" />
+          <el-input v-model="forms.query" />
         </el-form-item>
-        <el-form-item v-if="model.menuType === 'C'" prop="isCache">
+        <el-form-item v-if="forms.menuType === 'C'" prop="isCache">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>是否缓存</span>
@@ -141,12 +148,12 @@ onMounted(() => open());
               </el-tooltip>
             </div>
           </template>
-          <el-radio-group v-model="model.isCache">
+          <el-radio-group v-model="forms.isCache">
             <el-radio label="0">缓存</el-radio>
             <el-radio label="1">不缓存</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item v-if="model.menuType === 'M' || model.menuType === 'C'" prop="visible">
+        <el-form-item v-if="forms.menuType === 'M' || forms.menuType === 'C'" prop="visible">
           <template #label>
             <div class="flex items-center space-x-1">
               <span>显示状态</span>
@@ -155,7 +162,7 @@ onMounted(() => open());
               </el-tooltip>
             </div>
           </template>
-          <el-radio-group v-model="model.visible">
+          <el-radio-group v-model="forms.visible">
             <el-radio label="0">显示</el-radio>
             <el-radio label="1">隐藏</el-radio>
           </el-radio-group>
@@ -169,7 +176,7 @@ onMounted(() => open());
               </el-tooltip>
             </div>
           </template>
-          <el-radio-group v-model="model.status">
+          <el-radio-group v-model="forms.status">
             <el-radio label="0">正常</el-radio>
             <el-radio label="1">停用</el-radio>
           </el-radio-group>

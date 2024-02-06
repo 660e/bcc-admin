@@ -1,13 +1,6 @@
 <template>
   <div class="flex flex-col h-full">
-    <pro-table
-      :columns="columns"
-      :request-api="requestApi"
-      :request-auto="false"
-      :pagination="false"
-      row-key="menuId"
-      ref="tableRef"
-    >
+    <pro-table :columns="columns" :request-api="requestApi" :pagination="false" row-key="menuId" ref="tableRef">
       <template #tableHeader>
         <el-button @click="create()" type="primary">新增</el-button>
       </template>
