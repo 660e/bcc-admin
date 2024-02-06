@@ -1,7 +1,8 @@
 <script lang="ts" name="info-pane" setup>
 import { reactive, ref } from 'vue';
 import { FormRules } from 'element-plus';
-import { InfoType, SelectOption } from '../../models';
+import { SelectOption } from '@/modules/forms';
+import { InfoType } from '../../models';
 
 const $props = defineProps<{ info: InfoType }>();
 

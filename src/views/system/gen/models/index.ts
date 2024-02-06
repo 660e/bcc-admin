@@ -26,8 +26,3 @@ export interface DataType {
   info: InfoType;
   rows: InfoType[];
 }
-
-export interface SelectOption {
-  label: string;
-  value: string;
-}

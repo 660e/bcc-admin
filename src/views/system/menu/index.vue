@@ -1,8 +1,15 @@
 <template>
   <div class="flex flex-col h-full">
-    <pro-table :columns="columns" :request-api="requestApi" :pagination="false" row-key="menuId" ref="tableRef">
+    <pro-table
+      :columns="columns"
+      :request-api="requestApi"
+      :request-auto="false"
+      :pagination="false"
+      row-key="menuId"
+      ref="tableRef"
+    >
       <template #tableHeader>
-        <el-button type="primary">新增</el-button>
+        <el-button @click="create()" type="primary">新增</el-button>
       </template>
       <template #operation="scope">
         <el-button type="primary" link>编辑</el-button>
@@ -10,6 +17,9 @@
         <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
       </template>
     </pro-table>
+
+    <!-- 新增/编辑 -->
+    <create-dialog ref="createDialogRef" />
   </div>
 </template>
 
@@ -21,6 +31,7 @@ import { buildTree } from '@/utils';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
+import CreateDialog from './dialogs/create.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
@@ -42,6 +53,10 @@ const requestApi = (params: any) => {
   });
 };
 
+const createDialogRef = ref();
+const create = () => {
+  createDialogRef.value?.open();
+};
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.menuName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {

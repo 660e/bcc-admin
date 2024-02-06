@@ -1,7 +1,8 @@
 <script lang="ts" name="rows-pane" setup>
 import { ref } from 'vue';
 import { ColumnProps } from '@/components/pro-table/interface';
-import { InfoType, SelectOption } from '../../models';
+import { SelectOption } from '@/modules/forms';
+import { InfoType } from '../../models';
 
 import ProTable from '@/components/pro-table/index.vue';
 
