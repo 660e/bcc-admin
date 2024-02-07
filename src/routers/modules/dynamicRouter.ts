@@ -48,6 +48,36 @@ export const initDynamicRouter = async () => {
             isLink: '',
             title: '详情页'
           }
+        },
+        {
+          path: '/examples/pro-table/detail/:id',
+          name: 'pro-table-detail',
+          component: '/examples/pro-table/detail',
+          meta: {
+            activeMenu: '/examples/pro-table',
+            icon: 'Menu',
+            isAffix: false,
+            isFull: false,
+            isHide: true,
+            isKeepAlive: false,
+            isLink: '',
+            title: '详情页'
+          }
+        },
+        {
+          path: '/examples/tabs/detail/:id',
+          name: 'tabs-detail',
+          component: '/examples/tabs/detail',
+          meta: {
+            activeMenu: '/examples/tabs',
+            icon: 'Menu',
+            isAffix: false,
+            isFull: false,
+            isHide: true,
+            isKeepAlive: false,
+            isLink: '',
+            title: '详情页'
+          }
         }
       ]
     );
