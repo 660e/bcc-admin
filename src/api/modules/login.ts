@@ -1,7 +1,7 @@
 import http from '@/api';
 import { Login } from '@/api/interface/index';
+import { HOME_URL } from '@/config';
 
-import authMenuList from '@/assets/json/authMenuList.json';
 import authButtonList from '@/assets/json/authButtonList.json';
 
 // 获取验证码
@@ -23,11 +23,34 @@ export const logoutApi = () => {
 };
 
 // 获取菜单列表
-export const getAuthMenuListApi = () => {
-  http.get('/system/menu/getRouters', {}, { loading: false });
-  // return http.get<Menu.MenuOptions[]>('/menu/list', {}, { loading: false });
-  return authMenuList;
+export const getAuthMenuListApi = async () => {
+  const { data } = await http.get('/system/menu/getRouters', {}, { loading: false });
+  return { data: transformTree(data) };
 };
+
+/**
+ * 格式化路由
+ */
+function transformTree(tree: any): Menu.MenuOptions[] {
+  return tree.map((e: any) => {
+    const item: Menu.MenuOptions = {
+      path: e.path,
+      name: e.name,
+      component: e.component,
+      meta: {
+        icon: e.meta?.icon || '',
+        isAffix: e.path === HOME_URL,
+        isFull: false,
+        isHide: e.hidden,
+        isKeepAlive: !e.meta?.noCache,
+        isLink: e.meta?.link || '',
+        title: e.meta?.title || ''
+      }
+    };
+    if (e.children?.length) item.children = transformTree(e.children);
+    return item;
+  });
+}
 
 //
 //
