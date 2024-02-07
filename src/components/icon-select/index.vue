@@ -9,12 +9,12 @@
       @clear="clearIcon"
       @click="openDialog"
     >
-      <template #append>
-        <el-button :icon="customIcons[iconValue]" />
+      <template #prepend>
+        <el-icon><component :is="customIcons[iconValue]"></component></el-icon>
       </template>
     </el-input>
-    <el-dialog v-model="dialogVisible" :title="placeholder" top="50px" width="66%">
-      <el-input v-model="inputValue" placeholder="搜索图标" size="large" :prefix-icon="Icons.Search" />
+    <el-dialog v-model="dialogVisible" :title="placeholder" @closed="closed" top="50px" width="66%">
+      <el-input v-model="inputValue" placeholder="搜索图标" size="large" :prefix-icon="Icons.Search" clearable />
       <el-scrollbar v-if="Object.keys(iconsList).length">
         <div class="icon-list">
           <div v-for="item in iconsList" :key="item" class="icon-item" @click="selectIcon(item)">
@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" name="icon-select" setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watchEffect } from 'vue';
 import * as Icons from '@element-plus/icons-vue';
 
 interface SelectIconProps {
@@ -82,6 +82,14 @@ const iconsList = computed((): { [key: string]: any } => {
     if (key.toLowerCase().indexOf(inputValue.value.toLowerCase()) > -1) result[key] = customIcons[key];
   }
   return result;
+});
+
+const closed = () => {
+  inputValue.value = '';
+};
+
+watchEffect(() => {
+  valueIcon.value = props.iconValue;
 });
 </script>
 
