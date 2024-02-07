@@ -31,6 +31,27 @@ export const initDynamicRouter = async () => {
       return Promise.reject();
     }
 
+    // 详情页动态路由
+    $authStore.flatMenuListGet.push(
+      ...[
+        {
+          path: '/system/gen/:id',
+          name: 'gen-edit',
+          component: '/system/gen/pages/edit',
+          meta: {
+            activeMenu: '/system/gen',
+            icon: 'Menu',
+            isAffix: false,
+            isFull: false,
+            isHide: true,
+            isKeepAlive: false,
+            isLink: '',
+            title: '详情页'
+          }
+        }
+      ]
+    );
+
     // 添加动态路由
     $authStore.flatMenuListGet.forEach(item => {
       item.children && delete item.children;
