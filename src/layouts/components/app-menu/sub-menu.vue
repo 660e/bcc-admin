@@ -1,6 +1,19 @@
 <template>
   <template v-for="subItem in menuList" :key="subItem.path">
-    <el-sub-menu v-if="subItem.children?.length" :index="subItem.path">
+    <el-menu-item
+      v-if="subItem.path === '/' && subItem.children"
+      :index="subItem.children[0].path"
+      @click="handleClickMenu(subItem)"
+    >
+      <el-icon v-if="subItem.children[0].meta.icon">
+        <component :is="subItem.children[0].meta.icon"></component>
+      </el-icon>
+      <template #title>
+        <span class="sle">{{ subItem.children[0].meta.title }}</span>
+      </template>
+    </el-menu-item>
+
+    <el-sub-menu v-else-if="subItem.children?.length" :index="subItem.path">
       <template #title>
         <el-icon v-if="subItem.meta.icon">
           <component :is="subItem.meta.icon"></component>
@@ -9,6 +22,7 @@
       </template>
       <SubMenu :menu-list="subItem.children" />
     </el-sub-menu>
+
     <el-menu-item v-else :index="subItem.path" @click="handleClickMenu(subItem)">
       <el-icon v-if="subItem.meta.icon">
         <component :is="subItem.meta.icon"></component>
