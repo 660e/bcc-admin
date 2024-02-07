@@ -15,7 +15,7 @@ const formsRef = ref<FormInstance>();
 const forms = ref({
   menuId: undefined,
   parentId: '',
-  menuType: 'M',
+  menuType: 'C',
   icon: '',
   menuName: '',
   orderNum: 0,
