@@ -3,7 +3,7 @@
     <el-menu-item
       v-if="subItem.path === '/' && subItem.children"
       :index="subItem.children[0].path"
-      @click="handleClickMenu(subItem)"
+      @click="handleClickMenu(subItem.children[0])"
     >
       <el-icon v-if="subItem.children[0].meta.icon">
         <component :is="subItem.children[0].meta.icon"></component>
