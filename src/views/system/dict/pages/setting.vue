@@ -38,11 +38,12 @@ const columns: ColumnProps[] = [
 ];
 
 const $route = useRoute();
+const dictType = ref();
 const requestApi = async (params: any) => {
-  const dictTypeResponse: any = await getDictType($route.params.id);
-
   return new Promise(async resolve => {
-    params.dictType = dictTypeResponse.data.dictType;
+    const dictTypeResponse: any = await getDictType($route.params.id);
+    dictType.value = dictTypeResponse.data.dictType;
+    params.dictType = dictType.value;
     const dictDataListResponse: any = await getDictDataList(params);
     resolve({
       data: {
@@ -56,7 +57,7 @@ const requestApi = async (params: any) => {
 
 const createDataDialogRef = ref();
 const create = (row: any = {}) => {
-  createDataDialogRef.value?.open(row);
+  createDataDialogRef.value?.open(row, dictType.value);
 };
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.dictLabel}”？`, '系统提示', { type: 'warning' })

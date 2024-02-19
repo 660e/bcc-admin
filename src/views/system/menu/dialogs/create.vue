@@ -134,7 +134,7 @@
 </template>
 
 <script lang="ts" name="create-dialog" setup>
-import { nextTick, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { TreeSelectOption } from '@/modules/forms';
 import { getMenuList, createMenu, editMenu } from '@/api/modules/system';
@@ -179,7 +179,6 @@ const open = async (row: any) => {
       return { label: e.menuName, value: e.menuId, id: e.menuId, pid: e.parentId };
     })
   );
-  await nextTick();
   if (row.menuId) forms.value = JSON.parse(JSON.stringify(row));
 };
 const closed = () => {

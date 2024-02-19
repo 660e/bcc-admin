@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { createDictType, editDictType } from '@/api/modules/system';
 
@@ -51,7 +51,6 @@ const rules = reactive<FormRules>({
 
 const open = async (row: any) => {
   visible.value = true;
-  await nextTick();
   if (row.dictId) forms.value = JSON.parse(JSON.stringify(row));
 };
 const closed = () => {

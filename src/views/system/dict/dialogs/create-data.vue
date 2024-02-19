@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, reactive, ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { createDictData, editDictData } from '@/api/modules/system';
 
@@ -55,8 +55,8 @@ const forms = ref({
   dictLabel: '',
   dictValue: '',
   cssClass: '',
-  dictSort: '',
-  listClass: '',
+  dictSort: 0,
+  listClass: 'default',
   status: '0',
   remark: ''
 });
@@ -66,10 +66,10 @@ const rules = reactive<FormRules>({
   dictSort: [{ required: true, message: '请填写数据顺序', trigger: 'blur' }]
 });
 
-const open = async (row: any) => {
+const open = async (row: any, dictType: string) => {
   visible.value = true;
-  await nextTick();
   if (row.dictCode) forms.value = JSON.parse(JSON.stringify(row));
+  forms.value.dictType = dictType;
 };
 const closed = () => {
   formsRef.value?.resetFields();
