@@ -50,6 +50,21 @@ export const initDynamicRouter = async () => {
           }
         },
         {
+          path: '/system/dict/:id',
+          name: 'dict-setting',
+          component: '/system/dict/pages/setting',
+          meta: {
+            activeMenu: '/system/dict',
+            icon: 'Menu',
+            isAffix: false,
+            isFull: false,
+            isHide: true,
+            isKeepAlive: false,
+            isLink: '',
+            title: '详情页'
+          }
+        },
+        {
           path: '/examples/pro-table/detail/:id',
           name: 'pro-table-detail',
           component: '/examples/pro-table/detail',
