@@ -18,7 +18,7 @@
 <script lang="ts" name="dict-manage" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getDictList, deleteMenu } from '@/api/modules/system';
+import { getDictList, deleteDict } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
@@ -53,9 +53,9 @@ const create = (row: any = {}) => {
   createDialogRef.value?.open(row);
 };
 const remove = (row: any) => {
-  ElMessageBox.confirm(`是否删除“${row.menuName}”？`, '系统提示', { type: 'warning' })
+  ElMessageBox.confirm(`是否删除“${row.dictName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
-      const { msg } = await deleteMenu(row.menuId);
+      const { msg } = await deleteDict(row.dictId);
       tableRef.value.search();
       ElMessage.success(msg);
     })

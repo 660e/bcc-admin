@@ -24,3 +24,12 @@ export function editMenu(params: any) {
 export function getDictList(params: any = {}) {
   return http.get('/system/dict/type/list', params);
 }
+
+// 新增字典
+
+// 删除字典
+export function deleteDict(id: string) {
+  return http.delete(`/system/dict/type/${id}`);
+}
+
+// 编辑字典
