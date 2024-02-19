@@ -11,18 +11,18 @@
     </pro-table>
 
     <!-- 新增/编辑 -->
-    <!-- <create-dialog @confirm="tableRef.search()" ref="createDialogRef" /> -->
+    <create-dialog @confirm="tableRef.search()" ref="createDialogRef" />
   </div>
 </template>
 
 <script lang="ts" name="dict-manage" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getDictList, deleteDict } from '@/api/modules/system';
+import { getDictTypeList, deleteDictType } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
-// import CreateDialog from './dialogs/create.vue';
+import CreateDialog from './dialogs/create.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
@@ -37,7 +37,7 @@ const columns: ColumnProps[] = [
 
 const requestApi = (params: any) => {
   return new Promise(async resolve => {
-    const response: any = await getDictList(params);
+    const response: any = await getDictTypeList(params);
     resolve({
       data: {
         list: response.rows,
@@ -55,7 +55,7 @@ const create = (row: any = {}) => {
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.dictName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
-      const { msg } = await deleteDict(row.dictId);
+      const { msg } = await deleteDictType(row.dictId);
       tableRef.value.search();
       ElMessage.success(msg);
     })
