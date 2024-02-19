@@ -11,7 +11,7 @@
     </pro-table>
 
     <!-- 新增/编辑 -->
-    <!-- <create-dialog @confirm="tableRef.search()" ref="createDialogRef" /> -->
+    <create-data-dialog @confirm="tableRef.search()" ref="createDataDialogRef" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ import { getDictDataList, deleteDictData, getDictType } from '@/api/modules/syst
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
-// import CreateDialog from './dialogs/create.vue';
+import CreateDataDialog from '../dialogs/create-data.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
@@ -54,14 +54,14 @@ const requestApi = async (params: any) => {
   });
 };
 
-const createDialogRef = ref();
+const createDataDialogRef = ref();
 const create = (row: any = {}) => {
-  createDialogRef.value?.open(row);
+  createDataDialogRef.value?.open(row);
 };
 const remove = (row: any) => {
-  ElMessageBox.confirm(`是否删除“${row.dictName}”？`, '系统提示', { type: 'warning' })
+  ElMessageBox.confirm(`是否删除“${row.dictLabel}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
-      const { msg } = await deleteDictData(row.dictId);
+      const { msg } = await deleteDictData(row.dictCode);
       tableRef.value.search();
       ElMessage.success(msg);
     })
