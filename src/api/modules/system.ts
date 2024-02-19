@@ -82,3 +82,27 @@ export function getDictDataList(params: any = {}) {
 export function refreshDictTypeCache() {
   return http.delete('/system/dict/type/refreshCache');
 }
+
+/**
+ * 角色管理
+ */
+
+// 新增角色
+export function createRole(params: any) {
+  return http.post('/system/role', params);
+}
+
+// 删除角色
+export function deleteRole(id: string) {
+  return http.delete(`/system/role/${id}`);
+}
+
+// 编辑角色
+export function editRole(params: any) {
+  return http.put('/system/role', params);
+}
+
+// 获取角色列表
+export function getRoleList(params: any = {}) {
+  return http.get('/system/role/list', params);
+}
