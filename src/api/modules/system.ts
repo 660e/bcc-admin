@@ -77,3 +77,8 @@ export function getDictDataType(type: string) {
 export function getDictDataList(params: any = {}) {
   return http.get('/system/dict/data/list', params);
 }
+
+// 刷新缓存
+export function refreshDictTypeCache() {
+  return http.delete('/system/dict/type/refreshCache');
+}

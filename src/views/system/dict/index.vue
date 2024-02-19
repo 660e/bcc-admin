@@ -3,6 +3,7 @@
     <pro-table :columns="columns" :request-api="requestApi" row-key="menuId" ref="tableRef">
       <template #tableHeader>
         <el-button @click="create()" type="primary">新增</el-button>
+        <el-button @click="refreshCache">刷新缓存</el-button>
       </template>
       <template #operation="scope">
         <el-button @click="setting(scope.row.dictId)" type="primary" link>配置</el-button>
@@ -20,7 +21,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getDictTypeList, deleteDictType, getDictDataType } from '@/api/modules/system';
+import { getDictTypeList, deleteDictType, getDictDataType, refreshDictTypeCache } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
@@ -64,6 +65,10 @@ const setting = (id: string) => {
 const createTypeDialogRef = ref();
 const create = (row: any = {}) => {
   createTypeDialogRef.value?.open(row);
+};
+const refreshCache = async () => {
+  const { msg } = await refreshDictTypeCache();
+  ElMessage.success(msg);
 };
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.dictName}”？`, '系统提示', { type: 'warning' })
