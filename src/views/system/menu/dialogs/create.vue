@@ -117,8 +117,7 @@
             </div>
           </template>
           <el-radio-group v-model="forms.status">
-            <el-radio label="0">正常</el-radio>
-            <el-radio label="1">停用</el-radio>
+            <el-radio v-for="s in statusOptions" :key="s.dictCode" :label="s.dictValue">{{ s.dictLabel }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </div>
@@ -137,7 +136,7 @@
 import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { TreeSelectOption } from '@/modules/forms';
-import { getMenuList, createMenu, editMenu } from '@/api/modules/system';
+import { getMenuList, createMenu, editMenu, getDictDataType } from '@/api/modules/system';
 import { buildTree } from '@/utils';
 
 import IconSelect from '@/components/icon-select/index.vue';
@@ -170,15 +169,22 @@ const rules = reactive<FormRules>({
 });
 
 const parentIdOptions = ref<TreeSelectOption[]>([{ label: '根目录', value: 0, children: [] }]);
-
+const statusOptions = ref();
 const open = async (row: any) => {
   visible.value = true;
-  const response: any = await getMenuList();
+
+  const p0 = getMenuList();
+  const p1 = getDictDataType('enable_disable');
+
+  const response: any = await Promise.all([p0, p1]);
+
   parentIdOptions.value[0].children = buildTree(
-    response.data.map((e: any) => {
+    response[0].data.map((e: any) => {
       return { label: e.menuName, value: e.menuId, id: e.menuId, pid: e.parentId };
     })
   );
+  statusOptions.value = response[1].data;
+
   if (row.menuId) forms.value = JSON.parse(JSON.stringify(row));
 };
 const closed = () => {

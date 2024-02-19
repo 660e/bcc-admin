@@ -68,6 +68,11 @@ export function editDictData(params: any) {
   return http.put('/system/dict/data', params);
 }
 
+// 获取字典数据内容
+export function getDictDataType(type: string) {
+  return http.get(`/system/dict/data/type/${type}`);
+}
+
 // 获取字典数据列表
 export function getDictDataList(params: any = {}) {
   return http.get('/system/dict/data/list', params);

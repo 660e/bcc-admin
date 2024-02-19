@@ -21,8 +21,7 @@
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-radio-group v-model="forms.status">
-          <el-radio label="0">正常</el-radio>
-          <el-radio label="1">停用</el-radio>
+          <el-radio v-for="s in statusOptions" :key="s.dictCode" :label="s.dictValue">{{ s.dictLabel }}</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="备注" prop="remark">
@@ -42,7 +41,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
-import { createDictData, editDictData } from '@/api/modules/system';
+import { createDictData, editDictData, getDictDataType } from '@/api/modules/system';
 
 const $emit = defineEmits(['confirm']);
 
@@ -66,8 +65,13 @@ const rules = reactive<FormRules>({
   dictSort: [{ required: true, message: '请填写数据顺序', trigger: 'blur' }]
 });
 
+const statusOptions = ref();
 const open = async (row: any, dictType: string) => {
   visible.value = true;
+
+  const response: any = await getDictDataType('enable_disable');
+  statusOptions.value = response.data;
+
   if (row.dictCode) forms.value = JSON.parse(JSON.stringify(row));
   forms.value.dictType = dictType;
 };
