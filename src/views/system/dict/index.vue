@@ -12,7 +12,7 @@
     </pro-table>
 
     <!-- 新增/编辑 -->
-    <create-dialog @confirm="tableRef.search()" ref="createDialogRef" />
+    <create-type-dialog @confirm="tableRef.search()" ref="createTypeDialogRef" />
   </div>
 </template>
 
@@ -24,7 +24,7 @@ import { getDictTypeList, deleteDictType } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
-import CreateDialog from './dialogs/create.vue';
+import CreateTypeDialog from './dialogs/create-type.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
@@ -55,9 +55,9 @@ const setting = (id: string) => {
   $router.push({ name: 'dict-setting', params: { id } });
 };
 
-const createDialogRef = ref();
+const createTypeDialogRef = ref();
 const create = (row: any = {}) => {
-  createDialogRef.value?.open(row);
+  createTypeDialogRef.value?.open(row);
 };
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.dictName}”？`, '系统提示', { type: 'warning' })

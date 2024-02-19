@@ -27,7 +27,7 @@
   </el-dialog>
 </template>
 
-<script lang="ts" name="create-dialog" setup>
+<script lang="ts" setup>
 import { nextTick, reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { createDictType, editDictType } from '@/api/modules/system';
