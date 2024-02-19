@@ -1,69 +1,3 @@
-<script lang="ts" name="create-dialog" setup>
-import { nextTick, reactive, ref } from 'vue';
-import { ElMessage, FormInstance, FormRules } from 'element-plus';
-import { TreeSelectOption } from '@/modules/forms';
-import { getMenuList, createMenu, editMenu } from '@/api/modules/system';
-import { buildTree } from '@/utils';
-
-import IconSelect from '@/components/icon-select/index.vue';
-
-const $emit = defineEmits(['confirm']);
-
-const visible = ref(false);
-
-const formsRef = ref<FormInstance>();
-const forms = ref({
-  menuId: undefined,
-  parentId: '',
-  menuType: 'C',
-  icon: '',
-  menuName: '',
-  orderNum: 0,
-  isFrame: '1',
-  path: '',
-  component: '',
-  perms: '',
-  query: '',
-  isCache: '1',
-  visible: '0',
-  status: '0'
-});
-const rules = reactive<FormRules>({
-  menuName: [{ required: true, message: '请输入菜单名称', trigger: 'blur' }],
-  orderNum: [{ required: true, message: '请输入菜单顺序', trigger: 'blur' }],
-  path: [{ required: true, message: '请输入路由地址', trigger: 'blur' }]
-});
-
-const parentIdOptions = ref<TreeSelectOption[]>([{ label: '根目录', value: 0, children: [] }]);
-
-const open = async (row: any) => {
-  visible.value = true;
-  const response: any = await getMenuList();
-  parentIdOptions.value[0].children = buildTree(
-    response.data.map((e: any) => {
-      return { label: e.menuName, value: e.menuId, id: e.menuId, pid: e.parentId };
-    })
-  );
-  await nextTick();
-  if (row.menuId) forms.value = JSON.parse(JSON.stringify(row));
-};
-const closed = () => {
-  formsRef.value?.resetFields();
-};
-const confirm = () => {
-  formsRef.value?.validate(async valid => {
-    if (valid) {
-      const { msg } = forms.value.menuId ? await editMenu(forms.value) : await createMenu(forms.value);
-      $emit('confirm');
-      ElMessage.success(msg);
-      visible.value = false;
-    }
-  });
-};
-
-defineExpose({ open });
-</script>
-
 <template>
   <el-dialog v-model="visible" :title="forms.menuId ? '编辑' : '新增'" @closed="closed" width="700">
     <el-form :model="forms" :rules="rules" label-width="100" ref="formsRef" class="px-5 pt-5">
@@ -198,3 +132,69 @@ defineExpose({ open });
     </template>
   </el-dialog>
 </template>
+
+<script lang="ts" name="create-dialog" setup>
+import { nextTick, reactive, ref } from 'vue';
+import { ElMessage, FormInstance, FormRules } from 'element-plus';
+import { TreeSelectOption } from '@/modules/forms';
+import { getMenuList, createMenu, editMenu } from '@/api/modules/system';
+import { buildTree } from '@/utils';
+
+import IconSelect from '@/components/icon-select/index.vue';
+
+const $emit = defineEmits(['confirm']);
+
+const visible = ref(false);
+
+const formsRef = ref<FormInstance>();
+const forms = ref({
+  menuId: undefined,
+  parentId: '',
+  menuType: 'C',
+  icon: '',
+  menuName: '',
+  orderNum: 0,
+  isFrame: '1',
+  path: '',
+  component: '',
+  perms: '',
+  query: '',
+  isCache: '1',
+  visible: '0',
+  status: '0'
+});
+const rules = reactive<FormRules>({
+  menuName: [{ required: true, message: '请输入菜单名称', trigger: 'blur' }],
+  orderNum: [{ required: true, message: '请输入菜单顺序', trigger: 'blur' }],
+  path: [{ required: true, message: '请输入路由地址', trigger: 'blur' }]
+});
+
+const parentIdOptions = ref<TreeSelectOption[]>([{ label: '根目录', value: 0, children: [] }]);
+
+const open = async (row: any) => {
+  visible.value = true;
+  const response: any = await getMenuList();
+  parentIdOptions.value[0].children = buildTree(
+    response.data.map((e: any) => {
+      return { label: e.menuName, value: e.menuId, id: e.menuId, pid: e.parentId };
+    })
+  );
+  await nextTick();
+  if (row.menuId) forms.value = JSON.parse(JSON.stringify(row));
+};
+const closed = () => {
+  formsRef.value?.resetFields();
+};
+const confirm = () => {
+  formsRef.value?.validate(async valid => {
+    if (valid) {
+      const { msg } = forms.value.menuId ? await editMenu(forms.value) : await createMenu(forms.value);
+      $emit('confirm');
+      ElMessage.success(msg);
+      visible.value = false;
+    }
+  });
+};
+
+defineExpose({ open });
+</script>

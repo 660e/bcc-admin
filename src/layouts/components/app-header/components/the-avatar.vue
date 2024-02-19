@@ -1,3 +1,19 @@
+<template>
+  <el-dropdown trigger="click">
+    <el-avatar :src="avatarImage" />
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item @click="info">{{ $t('header.personalData') }}</el-dropdown-item>
+        <el-dropdown-item @click="password">{{ $t('header.changePassword') }}</el-dropdown-item>
+        <el-dropdown-item @click="logout" divided>{{ $t('header.logout') }}</el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
+  </el-dropdown>
+
+  <info-dialog ref="infoDialogRef" />
+  <password-dialog ref="passwordDialogRef" />
+</template>
+
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -33,19 +49,3 @@ const info = () => infoDialogRef.value?.open();
 const passwordDialogRef = ref();
 const password = () => passwordDialogRef.value?.open();
 </script>
-
-<template>
-  <el-dropdown trigger="click">
-    <el-avatar :src="avatarImage" />
-    <template #dropdown>
-      <el-dropdown-menu>
-        <el-dropdown-item @click="info">{{ $t('header.personalData') }}</el-dropdown-item>
-        <el-dropdown-item @click="password">{{ $t('header.changePassword') }}</el-dropdown-item>
-        <el-dropdown-item @click="logout" divided>{{ $t('header.logout') }}</el-dropdown-item>
-      </el-dropdown-menu>
-    </template>
-  </el-dropdown>
-
-  <info-dialog ref="infoDialogRef" />
-  <password-dialog ref="passwordDialogRef" />
-</template>

@@ -1,3 +1,51 @@
+<template>
+  <el-tab-pane v-bind="$attrs" class="h-full no-card">
+    <pro-table :data="data" :columns="columns" :pagination="false">
+      <template #columnComment="scope">
+        <el-input v-model="scope.row.columnComment" />
+      </template>
+      <template #javaType="scope">
+        <el-select v-model="scope.row.javaType">
+          <el-option v-for="option in javaTypeOptions" :key="option.value" :label="option.label" :value="option.value" />
+        </el-select>
+      </template>
+      <template #javaField="scope">
+        <el-input v-model="scope.row.javaField" />
+      </template>
+      <template #isInsert="scope">
+        <el-checkbox v-model="scope.row.isInsert" />
+      </template>
+      <template #isEdit="scope">
+        <el-checkbox v-model="scope.row.isEdit" />
+      </template>
+      <template #isList="scope">
+        <el-checkbox v-model="scope.row.isList" />
+      </template>
+      <template #isQuery="scope">
+        <el-checkbox v-model="scope.row.isQuery" />
+      </template>
+      <template #queryType="scope">
+        <el-select v-model="scope.row.queryType">
+          <el-option v-for="option in queryTypeOptions" :key="option.value" :label="option.label" :value="option.value" />
+        </el-select>
+      </template>
+      <template #isRequired="scope">
+        <el-checkbox v-model="scope.row.isRequired" />
+      </template>
+      <template #htmlType="scope">
+        <el-select v-model="scope.row.htmlType">
+          <el-option v-for="option in htmlTypeOptions" :key="option.value" :label="option.label" :value="option.value" />
+        </el-select>
+      </template>
+      <template #dictType="scope">
+        <el-select v-model="scope.row.dictType">
+          <el-option v-for="option in dictTypeOptions" :key="option.value" :label="option.label" :value="option.value" />
+        </el-select>
+      </template>
+    </pro-table>
+  </el-tab-pane>
+</template>
+
 <script lang="ts" name="rows-pane" setup>
 import { ref } from 'vue';
 import { ColumnProps } from '@/components/pro-table/interface';
@@ -57,54 +105,6 @@ const htmlTypeOptions = ref<SelectOption[]>([
 ]);
 const dictTypeOptions = ref<SelectOption[]>([]);
 </script>
-
-<template>
-  <el-tab-pane v-bind="$attrs" class="h-full no-card">
-    <pro-table :data="data" :columns="columns" :pagination="false">
-      <template #columnComment="scope">
-        <el-input v-model="scope.row.columnComment" />
-      </template>
-      <template #javaType="scope">
-        <el-select v-model="scope.row.javaType">
-          <el-option v-for="option in javaTypeOptions" :key="option.value" :label="option.label" :value="option.value" />
-        </el-select>
-      </template>
-      <template #javaField="scope">
-        <el-input v-model="scope.row.javaField" />
-      </template>
-      <template #isInsert="scope">
-        <el-checkbox v-model="scope.row.isInsert" />
-      </template>
-      <template #isEdit="scope">
-        <el-checkbox v-model="scope.row.isEdit" />
-      </template>
-      <template #isList="scope">
-        <el-checkbox v-model="scope.row.isList" />
-      </template>
-      <template #isQuery="scope">
-        <el-checkbox v-model="scope.row.isQuery" />
-      </template>
-      <template #queryType="scope">
-        <el-select v-model="scope.row.queryType">
-          <el-option v-for="option in queryTypeOptions" :key="option.value" :label="option.label" :value="option.value" />
-        </el-select>
-      </template>
-      <template #isRequired="scope">
-        <el-checkbox v-model="scope.row.isRequired" />
-      </template>
-      <template #htmlType="scope">
-        <el-select v-model="scope.row.htmlType">
-          <el-option v-for="option in htmlTypeOptions" :key="option.value" :label="option.label" :value="option.value" />
-        </el-select>
-      </template>
-      <template #dictType="scope">
-        <el-select v-model="scope.row.dictType">
-          <el-option v-for="option in dictTypeOptions" :key="option.value" :label="option.label" :value="option.value" />
-        </el-select>
-      </template>
-    </pro-table>
-  </el-tab-pane>
-</template>
 
 <style lang="scss" scoped>
 .no-card :deep(.table-main) {

@@ -1,3 +1,16 @@
+<template>
+  <el-dialog v-model="visible" @closed="closed" title="导入" class="no-card" draggable>
+    <pro-table :columns="columns" :data="data" ref="proTableRef" />
+
+    <template #footer>
+      <div class="flex justify-end">
+        <el-button @click="visible = false">取消</el-button>
+        <el-button @click="confirm" type="primary">确定</el-button>
+      </div>
+    </template>
+  </el-dialog>
+</template>
+
 <script lang="ts" name="import-dialog" setup>
 import { ref } from 'vue';
 import { ColumnProps } from '@/components/pro-table/interface';
@@ -33,16 +46,3 @@ const confirm = () => {
 
 defineExpose({ open });
 </script>
-
-<template>
-  <el-dialog v-model="visible" @closed="closed" title="导入" class="no-card" draggable>
-    <pro-table :columns="columns" :data="data" ref="proTableRef" />
-
-    <template #footer>
-      <div class="flex justify-end">
-        <el-button @click="visible = false">取消</el-button>
-        <el-button @click="confirm" type="primary">确定</el-button>
-      </div>
-    </template>
-  </el-dialog>
-</template>

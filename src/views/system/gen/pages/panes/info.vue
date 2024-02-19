@@ -1,41 +1,3 @@
-<script lang="ts" name="info-pane" setup>
-import { reactive, ref } from 'vue';
-import { FormRules } from 'element-plus';
-import { SelectOption } from '@/modules/forms';
-import { InfoType } from '../../models';
-
-const $props = defineProps<{ info: InfoType }>();
-
-const forms = $props.info;
-const rules = reactive<FormRules<InfoType>>({
-  tableName: [{ required: true, message: '请填写表名称', trigger: 'blur' }],
-  tableComment: [{ required: true, message: '请填写表描述', trigger: 'blur' }],
-  className: [{ required: true, message: '请填写实体类名称', trigger: 'blur' }],
-  packageName: [{ required: true, message: '请填写生成包路径', trigger: 'blur' }],
-  moduleName: [{ required: true, message: '请填写生成模块名', trigger: 'blur' }],
-  businessName: [{ required: true, message: '请填写生成业务名', trigger: 'blur' }],
-  functionName: [{ required: true, message: '请填写生成功能名', trigger: 'blur' }],
-
-  treeCode: [{ required: true, message: '请填写树编码字段', trigger: 'change' }],
-  treeParentCode: [{ required: true, message: '请填写树父编码字段', trigger: 'change' }],
-  treeName: [{ required: true, message: '请填写树名称字段', trigger: 'change' }],
-
-  subTableName: [{ required: true, message: '请填写关联子表的表名', trigger: 'change' }],
-  subTableFkName: [{ required: true, message: '请填写子表关联的外键名', trigger: 'change' }]
-});
-
-const tplCategoryOptions = ref<SelectOption[]>([
-  { label: '单表（增删改查）', value: 'crud' },
-  { label: '树表（增删改查）', value: 'tree' },
-  { label: '主子表（增删改查）', value: 'sub' }
-]);
-const treeCodeOptions = ref<SelectOption[]>([]);
-const treeParentCodeOptions = ref<SelectOption[]>([]);
-const treeNameOptions = ref<SelectOption[]>([]);
-const subTableNameOptions = ref<SelectOption[]>([]);
-const subTableFkNameOptions = ref<SelectOption[]>([]);
-</script>
-
 <template>
   <el-tab-pane v-bind="$attrs">
     <el-form :model="forms" :rules="rules" label-width="170px">
@@ -189,3 +151,41 @@ const subTableFkNameOptions = ref<SelectOption[]>([]);
     </el-form>
   </el-tab-pane>
 </template>
+
+<script lang="ts" name="info-pane" setup>
+import { reactive, ref } from 'vue';
+import { FormRules } from 'element-plus';
+import { SelectOption } from '@/modules/forms';
+import { InfoType } from '../../models';
+
+const $props = defineProps<{ info: InfoType }>();
+
+const forms = $props.info;
+const rules = reactive<FormRules<InfoType>>({
+  tableName: [{ required: true, message: '请填写表名称', trigger: 'blur' }],
+  tableComment: [{ required: true, message: '请填写表描述', trigger: 'blur' }],
+  className: [{ required: true, message: '请填写实体类名称', trigger: 'blur' }],
+  packageName: [{ required: true, message: '请填写生成包路径', trigger: 'blur' }],
+  moduleName: [{ required: true, message: '请填写生成模块名', trigger: 'blur' }],
+  businessName: [{ required: true, message: '请填写生成业务名', trigger: 'blur' }],
+  functionName: [{ required: true, message: '请填写生成功能名', trigger: 'blur' }],
+
+  treeCode: [{ required: true, message: '请填写树编码字段', trigger: 'change' }],
+  treeParentCode: [{ required: true, message: '请填写树父编码字段', trigger: 'change' }],
+  treeName: [{ required: true, message: '请填写树名称字段', trigger: 'change' }],
+
+  subTableName: [{ required: true, message: '请填写关联子表的表名', trigger: 'change' }],
+  subTableFkName: [{ required: true, message: '请填写子表关联的外键名', trigger: 'change' }]
+});
+
+const tplCategoryOptions = ref<SelectOption[]>([
+  { label: '单表（增删改查）', value: 'crud' },
+  { label: '树表（增删改查）', value: 'tree' },
+  { label: '主子表（增删改查）', value: 'sub' }
+]);
+const treeCodeOptions = ref<SelectOption[]>([]);
+const treeParentCodeOptions = ref<SelectOption[]>([]);
+const treeNameOptions = ref<SelectOption[]>([]);
+const subTableNameOptions = ref<SelectOption[]>([]);
+const subTableFkNameOptions = ref<SelectOption[]>([]);
+</script>

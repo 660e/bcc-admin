@@ -1,3 +1,26 @@
+<template>
+  <div class="flex flex-col h-full">
+    <pro-table :data="data" :columns="columns">
+      <template #tableHeader="scope">
+        <el-button @click="importData">导入</el-button>
+        <el-button @click="batchDelete(scope.selectedListIds)">删除</el-button>
+      </template>
+      <template #operation="scope">
+        <el-button @click="preview" type="primary" link>预览</el-button>
+        <el-button @click="edit(scope.row.id)" type="primary" link>编辑</el-button>
+        <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
+        <el-button @click="sync(scope.row)" type="primary" link>同步</el-button>
+        <el-button type="primary" link>生成代码</el-button>
+      </template>
+    </pro-table>
+
+    <!-- 导入 -->
+    <import-dialog @confirm="importDataConfirm" ref="importDialogRef" />
+    <!-- 预览 -->
+    <preview-dialog ref="previewDialogRef" />
+  </div>
+</template>
+
 <script lang="ts" name="gen-manage" setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -53,26 +76,3 @@ const sync = (row: any) => {
     .catch(() => false);
 };
 </script>
-
-<template>
-  <div class="flex flex-col h-full">
-    <pro-table :data="data" :columns="columns">
-      <template #tableHeader="scope">
-        <el-button @click="importData">导入</el-button>
-        <el-button @click="batchDelete(scope.selectedListIds)">删除</el-button>
-      </template>
-      <template #operation="scope">
-        <el-button @click="preview" type="primary" link>预览</el-button>
-        <el-button @click="edit(scope.row.id)" type="primary" link>编辑</el-button>
-        <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
-        <el-button @click="sync(scope.row)" type="primary" link>同步</el-button>
-        <el-button type="primary" link>生成代码</el-button>
-      </template>
-    </pro-table>
-
-    <!-- 导入 -->
-    <import-dialog @confirm="importDataConfirm" ref="importDialogRef" />
-    <!-- 预览 -->
-    <preview-dialog ref="previewDialogRef" />
-  </div>
-</template>
