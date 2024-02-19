@@ -27,14 +27,14 @@ import CreateDialog from './dialogs/create.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
-  { prop: 'menuName', label: '菜单名称', width: 200, search: { el: 'input' } },
-  { prop: 'icon', label: '图标', width: 120 },
-  { prop: 'orderNum', label: '排序', width: 60 },
-  { prop: 'perms', label: '权限标识', width: 200 },
+  { prop: 'menuName', label: '菜单名称', search: { el: 'input' } },
+  { prop: 'icon', label: '图标' },
+  { prop: 'orderNum', label: '排序' },
+  { prop: 'perms', label: '权限标识' },
   { prop: 'path', label: '路由地址' },
   { prop: 'component', label: '组件路径' },
-  { prop: 'status', label: '状态', width: 60, search: { el: 'select' } },
-  { prop: 'createTime', label: '创建时间', width: 200 },
+  { prop: 'status', label: '状态', search: { el: 'select' } },
+  { prop: 'createTime', label: '创建时间' },
   { prop: 'operation', label: '操作', fixed: 'right', width: 120 }
 ];
 

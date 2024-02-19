@@ -19,3 +19,8 @@ export function deleteMenu(id: string) {
 export function editMenu(params: any) {
   return http.put('/system/menu', params);
 }
+
+// 获取字典列表
+export function getDictList(params: any = {}) {
+  return http.get('/system/dict/type/list', params);
+}
