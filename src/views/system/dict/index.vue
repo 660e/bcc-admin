@@ -20,7 +20,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getDictTypeList, deleteDictType } from '@/api/modules/system';
+import { getDictTypeList, deleteDictType, getDictDataType } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
@@ -31,7 +31,13 @@ const columns: ColumnProps[] = [
   { prop: 'dictId', label: '字典编号' },
   { prop: 'dictName', label: '字典名称', search: { el: 'input' } },
   { prop: 'dictType', label: '字典类型', search: { el: 'input' } },
-  { prop: 'status', label: '状态', search: { el: 'select' } },
+  {
+    prop: 'status',
+    label: '状态',
+    enum: () => getDictDataType('enable_disable'),
+    search: { el: 'select' },
+    fieldNames: { label: 'dictLabel', value: 'dictValue' }
+  },
   { prop: 'remark', label: '备注' },
   { prop: 'createTime', label: '创建时间' },
   { prop: 'operation', label: '操作', fixed: 'right', width: 150 }

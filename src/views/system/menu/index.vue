@@ -18,7 +18,7 @@
 <script lang="ts" name="menu-manage" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getMenuList, deleteMenu } from '@/api/modules/system';
+import { getMenuList, deleteMenu, getDictDataType } from '@/api/modules/system';
 import { buildTree } from '@/utils';
 import { ColumnProps } from '@/components/pro-table/interface';
 
@@ -33,7 +33,13 @@ const columns: ColumnProps[] = [
   { prop: 'perms', label: '权限标识' },
   { prop: 'path', label: '路由地址' },
   { prop: 'component', label: '组件路径' },
-  { prop: 'status', label: '状态', search: { el: 'select' } },
+  {
+    prop: 'status',
+    label: '状态',
+    enum: () => getDictDataType('enable_disable'),
+    search: { el: 'select' },
+    fieldNames: { label: 'dictLabel', value: 'dictValue' }
+  },
   { prop: 'createTime', label: '创建时间' },
   { prop: 'operation', label: '操作', fixed: 'right', width: 120 }
 ];
