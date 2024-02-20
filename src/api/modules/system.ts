@@ -24,6 +24,11 @@ export function getMenuList(params: any = {}) {
   return http.get('/system/menu/list', params);
 }
 
+// 获取菜单列表（树结构）
+export function treeselect() {
+  return http.get('/system/menu/treeselect');
+}
+
 /**
  * 字典管理
  */
@@ -45,7 +50,7 @@ export function editDictType(params: any) {
 
 // 获取字典类型
 export function getDictType(id: string | string[]) {
-  return http.get(`/system/dict/type/${id}`);
+  return http.get<any>(`/system/dict/type/${id}`);
 }
 
 // 获取字典类型列表

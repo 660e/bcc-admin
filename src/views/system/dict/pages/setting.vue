@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full">
-    <pro-table :columns="columns" :request-api="requestApi" row-key="menuId" ref="tableRef">
+    <pro-table :columns="columns" :request-api="requestApi" ref="tableRef">
       <template #tableHeader>
         <el-button @click="create()" type="primary">新增</el-button>
       </template>
@@ -46,19 +46,14 @@ const columns: ColumnProps[] = [
 const $route = useRoute();
 const dictType = ref();
 const requestApi = async (params: any) => {
-  return new Promise(async resolve => {
-    const dictTypeResponse: any = await getDictType($route.params.id);
-    dictType.value = dictTypeResponse.data.dictType;
-    params.dictType = dictType.value;
-    const dictDataListResponse: any = await getDictDataList(params);
-    resolve({
-      data: {
-        list: dictDataListResponse.rows,
-        total: dictDataListResponse.total,
-        ...params
-      }
-    });
-  });
+  const {
+    data: { dictType: type }
+  } = await getDictType($route.params.id);
+
+  dictType.value = type;
+  params.dictType = type;
+
+  return getDictDataList(params);
 };
 
 const createDataDialogRef = ref();

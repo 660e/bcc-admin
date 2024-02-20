@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full">
-    <pro-table :columns="columns" :request-api="requestApi" row-key="menuId" ref="tableRef">
+    <pro-table :columns="columns" :request-api="getDictTypeList" ref="tableRef">
       <template #tableHeader>
         <el-button @click="create()" type="primary">新增</el-button>
         <el-button @click="refreshCache">刷新缓存</el-button>
@@ -43,19 +43,6 @@ const columns: ColumnProps[] = [
   { prop: 'createTime', label: '创建时间' },
   { prop: 'operation', label: '操作', fixed: 'right', width: 150 }
 ];
-
-const requestApi = (params: any) => {
-  return new Promise(async resolve => {
-    const response: any = await getDictTypeList(params);
-    resolve({
-      data: {
-        list: response.rows,
-        total: response.total,
-        ...params
-      }
-    });
-  });
-};
 
 const $router = useRouter();
 const setting = (id: string) => {
