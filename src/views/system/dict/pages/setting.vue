@@ -46,12 +46,10 @@ const columns: ColumnProps[] = [
 const $route = useRoute();
 const dictType = ref();
 const requestApi = async (params: any) => {
-  const {
-    data: { dictType: type }
-  } = await getDictType($route.params.id);
+  const { data } = await getDictType($route.params.id);
 
-  dictType.value = type;
-  params.dictType = type;
+  dictType.value = data.dictType;
+  params.dictType = data.dictType;
 
   return getDictDataList(params);
 };

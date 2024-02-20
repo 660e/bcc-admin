@@ -46,9 +46,9 @@ const columns: ColumnProps[] = [
 
 const requestApi = (params: any) => {
   return new Promise(async resolve => {
-    const response: any = await getMenuList(params);
-    const data = buildTree(response.data, 'menuId', 'parentId');
-    resolve({ data });
+    const { data } = await getMenuList(params);
+    const tree = buildTree(data, 'menuId', 'parentId');
+    resolve({ data: tree });
   });
 };
 

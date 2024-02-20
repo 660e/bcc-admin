@@ -21,7 +21,7 @@ export function editMenu(params: any) {
 
 // 获取菜单列表
 export function getMenuList(params: any = {}) {
-  return http.get('/system/menu/list', params);
+  return http.get<any>('/system/menu/list', params);
 }
 
 // 获取菜单列表（树结构）

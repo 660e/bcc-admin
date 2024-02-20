@@ -176,7 +176,7 @@ const open = async (row: any) => {
   const p0 = getMenuList();
   const p1 = getDictDataType('enable_disable');
 
-  const response: any = await Promise.all([p0, p1]);
+  const response = await Promise.all([p0, p1]);
 
   parentIdOptions.value[0].children = buildTree(
     response[0].data.map((e: any) => {

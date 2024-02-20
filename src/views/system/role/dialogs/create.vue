@@ -80,7 +80,7 @@ const open = async (row: any) => {
   const p0 = getDictDataType('enable_disable');
   const p1 = treeselect();
 
-  const response: any = await Promise.all([p0, p1]);
+  const response = await Promise.all([p0, p1]);
   statusOptions.value = response[0].data;
   treeData.value = response[1].data;
 
