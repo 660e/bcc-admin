@@ -5,8 +5,10 @@
         <el-button @click="create()" type="primary">新增</el-button>
       </template>
       <template #operation="scope">
-        <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
-        <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
+        <template v-if="scope.row.roleId !== 1">
+          <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
+          <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
+        </template>
       </template>
     </pro-table>
 
