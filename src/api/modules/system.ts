@@ -29,6 +29,11 @@ export function treeselect() {
   return http.get('/system/menu/treeselect');
 }
 
+// 根据角色查询菜单信息
+export function roleMenuTreeselect(id: string) {
+  return http.get(`/system/menu/roleMenuTreeselect/${id}`);
+}
+
 /**
  * 字典管理
  */

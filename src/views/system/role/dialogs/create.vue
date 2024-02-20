@@ -29,7 +29,7 @@
         </el-form-item>
       </div>
       <div class="flex-1 h-[500px] overflow-auto border border-gray-300 rounded">
-        <el-tree :data="treeData" ref="treeRef" show-checkbox />
+        <el-tree :data="treeData" node-key="id" ref="treeRef" show-checkbox />
       </div>
     </el-form>
 
@@ -45,7 +45,7 @@
 <script lang="ts" name="create-dialog" setup>
 import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
-import { createRole, editRole, getDictDataType, treeselect } from '@/api/modules/system';
+import { createRole, editRole, getDictDataType, treeselect, roleMenuTreeselect } from '@/api/modules/system';
 
 const $emit = defineEmits(['confirm']);
 
@@ -84,7 +84,11 @@ const open = async (row: any) => {
   statusOptions.value = response[0].data;
   treeData.value = response[1].data;
 
-  if (row.roleId) forms.value = JSON.parse(JSON.stringify(row));
+  if (row.roleId) {
+    forms.value = JSON.parse(JSON.stringify(row));
+    const data: any = await roleMenuTreeselect(row.roleId);
+    treeRef.value.setCheckedKeys(data.checkedKeys, false);
+  }
 };
 const closed = () => {
   formsRef.value?.resetFields();
