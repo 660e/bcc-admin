@@ -28,7 +28,7 @@ import CreateDialog from './dialogs/create.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
-  { prop: 'roleId', label: '角色编号' },
+  { prop: 'roleId', label: '角色编号', width: 100 },
   { prop: 'roleName', label: '角色名称', search: { el: 'input' } },
   { prop: 'roleKey', label: '权限字符', search: { el: 'input' } },
   { prop: 'roleSort', label: '显示顺序' },

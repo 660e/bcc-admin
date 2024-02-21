@@ -1,6 +1,6 @@
 <template>
   <el-dialog v-model="visible" @closed="closed" title="导入" class="no-card" draggable>
-    <pro-table :columns="columns" :data="data" ref="proTableRef" />
+    <pro-table :columns="columns" :request-api="getGenDbList" ref="tableRef" />
 
     <template #footer>
       <div class="flex justify-end">
@@ -14,21 +14,18 @@
 <script lang="ts" name="import-dialog" setup>
 import { ref } from 'vue';
 import { ColumnProps } from '@/components/pro-table/interface';
+import { getGenDbList } from '@/api/modules/code';
 
 import ProTable from '@/components/pro-table/index.vue';
 
 const $emit = defineEmits(['confirm']);
 
-const data = ref([
-  { id: '001', name: 'TEST-G-001' },
-  { id: '002', name: 'TEST-G-002' }
-]);
 const columns: ColumnProps[] = [
   { type: 'selection', fixed: 'left', width: 0 },
-  { prop: 'name', label: '表名称', search: { el: 'input' } },
-  { prop: 'description', label: '表描述', search: { el: 'input' } },
-  { prop: 'creationTime', label: '创建时间' },
-  { prop: 'updateTime', label: '更新时间' }
+  { prop: 'tableName', label: '表名称', search: { el: 'input' }, width: 180 },
+  { prop: 'tableComment', label: '表描述', search: { el: 'input' } },
+  { prop: 'createTime', label: '创建时间', width: 180 },
+  { prop: 'updateTime', label: '更新时间', width: 180 }
 ];
 
 const proTableRef = ref();
