@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full">
-    <pro-table :data="data" :columns="columns">
+    <pro-table :columns="columns" :request-api="getGenList" ref="tableRef">
       <template #tableHeader="scope">
         <el-button @click="importData">导入</el-button>
         <el-button @click="batchDelete(scope.selectedListIds)">删除</el-button>
@@ -26,12 +26,13 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ColumnProps } from '@/components/pro-table/interface';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import { getGenList } from '@/api/modules/code';
 
 import ProTable from '@/components/pro-table/index.vue';
 import ImportDialog from './dialogs/import.vue';
 import PreviewDialog from './dialogs/preview.vue';
 
-const data = ref(new Array(20).fill(null).map((e, i) => ({ id: i, tableName: `TEST-G-${i}` })));
+const tableRef = ref();
 const columns: ColumnProps[] = [
   { type: 'selection', fixed: 'left', width: 0 },
   { prop: 'tableName', label: '表名称', search: { el: 'input' } },
@@ -62,14 +63,14 @@ const edit = (id: string) => {
   $router.push({ name: 'gen-edit', params: { id } });
 };
 const remove = (row: any) => {
-  ElMessageBox.confirm(`是否确认删除表名称为“${row.tableName}”的数据项？`, '系统提示', { type: 'warning' })
+  ElMessageBox.confirm(`是否删除“${row.tableName}”？`, '系统提示', { type: 'warning' })
     .then(() => {
       ElMessage.success('删除成功');
     })
     .catch(() => false);
 };
 const sync = (row: any) => {
-  ElMessageBox.confirm(`确认要强制同步“${row.tableName}”表结构吗？`, '系统提示', { type: 'warning' })
+  ElMessageBox.confirm(`是否同步“${row.tableName}”？`, '系统提示', { type: 'warning' })
     .then(() => {
       ElMessage.success('同步成功');
     })
