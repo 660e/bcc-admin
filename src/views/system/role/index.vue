@@ -45,7 +45,7 @@ const columns: ColumnProps[] = [
 
 const createDialogRef = ref();
 const create = (row: any = {}) => {
-  createDialogRef.value?.open(row);
+  createDialogRef.value.open(row);
 };
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.roleName}”？`, '系统提示', { type: 'warning' })

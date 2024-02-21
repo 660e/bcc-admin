@@ -41,17 +41,17 @@ const columns: ColumnProps[] = [
   },
   { prop: 'remark', label: '备注' },
   { prop: 'createTime', label: '创建时间' },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 150 }
+  { prop: 'operation', label: '操作', fixed: 'right', width: 160 }
 ];
 
 const $router = useRouter();
-const setting = (id: string) => {
-  $router.push({ name: 'dict-setting', params: { id } });
+const setting = (dictId: string) => {
+  $router.push({ name: 'dict-setting', params: { dictId } });
 };
 
 const createTypeDialogRef = ref();
 const create = (row: any = {}) => {
-  createTypeDialogRef.value?.open(row);
+  createTypeDialogRef.value.open(row);
 };
 const refreshCache = async () => {
   const { msg } = await refreshDictTypeCache();

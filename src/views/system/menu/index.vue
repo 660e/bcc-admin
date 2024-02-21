@@ -54,7 +54,7 @@ const requestApi = (params: any) => {
 
 const createDialogRef = ref();
 const create = (row: any = {}) => {
-  createDialogRef.value?.open(row);
+  createDialogRef.value.open(row);
 };
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.menuName}”？`, '系统提示', { type: 'warning' })

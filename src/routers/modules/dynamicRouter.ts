@@ -50,7 +50,7 @@ export const initDynamicRouter = async () => {
           }
         },
         {
-          path: '/system/dict/:id',
+          path: '/system/dict/:dictId',
           name: 'dict-setting',
           component: '/system/dict/pages/setting',
           meta: {

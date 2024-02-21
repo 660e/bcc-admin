@@ -34,8 +34,8 @@ export function createUser(params: any) {
 }
 
 // 删除用户
-export function deleteUser(id: string) {
-  return http.delete(`/system/user/${id}`);
+export function deleteUser(userId: string) {
+  return http.delete(`/system/user/${userId}`);
 }
 
 // 编辑用户
@@ -44,14 +44,16 @@ export function editUser(params: any) {
 }
 
 // 获取用户
-export function getUser(id: string) {
-  return http.get(`/system/user/${id}`);
+export function getUser(userId: string) {
+  return http.get(`/system/user/${userId}`);
 }
 
 // 获取用户列表
 export function getUserList(params: any = {}) {
   return http.get('/system/user/list', params);
 }
+
+// 重置密码
 
 /**
  * 菜单管理
@@ -63,8 +65,8 @@ export function createMenu(params: any) {
 }
 
 // 删除菜单
-export function deleteMenu(id: string) {
-  return http.delete(`/system/menu/${id}`);
+export function deleteMenu(menuId: string) {
+  return http.delete(`/system/menu/${menuId}`);
 }
 
 // 编辑菜单
@@ -83,8 +85,8 @@ export function treeselect() {
 }
 
 // 根据角色查询菜单信息
-export function roleMenuTreeselect(id: string) {
-  return http.get(`/system/menu/roleMenuTreeselect/${id}`);
+export function roleMenuTreeselect(roleId: string) {
+  return http.get(`/system/menu/roleMenuTreeselect/${roleId}`);
 }
 
 /**
@@ -97,8 +99,8 @@ export function createDictType(params: any) {
 }
 
 // 删除字典类型
-export function deleteDictType(id: string) {
-  return http.delete(`/system/dict/type/${id}`);
+export function deleteDictType(dictId: string) {
+  return http.delete(`/system/dict/type/${dictId}`);
 }
 
 // 编辑字典类型
@@ -107,8 +109,8 @@ export function editDictType(params: any) {
 }
 
 // 获取字典类型
-export function getDictType(id: string | string[]) {
-  return http.get<any>(`/system/dict/type/${id}`);
+export function getDictType(dictId: string | string[]) {
+  return http.get<any>(`/system/dict/type/${dictId}`);
 }
 
 // 获取字典类型列表
@@ -122,8 +124,8 @@ export function createDictData(params: any) {
 }
 
 // 删除字典数据
-export function deleteDictData(id: string) {
-  return http.delete(`/system/dict/data/${id}`);
+export function deleteDictData(dictCode: string) {
+  return http.delete(`/system/dict/data/${dictCode}`);
 }
 
 // 编辑字典数据
@@ -132,8 +134,8 @@ export function editDictData(params: any) {
 }
 
 // 获取字典数据内容
-export function getDictDataType(type: string) {
-  return http.get(`/system/dict/data/type/${type}`);
+export function getDictDataType(dictType: string) {
+  return http.get(`/system/dict/data/type/${dictType}`);
 }
 
 // 获取字典数据列表
