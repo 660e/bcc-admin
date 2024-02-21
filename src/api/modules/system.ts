@@ -1,6 +1,54 @@
 import http from '@/api';
 
 /**
+ * 角色管理
+ */
+
+// 新增角色
+export function createRole(params: any) {
+  return http.post('/system/role', params);
+}
+
+// 删除角色
+export function deleteRole(id: string) {
+  return http.delete(`/system/role/${id}`);
+}
+
+// 编辑角色
+export function editRole(params: any) {
+  return http.put('/system/role', params);
+}
+
+// 获取角色列表
+export function getRoleList(params: any = {}) {
+  return http.get('/system/role/list', params);
+}
+
+/**
+ * 用户管理
+ */
+
+// 新增用户
+export function createUser(params: any) {
+  return http.post('/system/user', params);
+}
+
+// 删除用户
+export function deleteUser(id: string) {
+  return http.delete(`/system/user/${id}`);
+}
+
+// 编辑用户
+export function editUser(params: any) {
+  return http.put('/system/user', params);
+}
+
+// 获取用户列表
+export function getUserList(params: any = {}) {
+  return http.get('/system/user/list', params);
+}
+
+/**
  * 菜单管理
  */
 
@@ -91,28 +139,4 @@ export function getDictDataList(params: any = {}) {
 // 刷新缓存
 export function refreshDictTypeCache() {
   return http.delete('/system/dict/type/refreshCache');
-}
-
-/**
- * 角色管理
- */
-
-// 新增角色
-export function createRole(params: any) {
-  return http.post('/system/role', params);
-}
-
-// 删除角色
-export function deleteRole(id: string) {
-  return http.delete(`/system/role/${id}`);
-}
-
-// 编辑角色
-export function editRole(params: any) {
-  return http.put('/system/role', params);
-}
-
-// 获取角色列表
-export function getRoleList(params: any = {}) {
-  return http.get('/system/role/list', params);
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full">
-    <pro-table :columns="columns" :request-api="getRoleList" ref="tableRef">
+    <pro-table :columns="columns" :request-api="getUserList" ref="tableRef">
       <template #tableHeader>
         <el-button @click="create()" type="primary">新增</el-button>
       </template>
@@ -20,7 +20,7 @@
 <script lang="ts" name="user-manage" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getRoleList, deleteRole, getDictDataType } from '@/api/modules/system';
+import { getUserList, deleteRole, getDictDataType } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
@@ -28,10 +28,10 @@ import CreateDialog from './dialogs/create.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
-  { prop: 'roleId', label: '角色编号' },
-  { prop: 'roleName', label: '角色名称', search: { el: 'input' } },
-  { prop: 'roleKey', label: '权限字符', search: { el: 'input' } },
-  { prop: 'roleSort', label: '显示顺序' },
+  { prop: 'userId', label: '用户编号' },
+  { prop: 'userName', label: '用户名称', search: { el: 'input' } },
+  { prop: 'nickName', label: '用户昵称' },
+  { prop: 'phonenumber', label: '手机号码', search: { el: 'input' } },
   {
     prop: 'status',
     label: '状态',
