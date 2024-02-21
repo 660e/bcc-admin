@@ -55,9 +55,7 @@ const requestApi = async (params: any) => {
 };
 
 const createDataDialogRef = ref();
-const create = (row: any = {}) => {
-  createDataDialogRef.value.open(row, dictType.value);
-};
+const create = (row: any = {}) => createDataDialogRef.value.open(row, dictType.value);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.dictLabel}”？`, '系统提示', { type: 'warning' })
     .then(async () => {

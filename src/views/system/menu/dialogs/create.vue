@@ -187,9 +187,7 @@ const open = async (row: any) => {
 
   if (row.menuId) forms.value = JSON.parse(JSON.stringify(row));
 };
-const closed = () => {
-  formsRef.value?.resetFields();
-};
+const closed = () => formsRef.value?.resetFields();
 const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {

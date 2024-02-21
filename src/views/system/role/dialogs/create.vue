@@ -90,9 +90,7 @@ const open = async (row: any) => {
     treeRef.value.setCheckedKeys(data.checkedKeys, false);
   }
 };
-const closed = () => {
-  formsRef.value?.resetFields();
-};
+const closed = () => formsRef.value?.resetFields();
 const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {

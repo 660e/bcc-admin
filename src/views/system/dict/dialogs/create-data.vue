@@ -75,9 +75,7 @@ const open = async (row: any, dictType: string) => {
   if (row.dictCode) forms.value = JSON.parse(JSON.stringify(row));
   forms.value.dictType = dictType;
 };
-const closed = () => {
-  formsRef.value?.resetFields();
-};
+const closed = () => formsRef.value?.resetFields();
 const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {

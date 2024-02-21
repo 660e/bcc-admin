@@ -45,14 +45,10 @@ const columns: ColumnProps[] = [
 ];
 
 const $router = useRouter();
-const setting = (dictId: string) => {
-  $router.push({ name: 'dict-setting', params: { dictId } });
-};
+const setting = (dictId: string) => $router.push({ name: 'dict-setting', params: { dictId } });
 
 const createTypeDialogRef = ref();
-const create = (row: any = {}) => {
-  createTypeDialogRef.value.open(row);
-};
+const create = (row: any = {}) => createTypeDialogRef.value.open(row);
 const refreshCache = async () => {
   const { msg } = await refreshDictTypeCache();
   ElMessage.success(msg);

@@ -40,9 +40,7 @@ const open = async (row: any) => {
   visible.value = true;
   forms.value = JSON.parse(JSON.stringify(row));
 };
-const closed = () => {
-  formsRef.value?.resetFields();
-};
+const closed = () => formsRef.value?.resetFields();
 const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {

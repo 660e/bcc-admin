@@ -48,9 +48,7 @@ const columns: ColumnProps[] = [
 ];
 
 const createDialogRef = ref();
-const create = (row: any = {}) => {
-  createDialogRef.value.open(row);
-};
+const create = (row: any = {}) => createDialogRef.value.open(row);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.userName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
@@ -61,7 +59,5 @@ const remove = (row: any) => {
     .catch(() => false);
 };
 const resetDialogRef = ref();
-const reset = (row: any) => {
-  resetDialogRef.value.open(row);
-};
+const reset = (row: any) => resetDialogRef.value.open(row);
 </script>
