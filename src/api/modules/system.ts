@@ -54,6 +54,9 @@ export function getUserList(params: any = {}) {
 }
 
 // 重置密码
+export function resetPwd(params: any) {
+  return http.put('/system/user/resetPwd', params);
+}
 
 /**
  * 菜单管理

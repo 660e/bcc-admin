@@ -8,7 +8,7 @@
         <template v-if="scope.row.userId !== 1">
           <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
           <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
-          <el-button @click="reset(scope.row.userId)" type="primary" link>重置密码</el-button>
+          <el-button @click="reset(scope.row)" type="primary" link>重置密码</el-button>
         </template>
       </template>
     </pro-table>
@@ -61,7 +61,7 @@ const remove = (row: any) => {
     .catch(() => false);
 };
 const resetDialogRef = ref();
-const reset = (userId: string) => {
-  resetDialogRef.value.open(userId);
+const reset = (row: any) => {
+  resetDialogRef.value.open(row);
 };
 </script>
