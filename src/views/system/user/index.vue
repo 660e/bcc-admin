@@ -5,7 +5,7 @@
         <el-button @click="create()" type="primary">新增</el-button>
       </template>
       <template #operation="scope">
-        <template v-if="scope.row.roleId !== 1">
+        <template v-if="scope.row.userId !== 1">
           <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
           <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
         </template>

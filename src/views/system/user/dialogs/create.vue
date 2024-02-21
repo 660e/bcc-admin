@@ -1,36 +1,49 @@
 <template>
-  <el-dialog v-model="visible" :title="forms.roleId ? '编辑' : '新增'" @closed="closed" width="800">
-    <el-form :model="forms" :rules="rules" label-width="100" ref="formsRef" class="p-5 flex space-x-5">
-      <div class="flex-1">
-        <el-form-item label="角色名称" prop="roleName">
-          <el-input v-model="forms.roleName" />
+  <el-dialog v-model="visible" :title="forms.userId ? '编辑' : '新增'" @closed="closed" width="800">
+    <el-form :model="forms" :rules="rules" label-width="100" ref="formsRef" class="px-5 pt-5">
+      <div class="grid grid-cols-2 gap-x-5">
+        <el-form-item label="用户昵称" prop="nickName">
+          <el-input v-model="forms.nickName" maxlength="30" />
         </el-form-item>
-        <el-form-item prop="roleKey">
-          <template #label>
-            <div class="flex items-center space-x-1">
-              <span>权限字符</span>
-              <el-tooltip content="控制器中定义的权限字符，如：@PreAuthorize(`@ss.hasRole('admin')`)" placement="top">
-                <el-icon><QuestionFilled /></el-icon>
-              </el-tooltip>
-            </div>
-          </template>
-          <el-input v-model="forms.roleKey" />
+        <el-form-item label="用户性别">
+          <el-select v-model="forms.sex">
+            <el-option v-for="s in sexOptions" :key="s.dictCode" :label="s.dictLabel" :value="s.dictValue" />
+          </el-select>
         </el-form-item>
-        <el-form-item label="角色顺序" prop="roleSort">
-          <el-input-number v-model="forms.roleSort" :min="0" />
+        <el-form-item label="手机号码" prop="phonenumber">
+          <el-input v-model="forms.phonenumber" maxlength="11" />
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="forms.email" maxlength="50" />
+        </el-form-item>
+        <template v-if="!forms.userId">
+          <el-form-item label="用户名称" prop="userName">
+            <el-input v-model="forms.userName" maxlength="30" />
+          </el-form-item>
+          <el-form-item label="用户密码" prop="password">
+            <el-input v-model="forms.password" type="password" maxlength="20" show-password />
+          </el-form-item>
+        </template>
+        <el-form-item label="角色">
+          <el-select v-model="forms.roleIds" multiple>
+            <el-option
+              v-for="r in roleIdsOptions"
+              :key="r.roleId"
+              :label="r.roleName"
+              :value="r.roleId"
+              :disabled="r.status === '1'"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="状态">
           <el-radio-group v-model="forms.status">
             <el-radio v-for="s in statusOptions" :key="s.dictCode" :label="s.dictValue">{{ s.dictLabel }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="备注">
-          <el-input v-model="forms.remark" type="textarea" />
-        </el-form-item>
       </div>
-      <div class="flex-1 h-[500px] overflow-auto border border-gray-300 rounded">
-        <el-tree :data="treeData" node-key="id" ref="treeRef" show-checkbox />
-      </div>
+      <el-form-item label="备注">
+        <el-input v-model="forms.remark" type="textarea" />
+      </el-form-item>
     </el-form>
 
     <template #footer>
@@ -45,49 +58,69 @@
 <script lang="ts" name="create-dialog" setup>
 import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
-import { createRole, editRole, getDictDataType, treeselect, roleMenuTreeselect } from '@/api/modules/system';
+import { getUser, createUser, editUser, getDictDataType } from '@/api/modules/system';
 
 const $emit = defineEmits(['confirm']);
 
 const visible = ref(false);
 
-const treeRef = ref();
 const formsRef = ref<FormInstance>();
 const forms = ref({
-  roleId: undefined,
-  roleName: '',
-  roleKey: '',
-  roleSort: 0,
+  userId: undefined,
+  nickName: '',
+  phonenumber: '',
+  email: '',
+  userName: '',
+  password: '',
+  sex: '2',
+  roleIds: [],
   status: '0',
-  remark: '',
-
-  menuIds: [],
-  deptIds: [],
-  menuCheckStrictly: true,
-  deptCheckStrictly: true
+  remark: ''
 });
 const rules = reactive<FormRules>({
-  roleName: [{ required: true, message: '请输入角色名称', trigger: 'blur' }],
-  roleKey: [{ required: true, message: '请输入权限字符', trigger: 'blur' }],
-  roleSort: [{ required: true, message: '请输入角色顺序', trigger: 'blur' }]
+  userName: [
+    { required: true, message: '用户名称不能为空', trigger: 'blur' },
+    { min: 2, max: 20, message: '用户名称长度必须介于 2 和 20 之间', trigger: 'blur' }
+  ],
+  nickName: [{ required: true, message: '用户昵称不能为空', trigger: 'blur' }],
+  password: [
+    { required: true, message: '用户密码不能为空', trigger: 'blur' },
+    { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' }
+  ],
+  email: [
+    {
+      type: 'email',
+      message: '请输入正确的邮箱地址',
+      trigger: ['blur', 'change']
+    }
+  ],
+  phonenumber: [
+    {
+      pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+      message: '请输入正确的手机号码',
+      trigger: 'blur'
+    }
+  ]
 });
 
+const roleIdsOptions = ref();
+const sexOptions = ref();
 const statusOptions = ref();
-const treeData = ref();
 const open = async (row: any) => {
   visible.value = true;
 
-  const p0 = getDictDataType('enable_disable');
-  const p1 = treeselect();
+  const p0 = getUser(row.userId || '');
+  const p1 = getDictDataType('user_sex');
+  const p2 = getDictDataType('enable_disable');
 
-  const response = await Promise.all([p0, p1]);
-  statusOptions.value = response[0].data;
-  treeData.value = response[1].data;
+  const response: any = await Promise.all([p0, p1, p2]);
+  roleIdsOptions.value = response[0].roles;
+  sexOptions.value = response[1].data;
+  statusOptions.value = response[2].data;
 
-  if (row.roleId) {
+  if (row.userId) {
     forms.value = JSON.parse(JSON.stringify(row));
-    const data: any = await roleMenuTreeselect(row.roleId);
-    treeRef.value.setCheckedKeys(data.checkedKeys, false);
+    forms.value.roleIds = response[0].roleIds;
   }
 };
 const closed = () => {
@@ -96,8 +129,7 @@ const closed = () => {
 const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {
-      forms.value.menuIds = treeRef.value.getCheckedNodes().map((e: any) => e.id);
-      const { msg } = forms.value.roleId ? await editRole(forms.value) : await createRole(forms.value);
+      const { msg } = forms.value.userId ? await editUser(forms.value) : await createUser(forms.value);
       $emit('confirm');
       ElMessage.success(msg);
       visible.value = false;

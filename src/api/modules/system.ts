@@ -43,6 +43,11 @@ export function editUser(params: any) {
   return http.put('/system/user', params);
 }
 
+// 获取用户
+export function getUser(id: string) {
+  return http.get(`/system/user/${id}`);
+}
+
 // 获取用户列表
 export function getUserList(params: any = {}) {
   return http.get('/system/user/list', params);
