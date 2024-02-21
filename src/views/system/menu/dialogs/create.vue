@@ -93,6 +93,18 @@
             <el-radio label="1">不缓存</el-radio>
           </el-radio-group>
         </el-form-item>
+        <el-form-item v-if="forms.menuType === 'C'" label="是否固定" prop="isAffix">
+          <el-radio-group v-model="forms.isAffix">
+            <el-radio label="0">固定</el-radio>
+            <el-radio label="1">不固定</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item v-if="forms.menuType === 'C'" label="是否全屏" prop="isFull">
+          <el-radio-group v-model="forms.isFull">
+            <el-radio label="0">全屏</el-radio>
+            <el-radio label="1">不全屏</el-radio>
+          </el-radio-group>
+        </el-form-item>
         <el-form-item v-if="forms.menuType === 'M' || forms.menuType === 'C'" prop="visible">
           <template #label>
             <div class="flex items-center space-x-1">
@@ -159,6 +171,8 @@ const forms = ref({
   perms: '',
   query: '',
   isCache: '1',
+  isAffix: '1',
+  isFull: '1',
   visible: '0',
   status: '0'
 });

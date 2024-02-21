@@ -39,8 +39,8 @@ function transformTree(tree: any): Menu.MenuOptions[] {
       component: e.component,
       meta: {
         icon: e.meta?.icon || '',
-        isAffix: e.path === HOME_URL,
-        isFull: false,
+        isAffix: e.path === HOME_URL || e.meta?.affix,
+        isFull: e.meta?.full,
         isHide: e.hidden,
         isKeepAlive: !e.meta?.noCache,
         isLink: e.meta?.link || '',
