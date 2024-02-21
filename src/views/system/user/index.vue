@@ -20,7 +20,7 @@
 <script lang="ts" name="user-manage" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getUserList, deleteRole, getDictDataType } from '@/api/modules/system';
+import { getUserList, deleteUser, getDictDataType } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
@@ -48,9 +48,9 @@ const create = (row: any = {}) => {
   createDialogRef.value?.open(row);
 };
 const remove = (row: any) => {
-  ElMessageBox.confirm(`是否删除“${row.roleName}”？`, '系统提示', { type: 'warning' })
+  ElMessageBox.confirm(`是否删除“${row.userName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
-      const { msg } = await deleteRole(row.roleId);
+      const { msg } = await deleteUser(row.userId);
       tableRef.value.search();
       ElMessage.success(msg);
     })
