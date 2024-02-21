@@ -111,7 +111,10 @@ const open = async (row: any) => {
     forms.value.roleIds = response[0].roleIds;
   }
 };
-const closed = () => formsRef.value?.resetFields();
+const closed = () => {
+  formsRef.value?.resetFields();
+  forms.value.roleIds = [];
+};
 const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {
