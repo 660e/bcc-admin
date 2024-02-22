@@ -95,7 +95,7 @@ const closed = () => {
 const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {
-      forms.value.menuIds = treeRef.value.getCheckedNodes().map((e: any) => e.id);
+      forms.value.menuIds = treeRef.value.getCheckedKeys().concat(treeRef.value.getHalfCheckedKeys());
       const { msg } = forms.value.roleId ? await editRole(forms.value) : await createRole(forms.value);
       $emit('confirm');
       ElMessage.success(msg);
