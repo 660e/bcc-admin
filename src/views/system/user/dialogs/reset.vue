@@ -35,7 +35,7 @@ const rules = reactive<FormRules>({
   ]
 });
 
-const open = async (row: any) => {
+const open = (row: any) => {
   visible.value = true;
   forms.value = JSON.parse(JSON.stringify(row));
 };

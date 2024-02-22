@@ -49,7 +49,7 @@ const columns: ColumnProps[] = [
   { prop: 'operation', label: '操作', width: 120 }
 ];
 
-const open = async (row: any) => {
+const open = (row: any) => {
   visible.value = true;
   dictId.value = row.dictId;
   tableRef.value?.reset();

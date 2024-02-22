@@ -3,7 +3,7 @@
     <div class="p-2.5">
       <pro-table :columns="columns" :request-api="requestApi" ref="tableRef">
         <template #tableHeader>
-          <el-button @click="create()" type="primary">授权</el-button>
+          <el-button @click="accredit" type="primary">授权</el-button>
         </template>
         <template #operation="scope">
           <el-button @click="remove(scope.row)" type="primary" link>取消授权</el-button>
@@ -11,8 +11,8 @@
       </pro-table>
     </div>
 
-    <!-- 新增/编辑 -->
-    <!-- <create-data-dialog @confirm="tableRef.search()" ref="createDataDialogRef" /> -->
+    <!-- 授权 -->
+    <accredit-dialog @confirm="tableRef.search()" ref="accreditDialogRef" />
   </el-dialog>
 </template>
 
@@ -23,12 +23,12 @@ import { allocatedList, deleteDictData, getDictDataType } from '@/api/modules/sy
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
-// import CreateDataDialog from './create-data.vue';
+import AccreditDialog from './accredit.vue';
 
 const visible = ref(false);
 const roleId = ref();
 const tableRef = ref();
-const createDataDialogRef = ref();
+const accreditDialogRef = ref();
 
 const columns: ColumnProps[] = [
   { prop: 'userId', label: '用户编号' },
@@ -46,16 +46,16 @@ const columns: ColumnProps[] = [
   { prop: 'operation', label: '操作', width: 100 }
 ];
 
-const open = async (row: any) => {
+const open = (row: any) => {
   visible.value = true;
   roleId.value = row.roleId;
   tableRef.value?.reset();
 };
-const requestApi = async (params: any) => {
+const requestApi = (params: any) => {
   params.roleId = roleId.value;
   return allocatedList(params);
 };
-const create = (row: any = {}) => createDataDialogRef.value.open(row);
+const accredit = () => accreditDialogRef.value.open(roleId.value);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否取消“${row.dictLabel}”授权？`, '系统提示', { type: 'warning' })
     .then(async () => {
