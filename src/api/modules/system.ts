@@ -34,6 +34,11 @@ export function unallocatedList(params: any = {}) {
   return http.get('/system/role/authUser/unallocatedList', params);
 }
 
+// 取消授权
+export function authUserCancel(params: any) {
+  return http.put('/system/role/authUser/cancel', params);
+}
+
 /**
  * 用户管理
  */

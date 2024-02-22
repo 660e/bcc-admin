@@ -19,7 +19,7 @@
 <script lang="ts" name="setting-dialog" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { allocatedList, deleteDictData, getDictDataType } from '@/api/modules/system';
+import { allocatedList, authUserCancel, getDictDataType } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
@@ -57,9 +57,9 @@ const requestApi = (params: any) => {
 };
 const accredit = () => accreditDialogRef.value.open(roleId.value);
 const remove = (row: any) => {
-  ElMessageBox.confirm(`是否取消“${row.dictLabel}”授权？`, '系统提示', { type: 'warning' })
+  ElMessageBox.confirm(`是否取消“${row.userName}”授权？`, '系统提示', { type: 'warning' })
     .then(async () => {
-      const { msg } = await deleteDictData(row.dictCode);
+      const { msg } = await authUserCancel({ roleId: roleId.value, userId: row.userId });
       tableRef.value.search();
       ElMessage.success(msg);
     })
