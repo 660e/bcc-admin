@@ -196,7 +196,11 @@ const open = async (row: any) => {
   );
   statusOptions.value = response[1].data;
 
-  if (row.menuId) forms.value = JSON.parse(JSON.stringify(row));
+  if (row.menuId) {
+    forms.value = JSON.parse(JSON.stringify(row));
+  } else {
+    forms.value.parentId = row;
+  }
 };
 const closed = () => {
   formsRef.value?.resetFields();

@@ -2,9 +2,10 @@
   <div class="flex flex-col h-full">
     <pro-table :columns="columns" :request-api="requestApi" :pagination="false" row-key="menuId" ref="tableRef">
       <template #tableHeader>
-        <el-button @click="create()" type="primary">新增</el-button>
+        <el-button @click="create(0)" type="primary">新增</el-button>
       </template>
       <template #operation="scope">
+        <el-button @click="create(scope.row.menuId)" type="primary" link>新增</el-button>
         <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
         <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
       </template>
@@ -44,7 +45,7 @@ const columns: ColumnProps[] = [
     width: 100
   },
   { prop: 'createTime', label: '创建时间', width: 180 },
-  { prop: 'operation', label: '操作', width: 120 }
+  { prop: 'operation', label: '操作', width: 180 }
 ];
 
 const requestApi = (params: any) => {
@@ -54,7 +55,7 @@ const requestApi = (params: any) => {
     resolve({ data: tree });
   });
 };
-const create = (row: any = {}) => createDialogRef.value.open(row);
+const create = (row: any) => createDialogRef.value.open(row);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.menuName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
