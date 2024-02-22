@@ -1,4 +1,5 @@
 import http from '@/api';
+import qs from 'qs';
 
 /**
  * 角色管理
@@ -32,6 +33,11 @@ export function allocatedList(params: any = {}) {
 // 获取未授权用户列表
 export function unallocatedList(params: any = {}) {
   return http.get('/system/role/authUser/unallocatedList', params);
+}
+
+// 批量授权
+export function authUserSelectAll(params: any) {
+  return http.put(`/system/role/authUser/selectAll?${qs.stringify(params)}`);
 }
 
 // 取消授权

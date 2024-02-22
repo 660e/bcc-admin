@@ -12,6 +12,12 @@
       </pro-table>
     </div>
 
+    <template #footer>
+      <div class="flex justify-end">
+        <el-button @click="visible = false">取消</el-button>
+      </div>
+    </template>
+
     <!-- 新增/编辑 -->
     <create-data-dialog @confirm="tableRef.search()" ref="createDataDialogRef" />
   </el-dialog>

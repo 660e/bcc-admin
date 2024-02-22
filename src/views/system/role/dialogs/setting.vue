@@ -3,13 +3,19 @@
     <div class="p-2.5">
       <pro-table :columns="columns" :request-api="requestApi" ref="tableRef">
         <template #tableHeader>
-          <el-button @click="accredit" type="primary">授权</el-button>
+          <el-button @click="accredit" type="primary">添加用户</el-button>
         </template>
         <template #operation="scope">
           <el-button @click="remove(scope.row)" type="primary" link>取消授权</el-button>
         </template>
       </pro-table>
     </div>
+
+    <template #footer>
+      <div class="flex justify-end">
+        <el-button @click="visible = false">取消</el-button>
+      </div>
+    </template>
 
     <!-- 授权 -->
     <accredit-dialog @confirm="tableRef.search()" ref="accreditDialogRef" />
