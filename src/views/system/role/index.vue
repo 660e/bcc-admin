@@ -8,13 +8,15 @@
         <template v-if="scope.row.roleId !== 1">
           <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
           <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
-          <el-button @click="remove(scope.row)" type="primary" link>分配用户</el-button>
+          <el-button @click="setting(scope.row)" type="primary" link>分配用户</el-button>
         </template>
       </template>
     </pro-table>
 
     <!-- 新增/编辑 -->
     <create-dialog @confirm="tableRef.search()" ref="createDialogRef" />
+    <!-- 配置 -->
+    <setting-dialog ref="settingDialogRef" />
   </div>
 </template>
 
@@ -26,9 +28,11 @@ import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
 import CreateDialog from './dialogs/create.vue';
+import SettingDialog from './dialogs/setting.vue';
 
 const tableRef = ref();
 const createDialogRef = ref();
+const settingDialogRef = ref();
 
 const columns: ColumnProps[] = [
   { prop: 'roleId', label: '角色编号', width: 100 },
@@ -48,6 +52,7 @@ const columns: ColumnProps[] = [
 ];
 
 const create = (row: any = {}) => createDialogRef.value.open(row);
+const setting = (row: any) => settingDialogRef.value.open(row);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.roleName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {

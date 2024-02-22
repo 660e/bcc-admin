@@ -24,6 +24,16 @@ export function getRoleList(params: any = {}) {
   return http.get('/system/role/list', params);
 }
 
+// 获取已授权用户列表
+export function allocatedList(params: any = {}) {
+  return http.get('/system/role/authUser/allocatedList', params);
+}
+
+// 获取未授权用户列表
+export function unallocatedList(params: any = {}) {
+  return http.get('/system/role/authUser/unallocatedList', params);
+}
+
 /**
  * 用户管理
  */

@@ -30,8 +30,8 @@ import CreateTypeDialog from './dialogs/create-type.vue';
 import SettingDialog from './dialogs/setting.vue';
 
 const tableRef = ref();
-const settingDialogRef = ref();
 const createTypeDialogRef = ref();
+const settingDialogRef = ref();
 
 const columns: ColumnProps[] = [
   { prop: 'dictId', label: '字典编号', width: 100 },
@@ -50,12 +50,12 @@ const columns: ColumnProps[] = [
   { prop: 'operation', label: '操作', width: 180 }
 ];
 
-const setting = (row: any) => settingDialogRef.value.open(row);
 const create = (row: any = {}) => createTypeDialogRef.value.open(row);
 const refreshCache = async () => {
   const { msg } = await refreshDictTypeCache();
   ElMessage.success(msg);
 };
+const setting = (row: any) => settingDialogRef.value.open(row);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.dictName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
