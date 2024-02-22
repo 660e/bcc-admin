@@ -33,7 +33,7 @@
 <script lang="ts" name="tree-filter" setup>
 import { reactive } from 'vue';
 import { ElMessage } from 'element-plus';
-import { getUserDepartment } from '@/api/modules/user';
+import { getUserDepartment } from '../pro-table/api';
 import TreeFilter from '@/components/tree-filter/index.vue';
 
 const treeFilterValue = reactive({ departmentId: '1' });

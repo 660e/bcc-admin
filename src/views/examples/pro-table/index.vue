@@ -48,7 +48,7 @@
 <script lang="tsx" name="pro-table" setup>
 import { ref, reactive } from 'vue';
 import { useRouter } from 'vue-router';
-import { User } from '@/api/interface';
+import { User } from './interface';
 import { useHandleData } from '@/hooks/useHandleData';
 import { useDownload } from '@/hooks/useDownload';
 import { useAuthButtons } from '@/hooks/useAuthButtons';
@@ -67,7 +67,7 @@ import {
   exportUserInfo,
   getUserStatus,
   getUserGender
-} from '@/api/modules/user';
+} from './api';
 
 const router = useRouter();
 
