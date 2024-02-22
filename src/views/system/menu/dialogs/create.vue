@@ -18,7 +18,7 @@
         <el-form-item label="菜单名称" prop="menuName">
           <el-input v-model="forms.menuName" />
         </el-form-item>
-        <el-form-item label="显示排序" prop="orderNum">
+        <el-form-item label="显示顺序" prop="orderNum">
           <el-input-number v-model="forms.orderNum" :min="0" controls-position="right" class="w-full" />
         </el-form-item>
         <el-form-item v-if="forms.menuType === 'M' || forms.menuType === 'C'" prop="isFrame">
@@ -60,8 +60,8 @@
         <el-form-item v-if="forms.menuType === 'F' || forms.menuType === 'C'" prop="perms">
           <template #label>
             <div class="flex items-center space-x-1">
-              <span>权限字符</span>
-              <el-tooltip content="控制器中定义的权限字符，如：@PreAuthorize(`@ss.hasPermi('system:user:list')`)" placement="top">
+              <span>权限标识</span>
+              <el-tooltip content="控制器中定义的权限标识，如：@PreAuthorize(`@ss.hasPermi('system:user:list')`)" placement="top">
                 <el-icon><QuestionFilled /></el-icon>
               </el-tooltip>
             </div>

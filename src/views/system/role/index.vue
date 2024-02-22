@@ -31,16 +31,17 @@ const columns: ColumnProps[] = [
   { prop: 'roleId', label: '角色编号', width: 100 },
   { prop: 'roleName', label: '角色名称', search: { el: 'input' } },
   { prop: 'roleKey', label: '权限字符', search: { el: 'input' } },
-  { prop: 'roleSort', label: '显示顺序' },
+  { prop: 'roleSort', label: '显示顺序', width: 100 },
   {
     prop: 'status',
     label: '状态',
     enum: () => getDictDataType('enable_disable'),
     search: { el: 'select' },
-    fieldNames: { label: 'dictLabel', value: 'dictValue' }
+    fieldNames: { label: 'dictLabel', value: 'dictValue' },
+    width: 100
   },
-  { prop: 'createTime', label: '创建时间' },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 120 }
+  { prop: 'createTime', label: '创建时间', width: 180 },
+  { prop: 'operation', label: '操作', width: 120 }
 ];
 
 const createDialogRef = ref();

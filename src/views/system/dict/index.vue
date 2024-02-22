@@ -29,7 +29,7 @@ import CreateTypeDialog from './dialogs/create-type.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
-  { prop: 'dictId', label: '字典编号' },
+  { prop: 'dictId', label: '字典编号', width: 100 },
   { prop: 'dictName', label: '字典名称', search: { el: 'input' } },
   { prop: 'dictType', label: '字典类型', search: { el: 'input' } },
   {
@@ -37,11 +37,12 @@ const columns: ColumnProps[] = [
     label: '状态',
     enum: () => getDictDataType('enable_disable'),
     search: { el: 'select' },
-    fieldNames: { label: 'dictLabel', value: 'dictValue' }
+    fieldNames: { label: 'dictLabel', value: 'dictValue' },
+    width: 100
   },
   { prop: 'remark', label: '备注' },
-  { prop: 'createTime', label: '创建时间' },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 160 }
+  { prop: 'createTime', label: '创建时间', width: 180 },
+  { prop: 'operation', label: '操作', width: 180 }
 ];
 
 const $router = useRouter();

@@ -28,8 +28,8 @@ import CreateDialog from './dialogs/create.vue';
 const tableRef = ref();
 const columns: ColumnProps[] = [
   { prop: 'menuName', label: '菜单名称', search: { el: 'input' } },
-  { prop: 'icon', label: '图标' },
-  { prop: 'orderNum', label: '排序' },
+  { prop: 'icon', label: '菜单图标' },
+  { prop: 'orderNum', label: '显示顺序', width: 100 },
   { prop: 'perms', label: '权限标识' },
   { prop: 'path', label: '路由地址' },
   { prop: 'component', label: '组件路径' },
@@ -38,10 +38,11 @@ const columns: ColumnProps[] = [
     label: '状态',
     enum: () => getDictDataType('enable_disable'),
     search: { el: 'select' },
-    fieldNames: { label: 'dictLabel', value: 'dictValue' }
+    fieldNames: { label: 'dictLabel', value: 'dictValue' },
+    width: 100
   },
-  { prop: 'createTime', label: '创建时间' },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 120 }
+  { prop: 'createTime', label: '创建时间', width: 180 },
+  { prop: 'operation', label: '操作', width: 120 }
 ];
 
 const requestApi = (params: any) => {

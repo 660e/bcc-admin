@@ -32,19 +32,20 @@ import ResetDialog from './dialogs/reset.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
-  { prop: 'userId', label: '用户编号' },
+  { prop: 'userId', label: '用户编号', width: 100 },
   { prop: 'userName', label: '用户名称', search: { el: 'input' } },
   { prop: 'nickName', label: '用户昵称' },
-  { prop: 'phonenumber', label: '手机号码', search: { el: 'input' } },
+  { prop: 'phonenumber', label: '手机号码', search: { el: 'input' }, width: 180 },
   {
     prop: 'status',
     label: '状态',
     enum: () => getDictDataType('enable_disable'),
     search: { el: 'select' },
-    fieldNames: { label: 'dictLabel', value: 'dictValue' }
+    fieldNames: { label: 'dictLabel', value: 'dictValue' },
+    width: 100
   },
-  { prop: 'createTime', label: '创建时间' },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 200 }
+  { prop: 'createTime', label: '创建时间', width: 180 },
+  { prop: 'operation', label: '操作', width: 180 }
 ];
 
 const createDialogRef = ref();

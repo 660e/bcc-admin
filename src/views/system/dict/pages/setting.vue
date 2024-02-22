@@ -27,20 +27,21 @@ import CreateDataDialog from '../dialogs/create-data.vue';
 
 const tableRef = ref();
 const columns: ColumnProps[] = [
-  { prop: 'dictCode', label: '字典编码' },
+  { prop: 'dictCode', label: '字典编码', width: 100 },
   { prop: 'dictLabel', label: '字典标签', search: { el: 'input' } },
   { prop: 'dictValue', label: '字典键值' },
-  { prop: 'dictSort', label: '字典排序' },
+  { prop: 'dictSort', label: '显示顺序', width: 100 },
   {
     prop: 'status',
     label: '状态',
     enum: () => getDictDataType('enable_disable'),
     search: { el: 'select' },
-    fieldNames: { label: 'dictLabel', value: 'dictValue' }
+    fieldNames: { label: 'dictLabel', value: 'dictValue' },
+    width: 100
   },
   { prop: 'remark', label: '备注' },
-  { prop: 'createTime', label: '创建时间' },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 120 }
+  { prop: 'createTime', label: '创建时间', width: 180 },
+  { prop: 'operation', label: '操作', width: 120 }
 ];
 
 const $route = useRoute();

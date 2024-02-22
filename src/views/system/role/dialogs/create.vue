@@ -16,7 +16,7 @@
           </template>
           <el-input v-model="forms.roleKey" />
         </el-form-item>
-        <el-form-item label="角色顺序" prop="roleSort">
+        <el-form-item label="显示顺序" prop="roleSort">
           <el-input-number v-model="forms.roleSort" :min="0" />
         </el-form-item>
         <el-form-item label="状态">
@@ -69,7 +69,7 @@ const forms = ref({
 const rules = reactive<FormRules>({
   roleName: [{ required: true, message: '请输入角色名称', trigger: 'blur' }],
   roleKey: [{ required: true, message: '请输入权限字符', trigger: 'blur' }],
-  roleSort: [{ required: true, message: '请输入角色顺序', trigger: 'blur' }]
+  roleSort: [{ required: true, message: '请输入显示顺序', trigger: 'blur' }]
 });
 
 const statusOptions = ref();
