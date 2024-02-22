@@ -1,5 +1,6 @@
 import http from '@/api';
 import qs from 'qs';
+import { ResPage } from '@/api/interface/index';
 
 /**
  * 角色管理
@@ -22,17 +23,17 @@ export function editRole(params: any) {
 
 // 获取角色列表
 export function getRoleList(params: any = {}) {
-  return http.get('/system/role/list', params);
+  return http.get<ResPage<any>>('/system/role/list', params);
 }
 
 // 获取已授权用户列表
 export function allocatedList(params: any = {}) {
-  return http.get('/system/role/authUser/allocatedList', params);
+  return http.get<ResPage<any>>('/system/role/authUser/allocatedList', params);
 }
 
 // 获取未授权用户列表
 export function unallocatedList(params: any = {}) {
-  return http.get('/system/role/authUser/unallocatedList', params);
+  return http.get<ResPage<any>>('/system/role/authUser/unallocatedList', params);
 }
 
 // 批量授权
@@ -71,7 +72,7 @@ export function getUser(userId: string) {
 
 // 获取用户列表
 export function getUserList(params: any = {}) {
-  return http.get('/system/user/list', params);
+  return http.get<ResPage<any>>('/system/user/list', params);
 }
 
 // 重置密码
@@ -139,7 +140,7 @@ export function getDictType(dictId: string | string[]) {
 
 // 获取字典类型列表
 export function getDictTypeList(params: any = {}) {
-  return http.get('/system/dict/type/list', params);
+  return http.get<ResPage<any>>('/system/dict/type/list', params);
 }
 
 // 新增字典数据
@@ -164,7 +165,7 @@ export function getDictDataType(dictType: string) {
 
 // 获取字典数据列表
 export function getDictDataList(params: any = {}) {
-  return http.get('/system/dict/data/list', params);
+  return http.get<ResPage<any>>('/system/dict/data/list', params);
 }
 
 // 刷新缓存
