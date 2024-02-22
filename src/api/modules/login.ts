@@ -28,6 +28,14 @@ export const getAuthMenuListApi = async () => {
   return { data: transformTree(data) };
 };
 
+// 获取按钮权限
+export const getAuthButtonListApi = async () => {
+  const response: any = await http.get('/system/user/getInfo', {}, { loading: false });
+  console.log(response.permissions);
+  // return http.get<Login.ResAuthButtons>('/auth/buttons', {}, { loading: false });
+  return authButtonList;
+};
+
 /**
  * 格式化路由
  */
@@ -51,14 +59,3 @@ function transformTree(tree: any): Menu.MenuOptions[] {
     return item;
   });
 }
-
-//
-//
-//
-
-// 获取按钮权限
-export const getAuthButtonListApi = () => {
-  console.log('获取按钮权限');
-  // return http.get<Login.ResAuthButtons>('/auth/buttons', {}, { loading: false });
-  return authButtonList;
-};
