@@ -19,12 +19,12 @@
         <el-form-item label="显示顺序" prop="roleSort">
           <el-input-number v-model="forms.roleSort" :min="0" />
         </el-form-item>
-        <el-form-item label="状态">
+        <el-form-item label="状态" prop="status">
           <el-radio-group v-model="forms.status">
             <el-radio v-for="s in statusOptions" :key="s.dictCode" :label="s.dictValue">{{ s.dictLabel }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="备注">
+        <el-form-item label="备注" prop="remark">
           <el-input v-model="forms.remark" type="textarea" />
         </el-form-item>
       </div>
@@ -89,6 +89,7 @@ const open = async (row: any) => {
 };
 const closed = () => {
   formsRef.value?.resetFields();
+  forms.value.roleId = undefined;
   treeRef.value.setCheckedKeys([], false);
 };
 const confirm = () => {

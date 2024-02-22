@@ -54,7 +54,10 @@ const open = async (row: any) => {
   statusOptions.value = response.data;
   if (row.dictId) forms.value = JSON.parse(JSON.stringify(row));
 };
-const closed = () => formsRef.value?.resetFields();
+const closed = () => {
+  formsRef.value?.resetFields();
+  forms.value.dictId = undefined;
+};
 const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {

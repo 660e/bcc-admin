@@ -5,7 +5,7 @@
         <el-form-item label="用户昵称" prop="nickName">
           <el-input v-model="forms.nickName" maxlength="30" />
         </el-form-item>
-        <el-form-item label="用户性别">
+        <el-form-item label="用户性别" prop="sex">
           <el-select v-model="forms.sex">
             <el-option v-for="s in sexOptions" :key="s.dictCode" :label="s.dictLabel" :value="s.dictValue" />
           </el-select>
@@ -24,7 +24,7 @@
             <el-input v-model="forms.password" type="password" maxlength="20" show-password />
           </el-form-item>
         </template>
-        <el-form-item label="角色">
+        <el-form-item label="角色" prop="roleIds">
           <el-select v-model="forms.roleIds" multiple>
             <el-option
               v-for="r in roleIdsOptions"
@@ -35,13 +35,13 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="状态">
+        <el-form-item label="状态" prop="status">
           <el-radio-group v-model="forms.status">
             <el-radio v-for="s in statusOptions" :key="s.dictCode" :label="s.dictValue">{{ s.dictLabel }}</el-radio>
           </el-radio-group>
         </el-form-item>
       </div>
-      <el-form-item label="备注">
+      <el-form-item label="备注" prop="remark">
         <el-input v-model="forms.remark" type="textarea" />
       </el-form-item>
     </el-form>
@@ -111,7 +111,7 @@ const open = async (row: any) => {
 };
 const closed = () => {
   formsRef.value?.resetFields();
-  forms.value.roleIds = [];
+  forms.value.userId = undefined;
 };
 const confirm = () => {
   formsRef.value?.validate(async valid => {
