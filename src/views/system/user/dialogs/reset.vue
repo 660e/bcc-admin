@@ -23,7 +23,6 @@ import { resetPwd } from '@/api/modules/system';
 const $emit = defineEmits(['confirm']);
 
 const visible = ref(false);
-
 const formsRef = ref<FormInstance>();
 const forms = ref({
   userId: undefined,

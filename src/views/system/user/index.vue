@@ -31,6 +31,9 @@ import CreateDialog from './dialogs/create.vue';
 import ResetDialog from './dialogs/reset.vue';
 
 const tableRef = ref();
+const createDialogRef = ref();
+const resetDialogRef = ref();
+
 const columns: ColumnProps[] = [
   { prop: 'userId', label: '用户编号', width: 100 },
   { prop: 'userName', label: '用户名称', search: { el: 'input' } },
@@ -48,7 +51,6 @@ const columns: ColumnProps[] = [
   { prop: 'operation', label: '操作', width: 180 }
 ];
 
-const createDialogRef = ref();
 const create = (row: any = {}) => createDialogRef.value.open(row);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.userName}”？`, '系统提示', { type: 'warning' })
@@ -59,6 +61,5 @@ const remove = (row: any) => {
     })
     .catch(() => false);
 };
-const resetDialogRef = ref();
 const reset = (row: any) => resetDialogRef.value.open(row);
 </script>

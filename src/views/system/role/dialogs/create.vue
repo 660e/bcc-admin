@@ -50,7 +50,6 @@ import { createRole, editRole, getDictDataType, treeselect, roleMenuTreeselect }
 const $emit = defineEmits(['confirm']);
 
 const visible = ref(false);
-
 const treeRef = ref();
 const formsRef = ref<FormInstance>();
 const forms = ref({
@@ -60,7 +59,6 @@ const forms = ref({
   roleSort: 0,
   status: '0',
   remark: '',
-
   menuIds: [],
   deptIds: [],
   menuCheckStrictly: true,
@@ -71,15 +69,14 @@ const rules = reactive<FormRules>({
   roleKey: [{ required: true, message: '请输入权限字符', trigger: 'blur' }],
   roleSort: [{ required: true, message: '请输入显示顺序', trigger: 'blur' }]
 });
-
 const statusOptions = ref();
 const treeData = ref();
+
 const open = async (row: any) => {
   visible.value = true;
 
   const p0 = getDictDataType('enable_disable');
   const p1 = treeselect();
-
   const response = await Promise.all([p0, p1]);
   statusOptions.value = response[0].data;
   treeData.value = response[1].data;

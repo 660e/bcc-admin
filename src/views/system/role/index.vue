@@ -8,6 +8,7 @@
         <template v-if="scope.row.roleId !== 1">
           <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
           <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
+          <el-button @click="remove(scope.row)" type="primary" link>分配用户</el-button>
         </template>
       </template>
     </pro-table>
@@ -27,6 +28,8 @@ import ProTable from '@/components/pro-table/index.vue';
 import CreateDialog from './dialogs/create.vue';
 
 const tableRef = ref();
+const createDialogRef = ref();
+
 const columns: ColumnProps[] = [
   { prop: 'roleId', label: '角色编号', width: 100 },
   { prop: 'roleName', label: '角色名称', search: { el: 'input' } },
@@ -41,10 +44,9 @@ const columns: ColumnProps[] = [
     width: 100
   },
   { prop: 'createTime', label: '创建时间', width: 180 },
-  { prop: 'operation', label: '操作', width: 120 }
+  { prop: 'operation', label: '操作', width: 180 }
 ];
 
-const createDialogRef = ref();
 const create = (row: any = {}) => createDialogRef.value.open(row);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.roleName}”？`, '系统提示', { type: 'warning' })

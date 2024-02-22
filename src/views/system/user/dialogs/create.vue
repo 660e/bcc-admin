@@ -63,7 +63,6 @@ import { getUser, createUser, editUser, getDictDataType } from '@/api/modules/sy
 const $emit = defineEmits(['confirm']);
 
 const visible = ref(false);
-
 const formsRef = ref<FormInstance>();
 const forms = ref({
   userId: undefined,
@@ -90,17 +89,16 @@ const rules = reactive<FormRules>({
   email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
   phonenumber: [{ pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请输入正确的手机号码', trigger: 'blur' }]
 });
-
 const roleIdsOptions = ref();
 const sexOptions = ref();
 const statusOptions = ref();
+
 const open = async (row: any) => {
   visible.value = true;
 
   const p0 = getUser(row.userId || '');
   const p1 = getDictDataType('user_sex');
   const p2 = getDictDataType('enable_disable');
-
   const response: any = await Promise.all([p0, p1, p2]);
   roleIdsOptions.value = response[0].roles;
   sexOptions.value = response[1].data;

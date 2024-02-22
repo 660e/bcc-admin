@@ -156,7 +156,6 @@ import IconSelect from '@/components/icon-select/index.vue';
 const $emit = defineEmits(['confirm']);
 
 const visible = ref(false);
-
 const formsRef = ref<FormInstance>();
 const forms = ref({
   menuId: undefined,
@@ -181,17 +180,15 @@ const rules = reactive<FormRules>({
   orderNum: [{ required: true, message: '请输入菜单顺序', trigger: 'blur' }],
   path: [{ required: true, message: '请输入路由地址', trigger: 'blur' }]
 });
-
 const parentIdOptions = ref<TreeSelectOption[]>([{ label: '根目录', value: 0, children: [] }]);
 const statusOptions = ref();
+
 const open = async (row: any) => {
   visible.value = true;
 
   const p0 = getMenuList();
   const p1 = getDictDataType('enable_disable');
-
   const response = await Promise.all([p0, p1]);
-
   parentIdOptions.value[0].children = buildTree(
     response[0].data.map((e: any) => {
       return { label: e.menuName, value: e.menuId, id: e.menuId, pid: e.parentId };

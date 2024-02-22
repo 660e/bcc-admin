@@ -26,6 +26,8 @@ import ProTable from '@/components/pro-table/index.vue';
 import CreateDialog from './dialogs/create.vue';
 
 const tableRef = ref();
+const createDialogRef = ref();
+
 const columns: ColumnProps[] = [
   { prop: 'menuName', label: '菜单名称', search: { el: 'input' } },
   { prop: 'icon', label: '菜单图标' },
@@ -52,8 +54,6 @@ const requestApi = (params: any) => {
     resolve({ data: tree });
   });
 };
-
-const createDialogRef = ref();
 const create = (row: any = {}) => createDialogRef.value.open(row);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.menuName}”？`, '系统提示', { type: 'warning' })

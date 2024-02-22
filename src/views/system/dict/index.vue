@@ -6,7 +6,7 @@
         <el-button @click="refreshCache">刷新缓存</el-button>
       </template>
       <template #operation="scope">
-        <el-button @click="setting(scope.row.dictId)" type="primary" link>配置</el-button>
+        <el-button @click="setting(scope.row)" type="primary" link>配置</el-button>
         <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
         <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
       </template>
@@ -14,20 +14,25 @@
 
     <!-- 新增/编辑 -->
     <create-type-dialog @confirm="tableRef.search()" ref="createTypeDialogRef" />
+    <!-- 配置 -->
+    <setting-dialog ref="settingDialogRef" />
   </div>
 </template>
 
 <script lang="ts" name="dict-manage" setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { getDictTypeList, deleteDictType, getDictDataType, refreshDictTypeCache } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
 import CreateTypeDialog from './dialogs/create-type.vue';
+import SettingDialog from './dialogs/setting.vue';
 
 const tableRef = ref();
+const settingDialogRef = ref();
+const createTypeDialogRef = ref();
+
 const columns: ColumnProps[] = [
   { prop: 'dictId', label: '字典编号', width: 100 },
   { prop: 'dictName', label: '字典名称', search: { el: 'input' } },
@@ -45,10 +50,7 @@ const columns: ColumnProps[] = [
   { prop: 'operation', label: '操作', width: 180 }
 ];
 
-const $router = useRouter();
-const setting = (dictId: string) => $router.push({ name: 'dict-setting', params: { dictId } });
-
-const createTypeDialogRef = ref();
+const setting = (row: any) => settingDialogRef.value.open(row);
 const create = (row: any = {}) => createTypeDialogRef.value.open(row);
 const refreshCache = async () => {
   const { msg } = await refreshDictTypeCache();

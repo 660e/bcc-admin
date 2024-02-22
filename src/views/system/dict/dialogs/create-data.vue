@@ -46,7 +46,6 @@ import { createDictData, editDictData, getDictDataType } from '@/api/modules/sys
 const $emit = defineEmits(['confirm']);
 
 const visible = ref(false);
-
 const formsRef = ref<FormInstance>();
 const forms = ref({
   dictCode: undefined,
@@ -60,18 +59,16 @@ const forms = ref({
   remark: ''
 });
 const rules = reactive<FormRules>({
-  dictLabel: [{ required: true, message: '请填写数据标签', trigger: 'blur' }],
-  dictValue: [{ required: true, message: '请填写数据键值', trigger: 'blur' }],
-  dictSort: [{ required: true, message: '请填写数据顺序', trigger: 'blur' }]
+  dictLabel: [{ required: true, message: '请填写字典标签', trigger: 'blur' }],
+  dictValue: [{ required: true, message: '请填写字典键值', trigger: 'blur' }],
+  dictSort: [{ required: true, message: '请填写显示顺序', trigger: 'blur' }]
 });
-
 const statusOptions = ref();
+
 const open = async (row: any, dictType: string) => {
   visible.value = true;
-
   const response: any = await getDictDataType('enable_disable');
   statusOptions.value = response.data;
-
   if (row.dictCode) forms.value = JSON.parse(JSON.stringify(row));
   forms.value.dictType = dictType;
 };
