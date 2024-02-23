@@ -15,7 +15,7 @@
     </pro-table>
 
     <!-- 导入 -->
-    <import-dialog @confirm="importDataConfirm" ref="importDialogRef" />
+    <import-dialog @confirm="tableRef.search()" ref="importDialogRef" />
     <!-- 预览 -->
     <preview-dialog ref="previewDialogRef" />
   </div>
@@ -32,7 +32,12 @@ import ProTable from '@/components/pro-table/index.vue';
 import ImportDialog from './dialogs/import.vue';
 import PreviewDialog from './dialogs/preview.vue';
 
+const $router = useRouter();
+
 const tableRef = ref();
+const importDialogRef = ref();
+const previewDialogRef = ref();
+
 const columns: ColumnProps[] = [
   { type: 'selection', fixed: 'left', width: 0 },
   { prop: 'tableName', label: '表名称', search: { el: 'input' } },
@@ -43,19 +48,10 @@ const columns: ColumnProps[] = [
   { prop: 'operation', label: '操作', fixed: 'right', width: 0 }
 ];
 
-const importDialogRef = ref();
-const importData = () => {
-  importDialogRef.value.open();
-};
-const importDataConfirm = (ids: string[]) => {
-  console.log(ids);
-};
+const importData = () => importDialogRef.value.open();
 const batchDelete = (ids: string[]) => {
   console.log(ids);
 };
-
-const $router = useRouter();
-const previewDialogRef = ref();
 const preview = () => {
   previewDialogRef.value.open();
 };

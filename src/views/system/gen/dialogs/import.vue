@@ -1,7 +1,7 @@
 <template>
-  <el-dialog v-model="visible" @closed="closed" title="导入" align-center draggable>
+  <el-dialog v-model="visible" title="导入" align-center draggable>
     <div class="p-2.5">
-      <pro-table :columns="columns" :request-api="getGenDbList" ref="tableRef" />
+      <pro-table :columns="columns" :request-api="getGenDbList" ref="tableRef" row-key="tableName" />
     </div>
 
     <template #footer>
@@ -15,12 +15,16 @@
 
 <script lang="ts" name="import-dialog" setup>
 import { ref } from 'vue';
+import { ElMessage } from 'element-plus';
 import { ColumnProps } from '@/components/pro-table/interface';
-import { getGenDbList } from '@/api/modules/code';
+import { getGenDbList, importTable } from '@/api/modules/code';
 
 import ProTable from '@/components/pro-table/index.vue';
 
 const $emit = defineEmits(['confirm']);
+
+const visible = ref(false);
+const tableRef = ref();
 
 const columns: ColumnProps[] = [
   { type: 'selection', fixed: 'left', width: 0 },
@@ -30,16 +34,17 @@ const columns: ColumnProps[] = [
   { prop: 'updateTime', label: '更新时间', width: 180 }
 ];
 
-const proTableRef = ref();
-const visible = ref(false);
 const open = () => {
   visible.value = true;
+  tableRef.value?.reset();
+  tableRef.value?.clearSelection();
 };
-const closed = () => {
-  console.log('closed');
-};
-const confirm = () => {
-  $emit('confirm', proTableRef.value.selectedListIds);
+const confirm = async () => {
+  if (tableRef.value.selectedListIds.length) {
+    const { msg } = await importTable({ tables: tableRef.value.selectedListIds.join(',') });
+    $emit('confirm');
+    ElMessage.success(msg);
+  }
   visible.value = false;
 };
 
