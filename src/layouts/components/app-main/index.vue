@@ -3,11 +3,10 @@
   <app-tabs v-show="tabs" />
   <el-main>
     <router-view v-slot="{ Component, route }">
-      <transition appear name="fade-transform" mode="out-in">
-        <keep-alive :include="keepAliveName">
-          <component :is="Component" v-if="isRouterShow" :key="route.fullPath" />
-        </keep-alive>
-      </transition>
+      <!-- <transition appear name="fade-transform" mode="out-in"></transition> -->
+      <keep-alive :include="keepAliveName">
+        <component :is="Component" v-if="isRouterShow" :key="route.fullPath" />
+      </keep-alive>
     </router-view>
   </el-main>
   <el-footer v-show="footer">
