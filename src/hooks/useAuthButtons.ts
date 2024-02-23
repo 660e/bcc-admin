@@ -1,22 +1,16 @@
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/modules/auth';
 
-/**
- * @description 页面按钮权限
- * */
 export const useAuthButtons = () => {
-  const route = useRoute();
-  const authStore = useAuthStore();
-  const authButtons = authStore.authButtonListGet[route.name as string] || [];
+  const $authStore = useAuthStore();
 
   const BUTTONS = computed(() => {
-    let currentPageAuthButton: { [key: string]: boolean } = {};
-    authButtons.forEach(item => (currentPageAuthButton[item] = true));
-    return currentPageAuthButton;
+    const authButtons: { [key: string]: boolean } = {};
+    $authStore.authButtonListGet.forEach((item: string) => {
+      authButtons[item] = true;
+    });
+    return authButtons;
   });
 
-  return {
-    BUTTONS
-  };
+  return { BUTTONS };
 };

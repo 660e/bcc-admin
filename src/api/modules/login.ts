@@ -2,8 +2,6 @@ import http from '@/api';
 import { Login } from '@/api/interface/index';
 import { HOME_URL } from '@/config';
 
-import authButtonList from '@/assets/json/authButtonList.json';
-
 // 获取验证码
 export function getCode() {
   return http.get('/code', {}, { loading: false });
@@ -25,15 +23,13 @@ export const logoutApi = () => {
 // 获取菜单列表
 export const getAuthMenuListApi = async () => {
   const { data } = await http.get('/system/menu/getRouters', {}, { loading: false });
-  return { data: transformTree(data) };
+  return transformTree(data);
 };
 
 // 获取按钮权限
 export const getAuthButtonListApi = async () => {
   const response: any = await http.get('/system/user/getInfo', {}, { loading: false });
-  console.log(response.permissions);
-  // return http.get<Login.ResAuthButtons>('/auth/buttons', {}, { loading: false });
-  return authButtonList;
+  return response.permissions;
 };
 
 /**

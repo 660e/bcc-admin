@@ -6,7 +6,7 @@ import { getFlatMenuList, getShowMenuList, getAllBreadcrumbList } from '@/utils'
 export const useAuthStore = defineStore({
   id: 'bcc-auth',
   state: (): AuthState => ({
-    authButtonList: {},
+    authButtonList: [],
     authMenuList: [],
     routeName: ''
   }),
@@ -24,12 +24,10 @@ export const useAuthStore = defineStore({
   },
   actions: {
     async setAuthMenuList() {
-      const { data } = await getAuthMenuListApi();
-      this.authMenuList = data;
+      this.authMenuList = await getAuthMenuListApi();
     },
     async setAuthButtonList() {
-      const { data } = await getAuthButtonListApi();
-      this.authButtonList = data;
+      this.authButtonList = await getAuthButtonListApi();
     },
     async setRouteName(name: string) {
       this.routeName = name;
