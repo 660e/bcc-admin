@@ -1,11 +1,11 @@
 <template>
   <div class="tool-bar-ri">
     <div class="header-icon">
+      <message-box />
       <assembly-size />
       <language-setting />
       <search-menu />
       <theme-setting />
-      <message-box />
       <full-screen />
     </div>
     <span class="username">{{ username }}</span>
@@ -17,11 +17,11 @@
 import { computed } from 'vue';
 import { useUserStore } from '@/stores/modules/user';
 
+import MessageBox from './components/message-box.vue';
 import AssemblySize from './components/assembly-size.vue';
 import LanguageSetting from './components/language-setting.vue';
 import SearchMenu from './components/search-menu.vue';
 import ThemeSetting from './components/theme-setting.vue';
-import MessageBox from './components/message-box.vue';
 import FullScreen from './components/full-screen.vue';
 import TheAvatar from './components/the-avatar.vue';
 
