@@ -4,6 +4,11 @@
       <template #tableHeader>
         <el-button @click="create(0)" type="primary">新增</el-button>
       </template>
+      <template #icon="scope">
+        <el-icon v-if="scope.row.icon" :size="16">
+          <component :is="scope.row.icon" />
+        </el-icon>
+      </template>
       <template #operation="scope">
         <el-button @click="create(scope.row.menuId)" type="primary" link>新增</el-button>
         <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
@@ -31,7 +36,7 @@ const createDialogRef = ref();
 
 const columns: ColumnProps[] = [
   { prop: 'menuName', label: '菜单名称', search: { el: 'input' } },
-  { prop: 'icon', label: '菜单图标' },
+  { prop: 'icon', label: '菜单图标', width: 100 },
   { prop: 'orderNum', label: '显示顺序', width: 100 },
   { prop: 'perms', label: '权限标识' },
   { prop: 'path', label: '路由地址' },

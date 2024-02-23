@@ -198,6 +198,7 @@ const open = async (row: any) => {
 
   if (row.menuId) {
     forms.value = JSON.parse(JSON.stringify(row));
+    forms.value.icon = forms.value.icon || '';
   } else {
     forms.value.parentId = row;
   }
