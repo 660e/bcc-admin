@@ -1,9 +1,8 @@
 <template>
   <div class="flex flex-col h-full">
     <pro-table :columns="columns" :request-api="getGenList" ref="tableRef">
-      <template #tableHeader="scope">
-        <el-button @click="importData">导入</el-button>
-        <el-button @click="batchDelete(scope.selectedListIds)">删除</el-button>
+      <template #tableHeader>
+        <el-button @click="importData" type="primary">导入</el-button>
       </template>
       <template #operation="scope">
         <el-button @click="preview" type="primary" link>预览</el-button>
@@ -26,7 +25,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ColumnProps } from '@/components/pro-table/interface';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getGenList } from '@/api/modules/code';
+import { getGenList, deleteTable } from '@/api/modules/code';
 
 import ProTable from '@/components/pro-table/index.vue';
 import ImportDialog from './dialogs/import.vue';
@@ -39,19 +38,15 @@ const importDialogRef = ref();
 const previewDialogRef = ref();
 
 const columns: ColumnProps[] = [
-  { type: 'selection', fixed: 'left', width: 0 },
   { prop: 'tableName', label: '表名称', search: { el: 'input' } },
   { prop: 'tableComment', label: '表描述', search: { el: 'input' } },
   { prop: 'className', label: '实体' },
   { prop: 'createTime', label: '创建时间' },
   { prop: 'updateTime', label: '更新时间' },
-  { prop: 'operation', label: '操作', fixed: 'right', width: 0 }
+  { prop: 'operation', label: '操作', width: 0 }
 ];
 
 const importData = () => importDialogRef.value.open();
-const batchDelete = (ids: string[]) => {
-  console.log(ids);
-};
 const preview = () => {
   previewDialogRef.value.open();
 };
@@ -60,8 +55,10 @@ const edit = (id: string) => {
 };
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.tableName}”？`, '系统提示', { type: 'warning' })
-    .then(() => {
-      ElMessage.success('删除成功');
+    .then(async () => {
+      const { msg } = await deleteTable(row.tableId);
+      tableRef.value.search();
+      ElMessage.success(msg);
     })
     .catch(() => false);
 };
