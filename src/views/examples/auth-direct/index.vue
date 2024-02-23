@@ -10,14 +10,6 @@
       <el-button v-auth="['examples:auth:edit']" type="warning">编辑</el-button>
       <el-button v-auth="['examples:auth:search']" type="primary">搜索</el-button>
     </div>
-
-    <el-divider content-position="left">使用 hooks 方式绑定权限</el-divider>
-    <div>
-      <el-button v-if="BUTTONS['examples:auth:create']" type="success">新增</el-button>
-      <el-button v-if="BUTTONS['examples:auth:remove']" type="danger">删除</el-button>
-      <el-button v-if="BUTTONS['examples:auth:edit']" type="warning">编辑</el-button>
-      <el-button v-if="BUTTONS['examples:auth:search']" type="primary">搜索</el-button>
-    </div>
   </div>
 </template>
 
