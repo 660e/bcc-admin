@@ -1,22 +1,59 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="个人信息" width="500px" draggable>
-    <span>This is userInfo</span>
+  <el-dialog v-model="visible" title="个人信息" width="500" draggable>
+    <div class="p-5">
+      <table class="table">
+        <tr>
+          <th>用户昵称：</th>
+          <td>{{ user.nickName }}</td>
+        </tr>
+        <tr>
+          <th>手机号码：</th>
+          <td>{{ user.phonenumber }}</td>
+        </tr>
+        <tr>
+          <th>邮箱：</th>
+          <td>{{ user.email }}</td>
+        </tr>
+      </table>
+    </div>
+
     <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确认</el-button>
-      </span>
+      <div class="flex justify-end">
+        <el-button @click="visible = false">取消</el-button>
+      </div>
     </template>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { getInfo } from '@/api/modules/system';
 
-const dialogVisible = ref(false);
-const openDialog = () => {
-  dialogVisible.value = true;
+interface User {
+  nickName?: string;
+  phonenumber?: string;
+  email?: string;
+}
+
+const visible = ref(false);
+const user = ref<User>({});
+
+const open = async () => {
+  visible.value = true;
+  const response: any = await getInfo();
+  user.value = response.user;
 };
 
-defineExpose({ openDialog });
+defineExpose({ open });
 </script>
+
+<style lang="scss" scoped>
+.table {
+  width: 100%;
+  th {
+    text-align: right;
+    padding: 5px 0;
+    width: 80px;
+  }
+}
+</style>

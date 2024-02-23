@@ -1,11 +1,12 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="修改密码" width="500px" draggable>
-    <span>This is Password</span>
+  <el-dialog v-model="visible" title="修改密码" width="500" draggable>
+    <div class="p-5">修改密码</div>
+
     <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确认</el-button>
-      </span>
+      <div class="flex justify-end">
+        <el-button @click="visible = false">取消</el-button>
+        <el-button @click="confirm" type="primary">确定</el-button>
+      </div>
     </template>
   </el-dialog>
 </template>
@@ -13,10 +14,14 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-const dialogVisible = ref(false);
-const openDialog = () => {
-  dialogVisible.value = true;
+const visible = ref(false);
+
+const open = () => {
+  visible.value = true;
+};
+const confirm = () => {
+  visible.value = false;
 };
 
-defineExpose({ openDialog });
+defineExpose({ open });
 </script>

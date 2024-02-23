@@ -80,6 +80,11 @@ export function resetPwd(params: any) {
   return http.put('/system/user/resetPwd', params);
 }
 
+// 获取当前用户详细信息
+export function getInfo() {
+  return http.get('/system/user/getInfo');
+}
+
 /**
  * 菜单管理
  */
