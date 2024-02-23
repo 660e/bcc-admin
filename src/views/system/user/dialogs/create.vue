@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="visible" :title="forms.userId ? '编辑' : '新增'" @closed="closed" width="800">
+  <el-dialog v-model="visible" :title="forms.userId ? '编辑' : '新增'" @closed="closed" width="800" align-center draggable>
     <el-form :model="forms" :rules="rules" label-width="100" ref="formsRef" class="px-5 pt-5">
       <div class="grid grid-cols-2 gap-x-5">
         <el-form-item label="用户昵称" prop="nickName">

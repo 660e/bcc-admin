@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="visible" title="配置" width="1000">
+  <el-dialog v-model="visible" title="配置" width="1000" align-center draggable>
     <div class="p-2.5">
       <pro-table :columns="columns" :request-api="requestApi" ref="tableRef">
         <template #tableHeader>

@@ -1,6 +1,8 @@
 <template>
-  <el-dialog v-model="visible" @closed="closed" title="导入" class="no-card" draggable>
-    <pro-table :columns="columns" :request-api="getGenDbList" ref="tableRef" />
+  <el-dialog v-model="visible" @closed="closed" title="导入" align-center draggable>
+    <div class="p-2.5">
+      <pro-table :columns="columns" :request-api="getGenDbList" ref="tableRef" />
+    </div>
 
     <template #footer>
       <div class="flex justify-end">
