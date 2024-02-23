@@ -6,7 +6,7 @@
         ref="menuInputRef"
         v-model="searchMenu"
         value-key="path"
-        placeholder="菜单搜索 ：支持菜单名称、路径"
+        placeholder="请输入菜单名称"
         :fetch-suggestions="searchMenuList"
         @select="handleClickMenu"
         @click.stop
@@ -34,7 +34,7 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/modules/auth';
 const router = useRouter();
 const authStore = useAuthStore();
-const menuList = computed(() => authStore.flatMenuListGet.filter(item => !item.meta.isHide));
+const menuList = computed(() => authStore.flatMenuListGet.filter(item => !item.meta.isHide && item.path !== '/'));
 
 const searchMenuList = (queryString: string, cb: Function) => {
   const results = queryString ? menuList.value.filter(filterNodeMethod(queryString)) : menuList.value;
