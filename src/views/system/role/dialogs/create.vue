@@ -91,6 +91,7 @@ const closed = () => {
   formsRef.value?.resetFields();
   forms.value.roleId = undefined;
   treeRef.value.setCheckedKeys([], false);
+  Object.values(treeRef.value.store.nodesMap).forEach((node: any) => node.collapse());
 };
 const confirm = () => {
   formsRef.value?.validate(async valid => {
