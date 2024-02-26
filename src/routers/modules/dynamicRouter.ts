@@ -35,7 +35,7 @@ export const initDynamicRouter = async () => {
     $authStore.flatMenuListGet.push(
       ...[
         {
-          path: '/system/gen/:id',
+          path: '/system/gen/:tableId',
           name: 'gen-edit',
           component: '/system/gen/pages/edit',
           meta: {

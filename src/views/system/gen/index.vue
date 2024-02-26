@@ -6,7 +6,7 @@
       </template>
       <template #operation="scope">
         <el-button @click="preview(scope.row.tableId)" type="primary" link>预览</el-button>
-        <el-button @click="edit(scope.row.id)" type="primary" link>编辑</el-button>
+        <el-button @click="edit(scope.row.tableId)" type="primary" link>编辑</el-button>
         <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
         <el-button @click="sync(scope.row.tableName)" type="primary" link>同步</el-button>
         <el-button type="primary" link>生成代码</el-button>
@@ -48,9 +48,7 @@ const columns: ColumnProps[] = [
 
 const importData = () => importDialogRef.value.open();
 const preview = (tableId: string) => previewDialogRef.value.open(tableId);
-const edit = (id: string) => {
-  $router.push({ name: 'gen-edit', params: { id } });
-};
+const edit = (tableId: string) => $router.push({ name: 'gen-edit', params: { tableId } });
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.tableName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
