@@ -47,10 +47,11 @@
 </template>
 
 <script lang="ts" name="rows-pane" setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { ColumnProps } from '@/components/pro-table/interface';
 import { SelectOption } from '@/modules/forms';
 import { InfoType } from '../../models';
+import { optionselect } from '@/api/modules/system';
 
 import ProTable from '@/components/pro-table/index.vue';
 
@@ -103,6 +104,13 @@ const htmlTypeOptions = ref<SelectOption[]>([
   { label: '富文本控件', value: 'editor' }
 ]);
 const dictTypeOptions = ref<SelectOption[]>([]);
+
+onMounted(async () => {
+  const { data } = await optionselect();
+  dictTypeOptions.value = data.map((e: any) => {
+    return { label: e.dictName, value: e.dictType };
+  });
+});
 </script>
 
 <style lang="scss" scoped>

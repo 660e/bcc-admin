@@ -148,6 +148,11 @@ export function getDictTypeList(params: any = {}) {
   return http.get<ResPage<any>>('/system/dict/type/list', params);
 }
 
+// 获取字典类型列表（下拉）
+export function optionselect() {
+  return http.get<any>('/system/dict/type/optionselect');
+}
+
 // 新增字典数据
 export function createDictData(params: any) {
   return http.post('/system/dict/data', params);
