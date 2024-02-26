@@ -56,7 +56,6 @@
 import { ref, reactive } from 'vue';
 import { genderType } from '@/utils/dict';
 import { ElMessage, FormInstance } from 'element-plus';
-import { User } from '@/api/interface';
 import UploadImg from '@/components/upload/img.vue';
 import UploadImgs from '@/components/upload/imgs.vue';
 
@@ -73,7 +72,7 @@ const rules = reactive({
 interface DrawerProps {
   title: string;
   isView: boolean;
-  row: Partial<User.ResUserList>;
+  row: Partial<any>;
   api?: (params: any) => Promise<any>;
   getTableList?: () => void;
 }

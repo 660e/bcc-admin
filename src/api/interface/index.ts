@@ -6,14 +6,6 @@ export namespace Login {
   export interface Response {
     access_token: string;
   }
-
-  //
-  //
-  //
-
-  export interface ResAuthButtons {
-    [key: string]: string[];
-  }
 }
 
 // 文件上传
