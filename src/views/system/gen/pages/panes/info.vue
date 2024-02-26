@@ -1,20 +1,20 @@
 <template>
   <el-tab-pane v-bind="$attrs">
-    <el-form :model="forms" :rules="rules" label-width="170px">
+    <el-form :model="$props.info" :rules="rules" label-width="170px">
       <div class="grid grid-cols-2 pt-5">
         <el-form-item label="表名称" prop="tableName">
-          <el-input v-model="forms.tableName" />
+          <el-input v-model="$props.info.tableName" />
         </el-form-item>
         <el-form-item label="表描述" prop="tableComment">
-          <el-input v-model="forms.tableComment" />
+          <el-input v-model="$props.info.tableComment" />
         </el-form-item>
         <el-form-item label="生成模板">
-          <el-select v-model="forms.tplCategory">
+          <el-select v-model="$props.info.tplCategory">
             <el-option v-for="option in tplCategoryOptions" :key="option.value" :label="option.label" :value="option.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="实体类名称" prop="className">
-          <el-input v-model="forms.className" />
+          <el-input v-model="$props.info.className" />
         </el-form-item>
         <el-form-item prop="packageName">
           <template #label>
@@ -25,7 +25,7 @@
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="forms.packageName" />
+          <el-input v-model="$props.info.packageName" />
         </el-form-item>
         <el-form-item prop="moduleName">
           <template #label>
@@ -36,7 +36,7 @@
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="forms.moduleName" />
+          <el-input v-model="$props.info.moduleName" />
         </el-form-item>
         <el-form-item prop="businessName">
           <template #label>
@@ -47,7 +47,7 @@
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="forms.businessName" />
+          <el-input v-model="$props.info.businessName" />
         </el-form-item>
         <el-form-item prop="functionName">
           <template #label>
@@ -58,11 +58,11 @@
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="forms.functionName" />
+          <el-input v-model="$props.info.functionName" />
         </el-form-item>
 
         <!-- 生成模板：树表 -->
-        <template v-if="forms.tplCategory === 'tree'">
+        <template v-if="$props.info.tplCategory === 'tree'">
           <el-form-item prop="treeCode">
             <template #label>
               <div class="flex items-center space-x-1">
@@ -72,7 +72,7 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.treeCode">
+            <el-select v-model="$props.info.treeCode">
               <el-option v-for="option in treeCodeOptions" :key="option.value" :label="option.label" :value="option.value" />
             </el-select>
           </el-form-item>
@@ -85,7 +85,7 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.treeParentCode">
+            <el-select v-model="$props.info.treeParentCode">
               <el-option
                 v-for="option in treeParentCodeOptions"
                 :key="option.value"
@@ -103,14 +103,14 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.treeName">
+            <el-select v-model="$props.info.treeName">
               <el-option v-for="option in treeNameOptions" :key="option.value" :label="option.label" :value="option.value" />
             </el-select>
           </el-form-item>
         </template>
 
         <!-- 生成模板：主子表 -->
-        <template v-if="forms.tplCategory === 'sub'">
+        <template v-if="$props.info.tplCategory === 'sub'">
           <el-form-item prop="subTableName">
             <template #label>
               <div class="flex items-center space-x-1">
@@ -120,7 +120,7 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.subTableName">
+            <el-select v-model="$props.info.subTableName">
               <el-option v-for="option in subTableNameOptions" :key="option.value" :label="option.label" :value="option.value" />
             </el-select>
           </el-form-item>
@@ -133,7 +133,7 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="forms.subTableFkName">
+            <el-select v-model="$props.info.subTableFkName">
               <el-option
                 v-for="option in subTableFkNameOptions"
                 :key="option.value"
@@ -146,7 +146,7 @@
       </div>
 
       <el-form-item label="备注">
-        <el-input v-model="forms.remark" :rows="5" type="textarea" />
+        <el-input v-model="$props.info.remark" :rows="5" type="textarea" />
       </el-form-item>
     </el-form>
   </el-tab-pane>
@@ -158,9 +158,8 @@ import { FormRules } from 'element-plus';
 import { SelectOption } from '@/modules/forms';
 import { InfoType } from '../../models';
 
-const $props = defineProps<{ info: InfoType }>();
+defineProps<{ info: InfoType }>();
 
-const forms = $props.info;
 const rules = reactive<FormRules<InfoType>>({
   tableName: [{ required: true, message: '请填写表名称', trigger: 'blur' }],
   tableComment: [{ required: true, message: '请填写表描述', trigger: 'blur' }],

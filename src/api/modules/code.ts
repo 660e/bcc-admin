@@ -30,3 +30,8 @@ export function previewTable(tableId: string) {
 export function synchDb(tableName: string) {
   return http.get(`/code/gen/synchDb/${tableName}`);
 }
+
+// 查看
+export function getTable(tableId: string) {
+  return http.get(`/code/gen/${tableId}`);
+}

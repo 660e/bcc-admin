@@ -1,6 +1,6 @@
 <template>
   <el-tab-pane v-bind="$attrs" class="h-full no-card">
-    <pro-table :data="data" :columns="columns" :pagination="false">
+    <pro-table :data="$props.rows" :columns="columns" :pagination="false">
       <template #columnComment="scope">
         <el-input v-model="scope.row.columnComment" />
       </template>
@@ -54,9 +54,8 @@ import { InfoType } from '../../models';
 
 import ProTable from '@/components/pro-table/index.vue';
 
-const $props = defineProps<{ rows: InfoType[] }>();
+defineProps<{ rows: InfoType[] }>();
 
-const data = $props.rows;
 const columns: ColumnProps[] = [
   { prop: 'columnName', label: '字段列名' },
   { prop: 'columnComment', label: '字段描述' },

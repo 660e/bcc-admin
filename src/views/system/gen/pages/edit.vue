@@ -12,14 +12,17 @@
 </template>
 
 <script lang="ts" name="edit-page" setup>
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { getTable } from '@/api/modules/code';
 import { DataType } from '../models';
 
 import InfoPane from './panes/info.vue';
 import RowsPane from './panes/rows.vue';
 
-const active = ref('rows');
+const $route = useRoute();
 
+const active = ref('rows');
 const data = reactive<DataType>({
   info: {
     tableName: '',
@@ -44,10 +47,16 @@ const data = reactive<DataType>({
     tplWebType: 'element-plus',
     genType: '0'
   },
-  rows: new Array(20).fill(null).map((e, i) => ({ id: i, columnName: `TEST-G-${i}` })) as any
+  rows: []
 });
 
 const confirm = () => {
   console.log(data);
 };
+
+onMounted(async () => {
+  const response: any = await getTable($route.params.tableId as string);
+  data.info = response.data.info;
+  data.rows = response.data.rows;
+});
 </script>
