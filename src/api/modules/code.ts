@@ -12,16 +12,21 @@ export function deleteTable(tableId: string) {
 }
 
 // 列表
-export function getGenList(params: any = {}) {
+export function getList(params: any = {}) {
   return http.get('/code/gen/list', params);
 }
 
 // 数据库
-export function getGenDbList(params: any = {}) {
+export function getDbList(params: any = {}) {
   return http.get('/code/gen/db/list', params);
 }
 
 // 预览
-export function getGenPreview(tableId: string) {
+export function previewTable(tableId: string) {
   return http.get(`/code/gen/preview/${tableId}`);
+}
+
+// 同步
+export function synchDb(tableName: string) {
+  return http.get(`/code/gen/synchDb/${tableName}`);
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full">
-    <pro-table :columns="columns" :request-api="getGenList" ref="tableRef">
+    <pro-table :columns="columns" :request-api="getList" ref="tableRef">
       <template #tableHeader>
         <el-button @click="importData" type="primary">导入</el-button>
       </template>
@@ -8,7 +8,7 @@
         <el-button @click="preview(scope.row.tableId)" type="primary" link>预览</el-button>
         <el-button @click="edit(scope.row.id)" type="primary" link>编辑</el-button>
         <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
-        <el-button @click="sync(scope.row)" type="primary" link>同步</el-button>
+        <el-button @click="sync(scope.row.tableName)" type="primary" link>同步</el-button>
         <el-button type="primary" link>生成代码</el-button>
       </template>
     </pro-table>
@@ -25,7 +25,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ColumnProps } from '@/components/pro-table/interface';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getGenList, deleteTable } from '@/api/modules/code';
+import { getList, deleteTable, synchDb } from '@/api/modules/code';
 
 import ProTable from '@/components/pro-table/index.vue';
 import ImportDialog from './dialogs/import.vue';
@@ -60,10 +60,12 @@ const remove = (row: any) => {
     })
     .catch(() => false);
 };
-const sync = (row: any) => {
-  ElMessageBox.confirm(`是否同步“${row.tableName}”？`, '系统提示', { type: 'warning' })
-    .then(() => {
-      ElMessage.success('同步成功');
+const sync = (tableName: string) => {
+  ElMessageBox.confirm(`是否同步“${tableName}”？`, '系统提示', { type: 'warning' })
+    .then(async () => {
+      const { msg } = await synchDb(tableName);
+      tableRef.value.search();
+      ElMessage.success(msg);
     })
     .catch(() => false);
 };

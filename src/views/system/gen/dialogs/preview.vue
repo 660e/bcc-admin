@@ -21,14 +21,14 @@
 
 <script lang="ts" name="preview-dialog" setup>
 import { ref } from 'vue';
-import { getGenPreview } from '@/api/modules/code';
+import { previewTable } from '@/api/modules/code';
 
 const visible = ref(false);
 const preview = ref<Record<string, string>>();
 const active = ref('domain.java');
 
 const open = async (tableId: string) => {
-  const { data } = await getGenPreview(tableId);
+  const { data } = await previewTable(tableId);
   preview.value = data as Record<string, string>;
   visible.value = true;
 };

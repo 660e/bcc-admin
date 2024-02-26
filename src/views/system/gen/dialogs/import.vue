@@ -1,7 +1,7 @@
 <template>
   <el-dialog v-model="visible" title="导入" align-center draggable>
     <div class="p-2.5">
-      <pro-table :columns="columns" :request-api="getGenDbList" ref="tableRef" row-key="tableName" />
+      <pro-table :columns="columns" :request-api="getDbList" ref="tableRef" row-key="tableName" />
     </div>
 
     <template #footer>
@@ -17,7 +17,7 @@
 import { ref } from 'vue';
 import { ElMessage } from 'element-plus';
 import { ColumnProps } from '@/components/pro-table/interface';
-import { getGenDbList, importTable } from '@/api/modules/code';
+import { getDbList, importTable } from '@/api/modules/code';
 
 import ProTable from '@/components/pro-table/index.vue';
 
