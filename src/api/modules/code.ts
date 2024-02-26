@@ -7,8 +7,8 @@ export function importTable(params: any) {
 }
 
 // 删除
-export function deleteTable(id: string) {
-  return http.delete(`/code/gen/${id}`);
+export function deleteTable(tableId: string) {
+  return http.delete(`/code/gen/${tableId}`);
 }
 
 // 列表
@@ -19,4 +19,9 @@ export function getGenList(params: any = {}) {
 // 数据库
 export function getGenDbList(params: any = {}) {
   return http.get('/code/gen/db/list', params);
+}
+
+// 预览
+export function getGenPreview(tableId: string) {
+  return http.get(`/code/gen/preview/${tableId}`);
 }

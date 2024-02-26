@@ -1,34 +1,36 @@
 <template>
-  <el-dialog v-model="visible" @closed="closed" title="代码预览" fullscreen>
+  <el-dialog v-model="visible" title="代码预览" fullscreen>
     <el-tabs v-model="active" tab-position="left" class="tabs">
-      <el-tab-pane label="index.vue" name="index.vue">
-        <div class="p-5" style="height: 3000px">Lorem ipsum dolor sit amet.</div>
-      </el-tab-pane>
-      <el-tab-pane label="index.ts" name="index.ts">
-        <div class="p-5" style="height: 2000px">Lorem ipsum dolor sit amet.</div>
+      <el-tab-pane
+        v-for="(value, key) in preview"
+        :label="key.substring(key.lastIndexOf('/') + 1, key.indexOf('.vm'))"
+        :name="key.substring(key.lastIndexOf('/') + 1, key.indexOf('.vm'))"
+        :key="key"
+      >
+        <div class="p-5">
+          <pre>{{ value }}</pre>
+        </div>
+        <div v-copy="value" class="fixed top-[61px] right-5 flex items-center space-x-1 cursor-pointer hover:text-blue-500">
+          <el-icon><CopyDocument /></el-icon>
+          <span>复制</span>
+        </div>
       </el-tab-pane>
     </el-tabs>
-    <div @click="copy" class="fixed top-[61px] right-5 flex items-center space-x-1 cursor-pointer">
-      <el-icon><CopyDocument /></el-icon>
-      <span>复制</span>
-    </div>
   </el-dialog>
 </template>
 
 <script lang="ts" name="preview-dialog" setup>
 import { ref } from 'vue';
+import { getGenPreview } from '@/api/modules/code';
 
 const visible = ref(false);
-const open = () => {
-  visible.value = true;
-};
-const closed = () => {
-  console.log('closed');
-};
+const preview = ref<Record<string, string>>();
+const active = ref('domain.java');
 
-const active = ref('index.vue');
-const copy = () => {
-  console.log(active.value);
+const open = async (tableId: string) => {
+  const { data } = await getGenPreview(tableId);
+  preview.value = data as Record<string, string>;
+  visible.value = true;
 };
 
 defineExpose({ open });
