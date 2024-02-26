@@ -13,16 +13,16 @@
         <el-input v-model="scope.row.javaField" />
       </template>
       <template #isInsert="scope">
-        <el-checkbox v-model="scope.row.isInsert" />
+        <el-checkbox v-model="scope.row.isInsert" true-label="1" false-label="0" />
       </template>
       <template #isEdit="scope">
-        <el-checkbox v-model="scope.row.isEdit" />
+        <el-checkbox v-model="scope.row.isEdit" true-label="1" false-label="0" />
       </template>
       <template #isList="scope">
-        <el-checkbox v-model="scope.row.isList" />
+        <el-checkbox v-model="scope.row.isList" true-label="1" false-label="0" />
       </template>
       <template #isQuery="scope">
-        <el-checkbox v-model="scope.row.isQuery" />
+        <el-checkbox v-model="scope.row.isQuery" true-label="1" false-label="0" />
       </template>
       <template #queryType="scope">
         <el-select v-model="scope.row.queryType">
@@ -30,7 +30,7 @@
         </el-select>
       </template>
       <template #isRequired="scope">
-        <el-checkbox v-model="scope.row.isRequired" />
+        <el-checkbox v-model="scope.row.isRequired" true-label="1" false-label="0" />
       </template>
       <template #htmlType="scope">
         <el-select v-model="scope.row.htmlType">

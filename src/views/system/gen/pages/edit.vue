@@ -22,7 +22,7 @@ import RowsPane from './panes/rows.vue';
 
 const $route = useRoute();
 
-const active = ref('rows');
+const active = ref('info');
 const data = reactive<DataType>({
   info: {
     tableName: '',
