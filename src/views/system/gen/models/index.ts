@@ -20,9 +20,11 @@ export interface InfoType {
   functionAuthor: string;
   tplWebType: string;
   genType: string;
+  columns: any;
 }
 
 export interface DataType {
   info: InfoType;
   rows: InfoType[];
+  tables: any;
 }

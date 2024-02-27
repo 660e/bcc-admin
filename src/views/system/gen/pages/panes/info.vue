@@ -73,7 +73,12 @@
               </div>
             </template>
             <el-select v-model="$props.info.treeCode">
-              <el-option v-for="option in treeCodeOptions" :key="option.value" :label="option.label" :value="option.value" />
+              <el-option
+                v-for="option in $props.info.columns"
+                :key="option.columnId"
+                :label="`${option.columnName}：${option.columnComment}`"
+                :value="option.columnName"
+              />
             </el-select>
           </el-form-item>
           <el-form-item prop="treeParentCode">
@@ -87,10 +92,10 @@
             </template>
             <el-select v-model="$props.info.treeParentCode">
               <el-option
-                v-for="option in treeParentCodeOptions"
-                :key="option.value"
-                :label="option.label"
-                :value="option.value"
+                v-for="option in $props.info.columns"
+                :key="option.columnId"
+                :label="`${option.columnName}：${option.columnComment}`"
+                :value="option.columnName"
               />
             </el-select>
           </el-form-item>
@@ -104,7 +109,12 @@
               </div>
             </template>
             <el-select v-model="$props.info.treeName">
-              <el-option v-for="option in treeNameOptions" :key="option.value" :label="option.label" :value="option.value" />
+              <el-option
+                v-for="option in $props.info.columns"
+                :key="option.columnId"
+                :label="`${option.columnName}：${option.columnComment}`"
+                :value="option.columnName"
+              />
             </el-select>
           </el-form-item>
         </template>
@@ -121,7 +131,12 @@
               </div>
             </template>
             <el-select v-model="$props.info.subTableName">
-              <el-option v-for="option in subTableNameOptions" :key="option.value" :label="option.label" :value="option.value" />
+              <el-option
+                v-for="option in $props.tables"
+                :key="option.tableId"
+                :label="`${option.tableName}：${option.tableComment}`"
+                :value="option.tableName"
+              />
             </el-select>
           </el-form-item>
           <el-form-item prop="subTableFkName">
@@ -158,7 +173,7 @@ import { FormRules } from 'element-plus';
 import { SelectOption } from '@/modules/forms';
 import { InfoType } from '../../models';
 
-defineProps<{ info: InfoType }>();
+defineProps<{ info: InfoType; tables: any }>();
 
 const rules = reactive<FormRules<InfoType>>({
   tableName: [{ required: true, message: '请填写表名称', trigger: 'blur' }],
@@ -182,9 +197,5 @@ const tplCategoryOptions = ref<SelectOption[]>([
   { label: '树表（增删改查）', value: 'tree' },
   { label: '主子表（增删改查）', value: 'sub' }
 ]);
-const treeCodeOptions = ref<SelectOption[]>([]);
-const treeParentCodeOptions = ref<SelectOption[]>([]);
-const treeNameOptions = ref<SelectOption[]>([]);
-const subTableNameOptions = ref<SelectOption[]>([]);
 const subTableFkNameOptions = ref<SelectOption[]>([]);
 </script>

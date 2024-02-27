@@ -1,7 +1,7 @@
 <template>
   <div class="card h-full flex flex-col px-5">
     <el-tabs v-model="active" class="flex-1 flex flex-col h-0">
-      <info-pane :info="data.info" label="基本信息" name="info" />
+      <info-pane :info="data.info" :tables="data.tables" label="基本信息" name="info" />
       <rows-pane :rows="data.rows" label="字段信息" name="rows" />
     </el-tabs>
     <div class="flex justify-center pb-5">
@@ -45,9 +45,11 @@ const data = reactive<DataType>({
 
     functionAuthor: 'admin',
     tplWebType: 'element-plus',
-    genType: '0'
+    genType: '0',
+    columns: []
   },
-  rows: []
+  rows: [],
+  tables: []
 });
 
 const confirm = () => {
@@ -58,5 +60,6 @@ onMounted(async () => {
   const response: any = await getTable($route.params.tableId as string);
   data.info = response.data.info;
   data.rows = response.data.rows;
+  data.tables = response.data.tables;
 });
 </script>
