@@ -71,13 +71,13 @@ pnpm build:dev
 生产环境
 
 ```shell
-pnpm build:test
+pnpm build:prod
 ```
 
 测试环境
 
 ```shell
-pnpm build:pro
+pnpm build:test
 ```
 
 ## 目录结构
@@ -132,12 +132,12 @@ pnpm build:pro
 
 ## 内置功能/组件/指令
 
-- 切换组件大小（ AssemblySize.vue ）
-- 切换语言（ Language.vue ）
-- 全局菜单搜索（ SearchMenu.vue ）
-- 切换主题、布局（ ThemeSetting.vue ）
-- 站内通知（ Message.vue ）
-- 全屏模式（ Fullscreen.vue ）
+- 切换组件大小（ assembly-size.vue ）
+- 切换语言（ language-setting.vue ）
+- 全局菜单搜索（ search-menu.vue ）
+- 切换主题、布局（ theme-setting.vue ）
+- 站内通知（ message-box.vue ）
+- 全屏模式（ full-screen.vue ）
 - 页面缓存
 - 页面标签
 - 菜单权限控制
