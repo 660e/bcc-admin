@@ -130,7 +130,7 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="$props.info.subTableName">
+            <el-select v-model="$props.info.subTableName" @change="onSubTableNameChange">
               <el-option
                 v-for="option in $props.tables"
                 :key="option.tableId"
@@ -151,9 +151,9 @@
             <el-select v-model="$props.info.subTableFkName">
               <el-option
                 v-for="option in subTableFkNameOptions"
-                :key="option.value"
-                :label="option.label"
-                :value="option.value"
+                :key="option.columnId"
+                :label="`${option.columnName}：${option.columnComment}`"
+                :value="option.columnName"
               />
             </el-select>
           </el-form-item>
@@ -173,7 +173,7 @@ import { FormRules } from 'element-plus';
 import { SelectOption } from '@/modules/forms';
 import { InfoType } from '../../models';
 
-defineProps<{ info: InfoType; tables: any }>();
+const props = defineProps<{ info: InfoType; tables: any }>();
 
 const rules = reactive<FormRules<InfoType>>({
   tableName: [{ required: true, message: '请填写表名称', trigger: 'blur' }],
@@ -197,5 +197,9 @@ const tplCategoryOptions = ref<SelectOption[]>([
   { label: '树表（增删改查）', value: 'tree' },
   { label: '主子表（增删改查）', value: 'sub' }
 ]);
-const subTableFkNameOptions = ref<SelectOption[]>([]);
+const subTableFkNameOptions = ref();
+
+const onSubTableNameChange = (value: any) => {
+  subTableFkNameOptions.value = props.tables.find((table: any) => table.tableName === value)?.columns || [];
+};
 </script>
