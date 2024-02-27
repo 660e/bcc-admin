@@ -1,20 +1,20 @@
 <template>
   <el-tab-pane v-bind="$attrs">
-    <el-form :model="$props.info" :rules="rules" label-width="170px">
+    <el-form :model="propsInfo" :rules="rules" label-width="170px">
       <div class="grid grid-cols-2 pt-5">
         <el-form-item label="表名称" prop="tableName">
-          <el-input v-model="$props.info.tableName" />
+          <el-input v-model="propsInfo.tableName" />
         </el-form-item>
         <el-form-item label="表描述" prop="tableComment">
-          <el-input v-model="$props.info.tableComment" />
+          <el-input v-model="propsInfo.tableComment" />
         </el-form-item>
         <el-form-item label="生成模板">
-          <el-select v-model="$props.info.tplCategory">
+          <el-select v-model="propsInfo.tplCategory">
             <el-option v-for="option in tplCategoryOptions" :key="option.value" :label="option.label" :value="option.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="实体类名称" prop="className">
-          <el-input v-model="$props.info.className" />
+          <el-input v-model="propsInfo.className" />
         </el-form-item>
         <el-form-item prop="packageName">
           <template #label>
@@ -25,7 +25,7 @@
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="$props.info.packageName" />
+          <el-input v-model="propsInfo.packageName" />
         </el-form-item>
         <el-form-item prop="moduleName">
           <template #label>
@@ -36,7 +36,7 @@
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="$props.info.moduleName" />
+          <el-input v-model="propsInfo.moduleName" />
         </el-form-item>
         <el-form-item prop="businessName">
           <template #label>
@@ -47,7 +47,7 @@
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="$props.info.businessName" />
+          <el-input v-model="propsInfo.businessName" />
         </el-form-item>
         <el-form-item prop="functionName">
           <template #label>
@@ -58,11 +58,11 @@
               </el-tooltip>
             </div>
           </template>
-          <el-input v-model="$props.info.functionName" />
+          <el-input v-model="propsInfo.functionName" />
         </el-form-item>
 
         <!-- 生成模板：树表 -->
-        <template v-if="$props.info.tplCategory === 'tree'">
+        <template v-if="propsInfo.tplCategory === 'tree'">
           <el-form-item prop="treeCode">
             <template #label>
               <div class="flex items-center space-x-1">
@@ -72,9 +72,9 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="$props.info.treeCode">
+            <el-select v-model="propsInfo.treeCode">
               <el-option
-                v-for="option in $props.info.columns"
+                v-for="option in propsInfo.columns"
                 :key="option.columnId"
                 :label="`${option.columnName}：${option.columnComment}`"
                 :value="option.columnName"
@@ -90,9 +90,9 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="$props.info.treeParentCode">
+            <el-select v-model="propsInfo.treeParentCode">
               <el-option
-                v-for="option in $props.info.columns"
+                v-for="option in propsInfo.columns"
                 :key="option.columnId"
                 :label="`${option.columnName}：${option.columnComment}`"
                 :value="option.columnName"
@@ -108,9 +108,9 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="$props.info.treeName">
+            <el-select v-model="propsInfo.treeName">
               <el-option
-                v-for="option in $props.info.columns"
+                v-for="option in propsInfo.columns"
                 :key="option.columnId"
                 :label="`${option.columnName}：${option.columnComment}`"
                 :value="option.columnName"
@@ -120,7 +120,7 @@
         </template>
 
         <!-- 生成模板：主子表 -->
-        <template v-if="$props.info.tplCategory === 'sub'">
+        <template v-if="propsInfo.tplCategory === 'sub'">
           <el-form-item prop="subTableName">
             <template #label>
               <div class="flex items-center space-x-1">
@@ -130,9 +130,9 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="$props.info.subTableName" @change="onSubTableNameChange">
+            <el-select v-model="propsInfo.subTableName" @change="onSubTableNameChange">
               <el-option
-                v-for="option in $props.tables"
+                v-for="option in propsTables"
                 :key="option.tableId"
                 :label="`${option.tableName}：${option.tableComment}`"
                 :value="option.tableName"
@@ -148,7 +148,7 @@
                 </el-tooltip>
               </div>
             </template>
-            <el-select v-model="$props.info.subTableFkName">
+            <el-select v-model="propsInfo.subTableFkName">
               <el-option
                 v-for="option in subTableFkNameOptions"
                 :key="option.columnId"
@@ -161,19 +161,22 @@
       </div>
 
       <el-form-item label="备注">
-        <el-input v-model="$props.info.remark" :rows="5" type="textarea" />
+        <el-input v-model="propsInfo.remark" :rows="5" type="textarea" />
       </el-form-item>
     </el-form>
   </el-tab-pane>
 </template>
 
 <script lang="ts" name="info-pane" setup>
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import { FormRules } from 'element-plus';
 import { SelectOption } from '@/modules/forms';
 import { InfoType } from '../../models';
 
-const props = defineProps<{ info: InfoType; tables: any }>();
+const $props = defineProps<{ info: InfoType; tables: any }>();
+
+const propsInfo = computed(() => $props.info);
+const propsTables = computed(() => $props.tables);
 
 const rules = reactive<FormRules<InfoType>>({
   tableName: [{ required: true, message: '请填写表名称', trigger: 'blur' }],
@@ -200,6 +203,7 @@ const tplCategoryOptions = ref<SelectOption[]>([
 const subTableFkNameOptions = ref();
 
 const onSubTableNameChange = (value: any) => {
-  subTableFkNameOptions.value = props.tables.find((table: any) => table.tableName === value)?.columns || [];
+  propsInfo.value.subTableFkName = '';
+  subTableFkNameOptions.value = propsTables.value.find((table: any) => table.tableName === value)?.columns || [];
 };
 </script>
