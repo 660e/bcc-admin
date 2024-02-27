@@ -9,7 +9,7 @@
         <el-button @click="edit(scope.row.tableId)" type="primary" link>编辑</el-button>
         <el-button @click="remove(scope.row)" type="primary" link>删除</el-button>
         <el-button @click="sync(scope.row.tableName)" type="primary" link>同步</el-button>
-        <el-button type="primary" link>生成代码</el-button>
+        <!-- <el-button @click="generate(scope.row.tableName)" type="primary" link>生成代码</el-button> -->
       </template>
     </pro-table>
 
@@ -67,4 +67,7 @@ const sync = (tableName: string) => {
     })
     .catch(() => false);
 };
+// const generate = (tableName: string) => {
+//   console.log(tableName);
+// };
 </script>
