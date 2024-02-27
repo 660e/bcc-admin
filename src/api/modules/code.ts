@@ -11,6 +11,11 @@ export function deleteTable(tableId: string) {
   return http.delete(`/code/gen/${tableId}`);
 }
 
+// 编辑
+export function editTable(params: any) {
+  return http.put('/code/gen', params);
+}
+
 // 列表
 export function getList(params: any = {}) {
   return http.get('/code/gen/list', params);

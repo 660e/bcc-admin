@@ -5,7 +5,7 @@
       <rows-pane :rows="data.rows" label="字段信息" name="rows" />
     </el-tabs>
     <div class="flex justify-center pb-5">
-      <el-button>取消</el-button>
+      <el-button @click="cancel">取消</el-button>
       <el-button @click="confirm" type="primary">确定</el-button>
     </div>
   </div>
@@ -13,14 +13,17 @@
 
 <script lang="ts" name="edit-page" setup>
 import { onMounted, reactive, ref } from 'vue';
+import { ElMessage } from 'element-plus';
 import { useRoute } from 'vue-router';
-import { getTable } from '@/api/modules/code';
+import { useTabsStore } from '@/stores/modules/tabs';
+import { getTable, editTable } from '@/api/modules/code';
 import { DataType } from '../models';
 
 import InfoPane from './panes/info.vue';
 import RowsPane from './panes/rows.vue';
 
 const $route = useRoute();
+const $tabStore = useTabsStore();
 
 const active = ref('info');
 const data = reactive<DataType>({
@@ -46,15 +49,29 @@ const data = reactive<DataType>({
     functionAuthor: 'admin',
     tplWebType: 'element-plus',
     genType: '0',
+    parentMenuId: '',
     columns: []
   },
   rows: [],
   tables: []
 });
 
-const confirm = () => {
-  console.log(data);
+const confirm = async () => {
+  const params = {
+    ...data.info,
+    columns: data.rows,
+    params: {
+      treeCode: data.info.treeCode,
+      treeName: data.info.treeName,
+      treeParentCode: data.info.treeParentCode,
+      parentMenuId: data.info.parentMenuId
+    }
+  };
+  const { msg } = await editTable(params);
+  ElMessage.success(msg);
+  cancel();
 };
+const cancel = () => $tabStore.removeTabs($route.fullPath);
 
 onMounted(async () => {
   const response: any = await getTable($route.params.tableId as string);

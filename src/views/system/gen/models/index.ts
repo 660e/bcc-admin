@@ -20,6 +20,7 @@ export interface InfoType {
   functionAuthor: string;
   tplWebType: string;
   genType: string;
+  parentMenuId: string;
   columns: any;
 }
 
