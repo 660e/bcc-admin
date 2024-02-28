@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { AuthState } from '@/stores/interface';
 import { getAuthButtonListApi, getAuthMenuListApi } from '@/api/modules/login';
 import { getFlatMenuList, getShowMenuList, getAllBreadcrumbList } from '@/utils';
+import { HOME_URL } from '@/config';
 
 export const useAuthStore = defineStore({
   id: 'bcc-auth',
@@ -25,6 +26,20 @@ export const useAuthStore = defineStore({
   actions: {
     async setAuthMenuList() {
       this.authMenuList = await getAuthMenuListApi();
+      this.authMenuList.unshift({
+        path: HOME_URL,
+        name: 'home',
+        component: '/home/index',
+        meta: {
+          icon: 'HomeFilled',
+          title: '首页',
+          isLink: '',
+          isHide: false,
+          isFull: false,
+          isAffix: true,
+          isKeepAlive: false
+        }
+      });
     },
     async setAuthButtonList() {
       this.authButtonList = await getAuthButtonListApi();

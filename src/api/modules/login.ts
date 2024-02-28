@@ -1,6 +1,5 @@
 import http from '@/api';
 import { Login } from '@/api/interface/index';
-import { HOME_URL } from '@/config';
 
 // 获取验证码
 export function getCode() {
@@ -43,7 +42,7 @@ function transformTree(tree: any): Menu.MenuOptions[] {
       component: e.component,
       meta: {
         icon: e.meta?.icon || '',
-        isAffix: e.path === HOME_URL || e.meta?.affix,
+        isAffix: e.meta?.affix,
         isFull: e.meta?.full,
         isHide: e.hidden,
         isKeepAlive: !e.meta?.noCache,
