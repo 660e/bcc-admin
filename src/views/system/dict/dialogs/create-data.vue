@@ -4,10 +4,10 @@
       <el-form-item label="字典类型" prop="dictType">
         <el-input v-model="forms.dictType" disabled />
       </el-form-item>
-      <el-form-item label="数据标签" prop="dictLabel">
+      <el-form-item label="字典标签" prop="dictLabel">
         <el-input v-model="forms.dictLabel" />
       </el-form-item>
-      <el-form-item label="数据键值" prop="dictValue">
+      <el-form-item label="字典键值" prop="dictValue">
         <el-input v-model="forms.dictValue" />
       </el-form-item>
       <el-form-item label="显示排序" prop="dictSort">
