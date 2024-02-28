@@ -17,14 +17,14 @@
         </grid-item>
         <grid-item suffix>
           <div class="operation">
-            <el-button type="primary" @click="search">搜索</el-button>
-            <el-button @click="reset">重置</el-button>
             <el-button v-if="showCollapse" type="primary" link class="search-isOpen" @click="collapsed = !collapsed">
-              {{ collapsed ? '展开' : '合并' }}
+              {{ collapsed ? '展开' : '收起' }}
               <el-icon class="el-icon--right">
                 <component :is="collapsed ? ArrowDown : ArrowUp"></component>
               </el-icon>
             </el-button>
+            <el-button type="primary" @click="search">搜索</el-button>
+            <el-button @click="reset">重置</el-button>
           </div>
         </grid-item>
       </grid-layout>
@@ -75,7 +75,7 @@ const collapsed = ref(true);
 const gridRef = ref();
 const breakPoint = computed<BreakPoint>(() => gridRef.value?.breakPoint);
 
-// 判断是否显示 展开/合并 按钮
+// 判断是否显示 展开/收起 按钮
 const showCollapse = computed(() => {
   let show = false;
   props.columns.reduce((prev, current) => {
