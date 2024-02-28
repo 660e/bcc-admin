@@ -89,6 +89,7 @@ export const initDynamicRouter = async () => {
         item.component = modules[`/src/views${item.component}.vue`];
       }
       if (item.meta.isFull) {
+        if (item.path.slice(0, 1) !== '/') item.path = `/${item.path}`;
         router.addRoute(item as unknown as RouteRecordRaw);
       } else {
         router.addRoute('layout', item as unknown as RouteRecordRaw);
