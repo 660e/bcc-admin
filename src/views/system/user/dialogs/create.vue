@@ -2,6 +2,14 @@
   <el-dialog v-model="visible" :title="forms.userId ? '编辑' : '新增'" @closed="closed" width="800" align-center draggable>
     <el-form :model="forms" :rules="rules" label-width="100" ref="formsRef" class="px-5 pt-5">
       <div class="grid grid-cols-2 gap-x-5">
+        <template v-if="!forms.userId">
+          <el-form-item label="用户名称" prop="userName">
+            <el-input v-model="forms.userName" maxlength="30" />
+          </el-form-item>
+          <el-form-item label="用户密码" prop="password">
+            <el-input v-model="forms.password" type="password" maxlength="20" show-password />
+          </el-form-item>
+        </template>
         <el-form-item label="用户昵称" prop="nickName">
           <el-input v-model="forms.nickName" maxlength="30" />
         </el-form-item>
@@ -16,14 +24,6 @@
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="forms.email" maxlength="50" />
         </el-form-item>
-        <template v-if="!forms.userId">
-          <el-form-item label="用户名称" prop="userName">
-            <el-input v-model="forms.userName" maxlength="30" />
-          </el-form-item>
-          <el-form-item label="用户密码" prop="password">
-            <el-input v-model="forms.password" type="password" maxlength="20" show-password />
-          </el-form-item>
-        </template>
         <el-form-item label="角色" prop="roleIds">
           <el-select v-model="forms.roleIds" multiple>
             <el-option
@@ -66,12 +66,12 @@ const visible = ref(false);
 const formsRef = ref<FormInstance>();
 const forms = ref({
   userId: undefined,
+  userName: '',
+  password: '',
   nickName: '',
   phonenumber: '',
   email: '',
-  userName: '',
-  password: '',
-  sex: '2',
+  sex: '',
   roleIds: [],
   status: '0',
   remark: ''
@@ -81,11 +81,15 @@ const rules = reactive<FormRules>({
     { required: true, message: '用户名称不能为空', trigger: 'blur' },
     { min: 2, max: 20, message: '用户名称长度必须介于 2 和 20 之间', trigger: 'blur' }
   ],
-  nickName: [{ required: true, message: '用户昵称不能为空', trigger: 'blur' }],
   password: [
     { required: true, message: '用户密码不能为空', trigger: 'blur' },
-    { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' }
+    { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' },
+    {
+      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/,
+      message: '用户密码需要包含大、小写字母、数字、特殊字符'
+    }
   ],
+  nickName: [{ required: true, message: '用户昵称不能为空', trigger: 'blur' }],
   email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
   phonenumber: [{ pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/, message: '请输入正确的手机号码', trigger: 'blur' }]
 });

@@ -31,7 +31,11 @@ const forms = ref({
 const rules = reactive<FormRules>({
   password: [
     { required: true, message: '用户密码不能为空', trigger: 'blur' },
-    { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' }
+    { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' },
+    {
+      pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/,
+      message: '用户密码需要包含大、小写字母、数字、特殊字符'
+    }
   ]
 });
 
