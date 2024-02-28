@@ -116,6 +116,8 @@ const open = async (row: any) => {
 const closed = () => {
   formsRef.value?.resetFields();
   forms.value.userId = undefined;
+  forms.value.userName = '';
+  forms.value.password = '';
 };
 const confirm = () => {
   formsRef.value?.validate(async valid => {
