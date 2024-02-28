@@ -8,14 +8,15 @@
       <theme-setting />
       <full-screen />
     </div>
-    <span class="username">{{ username }}</span>
+    <span class="username">{{ nickName }}</span>
     <the-avatar />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useUserStore } from '@/stores/modules/user';
+import { getInfo } from '@/api/modules/system';
 
 import MessageBox from './components/message-box.vue';
 import AssemblySize from './components/assembly-size.vue';
@@ -25,8 +26,13 @@ import ThemeSetting from './components/theme-setting.vue';
 import FullScreen from './components/full-screen.vue';
 import TheAvatar from './components/the-avatar.vue';
 
-const userStore = useUserStore();
-const username = computed(() => userStore.userInfo.name);
+const $userStore = useUserStore();
+const nickName = computed(() => $userStore.userInfo.nickName);
+
+onMounted(async () => {
+  const response: any = await getInfo();
+  $userStore.setUserInfo(response.user);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -37,6 +43,7 @@ const username = computed(() => userStore.userInfo.name);
   .header-icon {
     display: flex;
     align-items: center;
+    padding-top: 4px;
     & > * {
       margin-left: 21px;
       color: var(--el-header-text-color);

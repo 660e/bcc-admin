@@ -6,15 +6,13 @@ export const useUserStore = defineStore({
   id: 'bcc-user',
   state: (): UserState => ({
     token: '',
-    userInfo: { name: 'Admin' }
+    userInfo: { nickName: '' }
   }),
   getters: {},
   actions: {
-    // Set Token
     setToken(token: string) {
       this.token = token;
     },
-    // Set setUserInfo
     setUserInfo(userInfo: UserState['userInfo']) {
       this.userInfo = userInfo;
     }
