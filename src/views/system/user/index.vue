@@ -3,7 +3,7 @@
     <pro-table :columns="columns" :request-api="getUserList" ref="tableRef">
       <template #tableHeader>
         <el-button @click="create()" type="primary">新增</el-button>
-        <el-button @click="importData">导入</el-button>
+        <!-- <el-button @click="importData">导入</el-button> -->
         <el-button @click="exportData">导出</el-button>
       </template>
       <template #operation="scope">
@@ -55,9 +55,9 @@ const columns: ColumnProps[] = [
 ];
 
 const create = (row: any = {}) => createDialogRef.value.open(row);
-const importData = () => {
-  console.log('import');
-};
+// const importData = () => {
+//   console.log('import');
+// };
 const exportData = async () => {
   const blob: any = await exportUserList(tableRef.value.searchParam);
   saveAs(blob, `user_${new Date().getTime()}.xlsx`);
