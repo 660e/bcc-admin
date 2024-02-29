@@ -9,7 +9,11 @@
 import dayjs from 'dayjs';
 import EchartsWrap from '@/components/echarts-wrap/index.vue';
 import { ECOption } from '@/components/echarts-wrap/config';
-import { randomNum } from '@/utils';
+
+function randomNum(min: number, max: number): number {
+  let num = Math.floor(Math.random() * (min - max) + max);
+  return num;
+}
 
 const initDate = (): string[] => {
   const dateList: string[] = [];

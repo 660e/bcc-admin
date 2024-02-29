@@ -3,6 +3,8 @@
     <pro-table :columns="columns" :request-api="getUserList" ref="tableRef">
       <template #tableHeader>
         <el-button @click="create()" type="primary">新增</el-button>
+        <el-button @click="importData">导入</el-button>
+        <el-button @click="exportData">导出</el-button>
       </template>
       <template #operation="scope">
         <template v-if="scope.row.userId !== 1">
@@ -52,6 +54,12 @@ const columns: ColumnProps[] = [
 ];
 
 const create = (row: any = {}) => createDialogRef.value.open(row);
+const importData = () => {
+  console.log('import');
+};
+const exportData = () => {
+  console.log('export');
+};
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.userName}”？`, '系统提示', { type: 'warning' })
     .then(async () => {
