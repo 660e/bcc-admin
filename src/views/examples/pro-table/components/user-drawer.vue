@@ -54,10 +54,14 @@
 
 <script lang="ts" name="UserDrawer" setup>
 import { ref, reactive } from 'vue';
-import { genderType } from '@/utils/dict';
 import { ElMessage, FormInstance } from 'element-plus';
 import UploadImg from '@/components/upload/img.vue';
 import UploadImgs from '@/components/upload/imgs.vue';
+
+const genderType = [
+  { label: '男', value: 1 },
+  { label: '女', value: 2 }
+];
 
 const rules = reactive({
   avatar: [{ required: true, message: '请上传用户头像' }],
