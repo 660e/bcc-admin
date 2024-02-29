@@ -4,6 +4,7 @@
       <pro-table :columns="columns" :request-api="requestApi" ref="tableRef">
         <template #tableHeader>
           <el-button @click="create()" type="primary">新增</el-button>
+          <el-button @click="exportData">导出</el-button>
         </template>
         <template #operation="scope">
           <el-button @click="create(scope.row)" type="primary" link>编辑</el-button>
@@ -26,8 +27,9 @@
 <script lang="ts" name="setting-dialog" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getDictDataList, deleteDictData, getDictType, getDictDataType } from '@/api/modules/system';
+import { getDictDataList, deleteDictData, getDictType, getDictDataType, exportDictDataList } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
+import { saveAs } from 'file-saver';
 
 import ProTable from '@/components/pro-table/index.vue';
 import CreateDataDialog from './create-data.vue';
@@ -67,6 +69,10 @@ const requestApi = async (params: any) => {
   return getDictDataList(params);
 };
 const create = (row: any = {}) => createDataDialogRef.value.open(row, dictType.value);
+const exportData = async () => {
+  const blob: any = await exportDictDataList({ ...tableRef.value.searchParam, dictType: dictType.value });
+  saveAs(blob, `dict_data_${new Date().getTime()}.xlsx`);
+};
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.dictLabel}”？`, '系统提示', { type: 'warning' })
     .then(async () => {

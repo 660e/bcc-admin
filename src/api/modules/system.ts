@@ -47,7 +47,7 @@ export function authUserCancel(params: any) {
   return http.put('/system/role/authUser/cancel', params);
 }
 
-// 导出用户列表
+// 导出角色列表
 export function exportRoleList(params: any = {}) {
   return http.download('/system/role/export', fd(params));
 }
@@ -164,6 +164,16 @@ export function optionselect() {
   return http.get<any>('/system/dict/type/optionselect');
 }
 
+// 刷新缓存
+export function refreshDictTypeCache() {
+  return http.delete('/system/dict/type/refreshCache');
+}
+
+// 导出字典类型列表
+export function exportDictTypeList(params: any = {}) {
+  return http.download('/system/dict/type/export', fd(params));
+}
+
 // 新增字典数据
 export function createDictData(params: any) {
   return http.post('/system/dict/data', params);
@@ -189,7 +199,7 @@ export function getDictDataList(params: any = {}) {
   return http.get<ResPage<any>>('/system/dict/data/list', params);
 }
 
-// 刷新缓存
-export function refreshDictTypeCache() {
-  return http.delete('/system/dict/type/refreshCache');
+// 导出字典数据列表
+export function exportDictDataList(params: any = {}) {
+  return http.download('/system/dict/data/export', fd(params));
 }

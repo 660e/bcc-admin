@@ -3,6 +3,7 @@
     <pro-table :columns="columns" :request-api="getDictTypeList" ref="tableRef">
       <template #tableHeader>
         <el-button @click="create()" type="primary">新增</el-button>
+        <el-button @click="exportData">导出</el-button>
         <el-button @click="refreshCache">刷新缓存</el-button>
       </template>
       <template #operation="scope">
@@ -22,8 +23,9 @@
 <script lang="ts" name="dict-manage" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getDictTypeList, deleteDictType, getDictDataType, refreshDictTypeCache } from '@/api/modules/system';
+import { getDictTypeList, deleteDictType, getDictDataType, refreshDictTypeCache, exportDictTypeList } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
+import { saveAs } from 'file-saver';
 
 import ProTable from '@/components/pro-table/index.vue';
 import CreateTypeDialog from './dialogs/create-type.vue';
@@ -51,6 +53,10 @@ const columns: ColumnProps[] = [
 ];
 
 const create = (row: any = {}) => createTypeDialogRef.value.open(row);
+const exportData = async () => {
+  const blob: any = await exportDictTypeList(tableRef.value.searchParam);
+  saveAs(blob, `dict_type_${new Date().getTime()}.xlsx`);
+};
 const refreshCache = async () => {
   const { msg } = await refreshDictTypeCache();
   ElMessage.success(msg);
