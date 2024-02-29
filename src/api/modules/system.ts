@@ -1,6 +1,7 @@
 import http from '@/api';
 import qs from 'qs';
 import { ResPage } from '@/api/interface/index';
+import { fd } from '@/utils';
 
 /**
  * 角色管理
@@ -83,6 +84,11 @@ export function resetPwd(params: any) {
 // 获取当前用户详细信息
 export function getInfo() {
   return http.get('/system/user/getInfo');
+}
+
+// 导出用户列表
+export function exportUserList(params: any = {}) {
+  return http.download('/system/user/export', fd(params));
 }
 
 /**

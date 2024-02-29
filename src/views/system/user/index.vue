@@ -25,8 +25,9 @@
 <script lang="ts" name="user-manage" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getUserList, deleteUser, getDictDataType } from '@/api/modules/system';
+import { getUserList, deleteUser, exportUserList, getDictDataType } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
+import { saveAs } from 'file-saver';
 
 import ProTable from '@/components/pro-table/index.vue';
 import CreateDialog from './dialogs/create.vue';
@@ -57,8 +58,9 @@ const create = (row: any = {}) => createDialogRef.value.open(row);
 const importData = () => {
   console.log('import');
 };
-const exportData = () => {
-  console.log('export');
+const exportData = async () => {
+  const blob: any = await exportUserList(tableRef.value.searchParam);
+  saveAs(blob, `user_${new Date().getTime()}.xlsx`);
 };
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.userName}”？`, '系统提示', { type: 'warning' })

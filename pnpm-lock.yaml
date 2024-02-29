@@ -32,6 +32,9 @@ dependencies:
   element-plus:
     specifier: ^2.5.2
     version: 2.5.2(vue@3.4.3)
+  file-saver:
+    specifier: ^2.0.5
+    version: 2.0.5
   md5:
     specifier: ^2.3.0
     version: registry.npmmirror.com/md5@2.3.0
@@ -3268,6 +3271,10 @@ packages:
     dependencies:
       escape-string-regexp: 1.0.5
     dev: true
+
+  /file-saver@2.0.5:
+    resolution: {integrity: sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==}
+    dev: false
 
   /filelist@1.0.4:
     resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}

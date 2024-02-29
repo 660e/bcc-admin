@@ -163,3 +163,12 @@ export function buildTree(data: any[], id: string = 'id', pid: string = 'pid', c
   });
   return tree;
 }
+
+/**
+ * @description 将参数格式化为FormData格式
+ */
+export function fd(params: any = {}): FormData {
+  const formData = new FormData();
+  Object.keys(params).forEach(k => formData.append(k, params[k]));
+  return formData;
+}
