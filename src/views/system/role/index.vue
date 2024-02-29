@@ -3,6 +3,7 @@
     <pro-table :columns="columns" :request-api="getRoleList" ref="tableRef">
       <template #tableHeader>
         <el-button @click="create()" type="primary">新增</el-button>
+        <el-button @click="exportData">导出</el-button>
       </template>
       <template #operation="scope">
         <template v-if="scope.row.roleId !== 1">
@@ -23,8 +24,9 @@
 <script lang="ts" name="role-manage" setup>
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { getRoleList, deleteRole, getDictDataType } from '@/api/modules/system';
+import { getRoleList, deleteRole, exportRoleList, getDictDataType } from '@/api/modules/system';
 import { ColumnProps } from '@/components/pro-table/interface';
+import { saveAs } from 'file-saver';
 
 import ProTable from '@/components/pro-table/index.vue';
 import CreateDialog from './dialogs/create.vue';
@@ -52,6 +54,10 @@ const columns: ColumnProps[] = [
 ];
 
 const create = (row: any = {}) => createDialogRef.value.open(row);
+const exportData = async () => {
+  const blob: any = await exportRoleList(tableRef.value.searchParam);
+  saveAs(blob, `role_${new Date().getTime()}.xlsx`);
+};
 const setting = (row: any) => settingDialogRef.value.open(row);
 const remove = (row: any) => {
   ElMessageBox.confirm(`是否删除“${row.roleName}”？`, '系统提示', { type: 'warning' })

@@ -47,6 +47,11 @@ export function authUserCancel(params: any) {
   return http.put('/system/role/authUser/cancel', params);
 }
 
+// 导出用户列表
+export function exportRoleList(params: any = {}) {
+  return http.download('/system/role/export', fd(params));
+}
+
 /**
  * 用户管理
  */
