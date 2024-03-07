@@ -15,6 +15,3 @@ export const AMAP_MAP_KEY: string = '';
 
 // 百度地图 key
 export const BAIDU_MAP_KEY: string = '';
-
-// 天地图地图 key
-export const TIANDITU_MAP_KEY: string = 'db02bd9c1bafcb5c5812547fe7f87af2';
