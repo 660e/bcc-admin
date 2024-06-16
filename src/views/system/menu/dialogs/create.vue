@@ -153,7 +153,7 @@ import { buildTree } from '@/utils';
 
 import IconSelect from '@/components/icon-select/index.vue';
 
-const $emit = defineEmits(['confirm']);
+const emit = defineEmits(['confirm']);
 
 const visible = ref(false);
 const formsRef = ref<FormInstance>();
@@ -211,7 +211,7 @@ const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {
       const { msg } = forms.value.menuId ? await editMenu(forms.value) : await createMenu(forms.value);
-      $emit('confirm');
+      emit('confirm');
       ElMessage.success(msg);
       visible.value = false;
     }

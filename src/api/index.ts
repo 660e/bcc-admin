@@ -38,7 +38,7 @@ class RequestHttp {
      */
     this.service.interceptors.request.use(
       (config: CustomAxiosRequestConfig) => {
-        const $userStore = useUserStore();
+        const userStore = useUserStore();
         // 重复请求不需要取消，在 api 服务中通过指定的第三个参数: { cancel: false } 来控制
         config.cancel ?? (config.cancel = true);
         config.cancel && axiosCanceler.addPending(config);
@@ -46,7 +46,7 @@ class RequestHttp {
         config.loading ?? (config.loading = true);
         config.loading && showFullScreenLoading();
         if (config.headers && typeof config.headers.set === 'function') {
-          config.headers.set('Authorization', `Bearer ${$userStore.token}`);
+          config.headers.set('Authorization', `Bearer ${userStore.token}`);
         }
         return config;
       },
@@ -62,12 +62,12 @@ class RequestHttp {
     this.service.interceptors.response.use(
       (response: AxiosResponse) => {
         const { data, config } = response;
-        const $userStore = useUserStore();
+        const userStore = useUserStore();
         axiosCanceler.removePending(config);
         tryHideFullScreenLoading();
         // 登录失效
         if (data.code == ResultEnum.OVERDUE) {
-          $userStore.setToken('');
+          userStore.setToken('');
           router.replace(LOGIN_URL);
           ElMessage.error(data.msg);
           return Promise.reject(data);

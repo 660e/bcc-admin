@@ -60,7 +60,7 @@ import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { getUser, createUser, editUser, getDictDataType } from '@/api/modules/system';
 
-const $emit = defineEmits(['confirm']);
+const emit = defineEmits(['confirm']);
 
 const visible = ref(false);
 const formsRef = ref<FormInstance>();
@@ -123,7 +123,7 @@ const confirm = () => {
   formsRef.value?.validate(async valid => {
     if (valid) {
       const { msg } = forms.value.userId ? await editUser(forms.value) : await createUser(forms.value);
-      $emit('confirm');
+      emit('confirm');
       ElMessage.success(msg);
       visible.value = false;
     }

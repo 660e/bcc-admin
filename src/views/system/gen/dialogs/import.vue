@@ -21,7 +21,7 @@ import { getDbList, importTable } from '@/api/modules/code';
 
 import ProTable from '@/components/pro-table/index.vue';
 
-const $emit = defineEmits(['confirm']);
+const emit = defineEmits(['confirm']);
 
 const visible = ref(false);
 const tableRef = ref();
@@ -42,7 +42,7 @@ const open = () => {
 const confirm = async () => {
   if (tableRef.value.selectedListIds.length) {
     const { msg } = await importTable({ tables: tableRef.value.selectedListIds.join(',') });
-    $emit('confirm');
+    emit('confirm');
     ElMessage.success(msg);
   }
   visible.value = false;

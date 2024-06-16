@@ -38,7 +38,7 @@ import ProTable from '@/components/pro-table/index.vue';
 import ImportDialog from './dialogs/import.vue';
 import PreviewDialog from './dialogs/preview.vue';
 
-const $router = useRouter();
+const router = useRouter();
 
 const tableRef = ref();
 const importDialogRef = ref();
@@ -56,7 +56,7 @@ const columns: ColumnProps[] = [
 
 const importData = () => importDialogRef.value.open();
 const preview = (tableId: string) => previewDialogRef.value.open(tableId);
-const edit = (tableId: string) => $router.push({ name: 'gen-edit', params: { tableId } });
+const edit = (tableId: string) => router.push({ name: 'gen-edit', params: { tableId } });
 const remove = (row: any) => {
   const name = row.tableId ? `“${row.tableName}”` : '';
   const ids = row.tableId ? [row.tableId] : tableRef.value.selectedListIds;

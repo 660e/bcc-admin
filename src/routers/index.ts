@@ -37,8 +37,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const $userStore = useUserStore();
-  const $authStore = useAuthStore();
+  const userStore = useUserStore();
+  const authStore = useAuthStore();
 
   // NProgress开始
   NProgress.start();
@@ -49,7 +49,7 @@ router.beforeEach(async (to, from, next) => {
 
   // 判断是否为登录页，有token就在当前页，没有token重定向到登录页
   if (to.path.toLocaleLowerCase() === LOGIN_URL) {
-    if ($userStore.token) return next(from.fullPath);
+    if (userStore.token) return next(from.fullPath);
     resetRouter();
     return next();
   }
@@ -58,24 +58,24 @@ router.beforeEach(async (to, from, next) => {
   if (ROUTER_WHITE_LIST.includes(to.path)) return next();
 
   // 判断是否有token，没有重定向到登录页
-  if (!$userStore.token) return next({ path: LOGIN_URL, replace: true });
+  if (!userStore.token) return next({ path: LOGIN_URL, replace: true });
 
   // 如果没有菜单列表，就重新请求菜单列表并添加动态路由
-  if (!$authStore.authMenuListGet.length) {
+  if (!authStore.authMenuListGet.length) {
     await initDynamicRouter();
     return next({ ...to, replace: true });
   }
 
   // 存储routeName做按钮权限筛选
-  $authStore.setRouteName(to.name as string);
+  authStore.setRouteName(to.name as string);
 
   // 正常访问页面
   next();
 });
 
 export const resetRouter = () => {
-  const $authStore = useAuthStore();
-  $authStore.flatMenuListGet.forEach(route => {
+  const authStore = useAuthStore();
+  authStore.flatMenuListGet.forEach(route => {
     const { name } = route;
     if (name && router.hasRoute(name)) router.removeRoute(name);
   });

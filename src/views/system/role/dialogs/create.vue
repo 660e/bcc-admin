@@ -47,7 +47,7 @@ import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { createRole, editRole, getDictDataType, treeselect, roleMenuTreeselect } from '@/api/modules/system';
 
-const $emit = defineEmits(['confirm']);
+const emit = defineEmits(['confirm']);
 
 const visible = ref(false);
 const treeRef = ref();
@@ -98,7 +98,7 @@ const confirm = () => {
     if (valid) {
       forms.value.menuIds = treeRef.value.getCheckedKeys().concat(treeRef.value.getHalfCheckedKeys());
       const { msg } = forms.value.roleId ? await editRole(forms.value) : await createRole(forms.value);
-      $emit('confirm');
+      emit('confirm');
       ElMessage.success(msg);
       visible.value = false;
     }

@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { saveAs } from 'file-saver';
 import { UploadInstance, ElMessage } from 'element-plus';
 
-const $emit = defineEmits(['confirm']);
+const emit = defineEmits(['confirm']);
 
 const visible = ref(false);
 const options = ref();
@@ -23,7 +23,7 @@ const confirm = () => uploadRef.value!.submit();
 const httpRequest = () => options.value.importApi(updateSupport.value, { file: fileList.value[0].raw });
 const onSuccess = (response: any) => {
   fileList.value = [];
-  $emit('confirm');
+  emit('confirm');
   ElMessage({
     type: 'success',
     dangerouslyUseHTMLString: true,

@@ -26,12 +26,12 @@ import ThemeSetting from './components/theme-setting.vue';
 import FullScreen from './components/full-screen.vue';
 import TheAvatar from './components/the-avatar.vue';
 
-const $userStore = useUserStore();
-const nickName = computed(() => $userStore.userInfo.nickName);
+const userStore = useUserStore();
+const nickName = computed(() => userStore.userInfo.nickName);
 
 onMounted(async () => {
   const response: any = await getInfo();
-  $userStore.setUserInfo(response.user);
+  userStore.setUserInfo(response.user);
 });
 </script>
 

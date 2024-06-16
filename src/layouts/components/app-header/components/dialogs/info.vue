@@ -35,12 +35,12 @@ interface User {
   email?: string;
 }
 
-const $useUser = useUserStore();
+const userStore = useUserStore();
 const visible = ref(false);
 const user = ref<User>({});
 const open = async () => {
   visible.value = true;
-  user.value = $useUser.userInfo;
+  user.value = userStore.userInfo;
 };
 
 defineExpose({ open });

@@ -3,8 +3,8 @@ import type { Directive, DirectiveBinding } from 'vue';
 
 const auth: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
-    const $authStore = useAuthStore();
-    const permissions = $authStore.authButtonListGet;
+    const authStore = useAuthStore();
+    const permissions = authStore.authButtonListGet;
     const { value } = binding;
 
     if (value && value instanceof Array && value.length > 0) {

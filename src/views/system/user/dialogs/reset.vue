@@ -20,7 +20,7 @@ import { reactive, ref } from 'vue';
 import { ElMessage, FormInstance, FormRules } from 'element-plus';
 import { resetPwd } from '@/api/modules/system';
 
-const $emit = defineEmits(['confirm']);
+const emit = defineEmits(['confirm']);
 
 const visible = ref(false);
 const formsRef = ref<FormInstance>();
@@ -49,7 +49,7 @@ const confirm = () => {
     if (valid) {
       const { userId, password } = forms.value;
       const { msg } = await resetPwd({ userId, password });
-      $emit('confirm');
+      emit('confirm');
       ElMessage.success(msg);
       visible.value = false;
     }

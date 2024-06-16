@@ -8,31 +8,31 @@ import { LOGIN_URL } from '@/config';
 const modules = import.meta.glob('@/views/**/*.vue');
 
 export const initDynamicRouter = async () => {
-  const $userStore = useUserStore();
-  const $authStore = useAuthStore();
+  const userStore = useUserStore();
+  const authStore = useAuthStore();
 
   try {
     // 设置菜单列表
-    await $authStore.setAuthMenuList();
+    await authStore.setAuthMenuList();
 
     // 设置按钮权限
-    await $authStore.setAuthButtonList();
+    await authStore.setAuthButtonList();
 
     // 当前用户没有菜单时
-    if (!$authStore.authMenuListGet.length) {
+    if (!authStore.authMenuListGet.length) {
       ElNotification({
         title: '无权限访问',
         message: '当前账号无任何菜单权限，请联系系统管理员！',
         type: 'warning',
         duration: 3000
       });
-      $userStore.setToken('');
+      userStore.setToken('');
       router.replace(LOGIN_URL);
       return Promise.reject();
     }
 
     // 详情页动态路由
-    $authStore.flatMenuListGet.push(
+    authStore.flatMenuListGet.push(
       ...[
         {
           path: '/system/gen/:tableId',
@@ -83,7 +83,7 @@ export const initDynamicRouter = async () => {
     );
 
     // 添加动态路由
-    $authStore.flatMenuListGet.forEach(item => {
+    authStore.flatMenuListGet.forEach(item => {
       item.children && delete item.children;
       if (item.component && typeof item.component === 'string') {
         item.component = modules[`/src/views${item.component}.vue`];
@@ -96,7 +96,7 @@ export const initDynamicRouter = async () => {
       }
     });
   } catch (error) {
-    $userStore.setToken('');
+    userStore.setToken('');
     router.replace(LOGIN_URL);
     return Promise.reject(error);
   }

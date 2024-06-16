@@ -173,10 +173,10 @@ import { FormRules } from 'element-plus';
 import { SelectOption } from '@/modules/forms';
 import { InfoType } from '../../models';
 
-const $props = defineProps<{ info: InfoType; tables: any }>();
+const props = defineProps<{ info: InfoType; tables: any }>();
 
-const propsInfo = computed(() => $props.info);
-const propsTables = computed(() => $props.tables);
+const propsInfo = computed(() => props.info);
+const propsTables = computed(() => props.tables);
 
 const rules = reactive<FormRules<InfoType>>({
   tableName: [{ required: true, message: '请填写表名称', trigger: 'blur' }],

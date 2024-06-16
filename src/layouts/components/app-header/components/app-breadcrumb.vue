@@ -1,5 +1,5 @@
 <template>
-  <div :class="['breadcrumb-box mask-image', !$globalStore.breadcrumbIcon && 'no-icon']">
+  <div :class="['breadcrumb-box mask-image', !globalStore.breadcrumbIcon && 'no-icon']">
     <el-breadcrumb :separator-icon="ArrowRight">
       <transition-group name="breadcrumb">
         <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
@@ -8,7 +8,7 @@
             :class="{ 'item-no-icon': !item.meta.icon }"
             @click="onBreadcrumbClick(item, index)"
           >
-            <el-icon v-if="item.meta.icon && $globalStore.breadcrumbIcon" class="breadcrumb-icon">
+            <el-icon v-if="item.meta.icon && globalStore.breadcrumbIcon" class="breadcrumb-icon">
               <component :is="item.meta.icon"></component>
             </el-icon>
             <span class="breadcrumb-title">{{ item.meta.title }}</span>
@@ -27,13 +27,13 @@ import { useAuthStore } from '@/stores/modules/auth';
 import { useGlobalStore } from '@/stores/modules/global';
 import { HOME_URL } from '@/config';
 
-const $route = useRoute();
-const $router = useRouter();
-const $authStore = useAuthStore();
-const $globalStore = useGlobalStore();
+const route = useRoute();
+const router = useRouter();
+const authStore = useAuthStore();
+const globalStore = useGlobalStore();
 
 const breadcrumbList = computed(() => {
-  const breadcrumbListItems = $authStore.breadcrumbListGet[$route.matched[$route.matched.length - 1].path];
+  const breadcrumbListItems = authStore.breadcrumbListGet[route.matched[route.matched.length - 1].path];
 
   let breadcrumbData: any[] = [];
 
@@ -42,7 +42,7 @@ const breadcrumbList = computed(() => {
       return item.name !== undefined && item.path !== '/';
     });
   } else {
-    breadcrumbData.push($route.matched[$route.matched.length - 1]);
+    breadcrumbData.push(route.matched[route.matched.length - 1]);
   }
 
   if (breadcrumbData[0].path !== HOME_URL) {
@@ -53,7 +53,7 @@ const breadcrumbList = computed(() => {
 });
 
 const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
-  if (index !== breadcrumbList.value.length - 1) $router.push(item.path);
+  if (index !== breadcrumbList.value.length - 1) router.push(item.path);
 };
 </script>
 

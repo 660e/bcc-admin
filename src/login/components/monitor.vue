@@ -10,10 +10,10 @@ import { useKeepAliveStore } from '@/stores/modules/keep-alive';
 import { initDynamicRouter } from '@/routers/modules/dynamicRouter';
 import { HOME_URL } from '@/config';
 
-const $router = useRouter();
-const $userStore = useUserStore();
-const $tabsStore = useTabsStore();
-const $keepAliveStore = useKeepAliveStore();
+const router = useRouter();
+const userStore = useUserStore();
+const tabsStore = useTabsStore();
+const keepAliveStore = useKeepAliveStore();
 
 const formsRef = ref<FormInstance>();
 const forms = reactive({
@@ -38,17 +38,17 @@ const login = () => {
     if (valid) {
       // 执行登录接口
       const { data } = await loginApi(forms);
-      $userStore.setToken(data.access_token);
+      userStore.setToken(data.access_token);
 
       // 添加动态路由
       await initDynamicRouter();
 
       // 清空 tabs、keep-alive 数据
-      $tabsStore.setTabs([]);
-      $keepAliveStore.setKeepAliveName([]);
+      tabsStore.setTabs([]);
+      keepAliveStore.setKeepAliveName([]);
 
       // 跳转到首页
-      $router.push(HOME_URL);
+      router.push(HOME_URL);
     }
   });
 };
@@ -73,7 +73,7 @@ onMounted(() => refreshCode());
     <div class="space-y-2">
       <div class="flex justify-between">
         <div></div>
-        <el-button @click="$router.push({ name: 'find-password' })" type="primary" link>忘记密码</el-button>
+        <el-button @click="router.push({ name: 'find-password' })" type="primary" link>忘记密码</el-button>
       </div>
       <el-button @click="login" type="primary" class="w-full" size="large">登录</el-button>
     </div>

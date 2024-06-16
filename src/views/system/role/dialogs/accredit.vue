@@ -21,7 +21,7 @@ import { ColumnProps } from '@/components/pro-table/interface';
 
 import ProTable from '@/components/pro-table/index.vue';
 
-const $emit = defineEmits(['confirm']);
+const emit = defineEmits(['confirm']);
 
 const visible = ref(false);
 const roleId = ref();
@@ -56,7 +56,7 @@ const requestApi = (params: any) => {
 const confirm = async () => {
   if (tableRef.value.selectedListIds.length) {
     const { msg } = await authUserSelectAll({ roleId: roleId.value, userIds: tableRef.value.selectedListIds.join(',') });
-    $emit('confirm');
+    emit('confirm');
     ElMessage.success(msg);
   }
   visible.value = false;

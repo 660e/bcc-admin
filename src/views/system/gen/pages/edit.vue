@@ -22,8 +22,8 @@ import { DataType } from '../models';
 import InfoPane from './panes/info.vue';
 import RowsPane from './panes/rows.vue';
 
-const $route = useRoute();
-const $tabStore = useTabsStore();
+const route = useRoute();
+const tabStore = useTabsStore();
 
 const active = ref('info');
 const data = reactive<DataType>({
@@ -71,10 +71,10 @@ const confirm = async () => {
   ElMessage.success(msg);
   cancel();
 };
-const cancel = () => $tabStore.removeTabs($route.fullPath);
+const cancel = () => tabStore.removeTabs(route.fullPath);
 
 onMounted(async () => {
-  const response: any = await getTable($route.params.tableId as string);
+  const response: any = await getTable(route.params.tableId as string);
   data.info = response.data.info;
   data.rows = response.data.rows;
   data.tables = response.data.tables;
